@@ -1,0 +1,22 @@
+{
+  "name": "spa-01",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ontheroadjp/SPA-01",
+  "authors": [
+    "Hideaki Ishihara <dev@ontheroad.jp>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.4",
+    "jquery-easing": "*",
+    "jquery.mb.ytplayer": "~2.9.3"
+  }
+}
