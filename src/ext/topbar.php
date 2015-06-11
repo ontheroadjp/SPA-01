@@ -16,10 +16,12 @@
 
 <div class="navbar-collapse collapse navbar-right scroll-me">
 <ul class="nav navbar-nav ">
-	<li><a href="#home">HOME</a></li>
-	<li><a href="#services">SERVICES</a></li>
-	<li><a href="#works">WORKS</a></li>
-	<li><a href="#contact">CONTACT</a></li>
+	<li><a href="#home">ホーム</a></li>
+	<li><a href="/test.html">html</a></li>
+	<li><a href="/test.php">testphp</a></li>
+	<li><a href="#services">サービス</a></li>
+	<li><a href="#works">料金</a></li>
+	<li><a href="#contact">問い合わせ</a></li>
 </ul>
 </div>
 
