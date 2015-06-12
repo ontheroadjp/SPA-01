@@ -90,7 +90,6 @@ gulp.task('php', function() {
 gulp.task('browser-sync',['php'], function() {
     browserSync({
         //server: {
-            // baseDir: "./"
             baseDir: "./build/",
 						proxy: "127.0.0.1:8080",
 						port: 9999,
