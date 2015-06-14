@@ -73,7 +73,7 @@ function save() {
 
 function cancel() {
 // 	alert('キャンセルしてもよろしいですか？');
-	$( *.editing ).data('backup');
+//	$( *.editing ).data('backup');
 	$('button#editing').remove();
 
 //	$( '*.editing' ).css('border', '0' );
