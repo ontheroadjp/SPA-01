@@ -84,14 +84,14 @@ gulp.task('img', function() {
 // Static server
 
 gulp.task('php', function() {
-	php.server({ base: './build/', port: 8080, keepalive: true});
+	php.server({ base: './build/', port: 9998, keepalive: true});
 });
 
 gulp.task('browser-sync',['php'], function() {
     browserSync({
         //server: {
             baseDir: "./build/",
-						proxy: "127.0.0.1:8080",
+						proxy: "127.0.0.1:9998",
 						port: 9999,
 						open: true,
 						notify: false,

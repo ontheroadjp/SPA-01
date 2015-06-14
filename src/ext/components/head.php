@@ -13,6 +13,7 @@
 <link href="css/font-awesome.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet" />
 <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
