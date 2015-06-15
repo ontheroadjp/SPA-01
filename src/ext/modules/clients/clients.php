@@ -1,30 +1,33 @@
 <?php
-$file = file_get_contents( './modules/clients/module.json', true );
-$json = json_decode( $file, true );	// true 付けると連想配列
-$content = $json['content'];
+require_once( 'modules/Module.php' );
+class Clients extends Module {
+	function __construct( $path ) {
+		parent::__construct( $path );
 
-$doc = '';
-$doc .= '<section id="clients">';
-$doc .= '<div class="container">';
-$doc .= '<div class="row">';
+		$this->doc = '';
+		$this->doc .= '<section id="clients">';
+		$this->doc .= '<div class="container">';
+		$this->doc .= '<div class="row">';
 
-$doc .= '<div class="col-md-3">';
-$doc .= '<img src="img/audio.png" alt="" class="img-responsive" />';
-$doc .= '</div>';
+		$this->doc .= '<div class="col-md-3">';
+		$this->doc .= '<img src="img/audio.png" alt="" class="img-responsive" />';
+		$this->doc .= '</div>';
 
-$doc .= '<div class="col-md-3">';
-$doc .= '<img src="img/codecanon.png" alt="" class="img-responsive" />';
-$doc .= '</div>';
- 
-$doc .= '<div class="col-md-3">';
-$doc .= '<img src="img/graphic.png" alt="" class="img-responsive" />';
-$doc .= '</div>';
+		$this->doc .= '<div class="col-md-3">';
+		$this->doc .= '<img src="img/codecanon.png" alt="" class="img-responsive" />';
+		$this->doc .= '</div>';
+		 
+		$this->doc .= '<div class="col-md-3">';
+		$this->doc .= '<img src="img/graphic.png" alt="" class="img-responsive" />';
+		$this->doc .= '</div>';
 
-$doc .= '<div class="col-md-3">';
-$doc .= '<img src="img/themeforest.png" alt="" class="img-responsive" />';
-$doc .= '</div>';
+		$this->doc .= '<div class="col-md-3">';
+		$this->doc .= '<img src="img/themeforest.png" alt="" class="img-responsive" />';
+		$this->doc .= '</div>';
 
-$doc .= '</div><!-- end of .row -->';
-$doc .= '</div><!-- end of .container -->';
-$doc .= '</section>';
+		$this->doc .= '</div><!-- end of .row -->';
+		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</section>';
+	}
+}
 ?>

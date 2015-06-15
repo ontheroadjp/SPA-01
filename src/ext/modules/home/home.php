@@ -2,9 +2,7 @@
 <?php
 require_once( 'modules/Module.php' );
 class Home extends Module {
-
 	function __construct( $path ) {
-
 		parent::__construct( $path );
 
 
@@ -21,6 +19,8 @@ class Home extends Module {
 
 		$this->doc .= '</div><!-- end of .overlay -->';
 		$this->doc .= '</div><!-- end of #home -->';
+	
+
 	}
 }
 ?>

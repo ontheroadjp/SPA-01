@@ -1,23 +1,26 @@
 <?php
-$file = file_get_contents( './modules/movie/module.json', true );
-$json = json_decode( $file, true );	// true 付けると連想配列
-$content = $json['content'];
+require_once( 'modules/Module.php' );
+class Movie extends Module {
+	function __construct( $path ) {
+		parent::__construct( $path );
 
-$doc = '';
-$doc .= '<div id="video-sec" class="player" data-property="{videoURL:\'https://www.youtube.com/watch?v=Ycv5fNd4AeM\',containment:\'self\',autoPlay:true, mute:true, startAt:0, opacity:1,mute: true,showControls:false}">';
-$doc .= '<!-- change https://www.youtube.com/watch?v=Ycv5fNd4AeM to your youtube url-->';
+		$this->doc = '';
+		$this->doc .= '<div id="video-sec" class="player" data-property="{videoURL:\'https://www.youtube.com/watch?v=Ycv5fNd4AeM\',containment:\'self\',autoPlay:true, mute:true, startAt:0, opacity:1,mute: true,showControls:false}">';
+		$this->doc .= '<!-- change https://www.youtube.com/watch?v=Ycv5fNd4AeM to your youtube url-->';
 
-$doc .= '<div class="overlay">';
-$doc .= '<div class="container">';
-$doc .= '<div class="row text-center">';
-$doc .= '<div class="col-md-12">';
-$doc .= '<h1>'.$content['text01'].'</h1>';
-$doc .= '<h4>'.$content['text02'].'</h4>';
-$doc .= '<h4>t'.$content['text03'].'</h4>';
-$doc .= '</div>';
-$doc .= '</div>';
-$doc .= '</div><!-- end of .container -->';
-$doc .= '</div><!-- end of .overlay -->';
+		$this->doc .= '<div class="overlay">';
+		$this->doc .= '<div class="container">';
+		$this->doc .= '<div class="row text-center">';
+		$this->doc .= '<div class="col-md-12">';
+		$this->doc .= '<h1>'.$this->content['text01'].'</h1>';
+		$this->doc .= '<h4>'.$this->content['text02'].'</h4>';
+		$this->doc .= '<h4>t'.$this->content['text03'].'</h4>';
+		$this->doc .= '</div>';
+		$this->doc .= '</div>';
+		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</div><!-- end of .overlay -->';
 
-$doc .= '</div><!-- end of #video-sec -->';
+		$this->doc .= '</div><!-- end of #video-sec -->';
+	}
+}
 ?>

@@ -1,28 +1,31 @@
 <?php
-$file = file_get_contents( './modules/location/module.json', true );
-$json = json_decode( $file, true );	// true 付けると連想配列
-$content = $json['content'];
+require_once( 'modules/Module.php' );
+class Location extends Module {
+	function __construct( $path ) {
+		parent::__construct( $path );
 
-$doc = '';
-$doc .= '<section id="contact">';
-$doc .= '<div class="container">';
+		$this->doc = '';
+		$this->doc .= '<section id="contact">';
+		$this->doc .= '<div class="container">';
 
-$doc .= '<div class="row text-center ">';
-$doc .= '<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">';
-$doc .= '<h2 class="head-set">'.$content['text01'].'</h2>';
-$doc .= '<p>'.$content['text02'].'</p><br />';
-$doc .= '</div>';
-$doc .= '</div>';
+		$this->doc .= '<div class="row text-center ">';
+		$this->doc .= '<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">';
+		$this->doc .= '<h2 class="head-set">'.$this->content['text01'].'</h2>';
+		$this->doc .= '<p>'.$this->content['text02'].'</p><br />';
+		$this->doc .= '</div>';
+		$this->doc .= '</div>';
 
-$doc .= '<div class="row text-center">';
-$doc .= '<div class="col-md-12">';
-$doc .= '<h3>'.$content['text03'].'</h3>';
-$doc .= '<h3>'.$content['text04'].'</h3>';
-$doc .= '<h3>'.$content['text05'].'</h3>';
-$doc .= '</div>';
-$doc .= '</div>';
+		$this->doc .= '<div class="row text-center">';
+		$this->doc .= '<div class="col-md-12">';
+		$this->doc .= '<h3>'.$this->content['text03'].'</h3>';
+		$this->doc .= '<h3>'.$this->content['text04'].'</h3>';
+		$this->doc .= '<h3>'.$this->content['text05'].'</h3>';
+		$this->doc .= '</div>';
+		$this->doc .= '</div>';
 
-$doc .= '</div><!-- end of .container -->';
-$doc .= '</section>';
+		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</section>';
+	}
+}
 ?>
 
