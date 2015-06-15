@@ -1,0 +1,13 @@
+{
+	"id" : "services",
+	"content" : {
+		"text01" : "OUR SERVICES",
+		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
+		"text03" : "RESPONSIVE DESIGN",
+		"text04" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
+		"text05" : "EASY TO CUSTOMIZE",
+		"text06" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
+		"text07" : "100% FREE TO USE",
+		"text08" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere."
+	}
+}

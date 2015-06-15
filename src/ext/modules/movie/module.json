@@ -1,0 +1,8 @@
+{
+	"id" : "services",
+	"content" : {
+		"text01" : "HERE IS BACKGROUND VEDIO",
+		"text02" : "This scripts uses plugin <strong>jquery.mb.YTPlayer</strong>",
+		"text03" : "to play video in background of divs"
+	}
+}
