@@ -2,8 +2,6 @@
 $file = file_get_contents( './modules/movie/module.json', true );
 $json = json_decode( $file, true );	// true 付けると連想配列
 $content = $json['content'];
-// $content['text01']
-
 
 $doc = '';
 $doc .= '<div id="video-sec" class="player" data-property="{videoURL:\'https://www.youtube.com/watch?v=Ycv5fNd4AeM\',containment:\'self\',autoPlay:true, mute:true, startAt:0, opacity:1,mute: true,showControls:false}">';
