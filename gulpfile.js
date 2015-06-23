@@ -1,24 +1,21 @@
 var gulp = require('gulp');
 var bower = require('main-bower-files');
-var sass = require('gulp-sass');
-var less = require('gulp-less');
+var sass = require('gulp-ruby-sass');
 var pleeease = require('gulp-pleeease');
+var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-//var uglify = require('vinyl-source-stream');
-//var uglify = require('vinyl-buffer');
 var filter = require('gulp-filter');
 var imagemin = require('gulp-imagemin');
 var php = require('gulp-connect-php');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
-
-// ソースコードの Directory を指定(最後に/必要)
+// ソースコードの Directory を指定(最後に / 必要)
 var target = 'src/';
 
 // build
-gulp.task('build',['ext','less','sass','js','img']);
+gulp.task('build',['ext','sass','js','img']);
 
 // ext
 gulp.task('ext', function () {
@@ -27,41 +24,35 @@ gulp.task('ext', function () {
 		.pipe(reload({stream:true}));
 });
 
-// less
-gulp.task('less', function () {
-	gulp.src(target + 'less/**/*.less')
-				.pipe(less({errLogToConsole: true}))
-				.pipe(pleeease({
-					autoprefixer: {
-						browsers: ['last 2 versions']
-					}
-				}))
-				.pipe(gulp.dest('build/css'))
-				.pipe(reload({stream:true}));
-});
-
 // Sass
 
+var sassoptions = {
+	style: 'expanded'
+	, sourcemap: true
+};
+
 gulp.task('sass', function () {
-    gulp.src(target + 'sass/**/*.scss')
-        .pipe(sass({errLogToConsole: true})) // Keep running gulp even though occurred compile error
-        .pipe(pleeease({
-            autoprefixer: {
-                browsers: ['last 2 versions']
-            }
-        }))
-        .pipe(gulp.dest('build/css'))
-        .pipe(reload({stream:true}));
+	sass(target + 'sass/',{
+		style: 'expanded'
+		, sourcemap: true
+	})
+	.pipe(pleeease({
+		autoprefixer: {"browsers": ["last 4 versions", "Android 2.3"]}
+		, minifier: false
+	}))
+	.pipe(sourcemaps.write('./'))
+	.pipe(gulp.dest('build/css'))
+	.pipe(reload({stream:true}));
 });
 
 // Js-concat-uglify
 
 gulp.task('js', function() {
-    gulp.src([target + 'js/*.js'])
-        .pipe(concat('scripts.js'))
-        .pipe(uglify({preserveComments: 'some'})) // Keep some comments
-        .pipe(gulp.dest('build/js'))
-        .pipe(reload({stream:true}));
+	gulp.src([target + 'js/*.js'])
+	.pipe(concat('scripts.js'))
+	.pipe(uglify({preserveComments: 'some'})) // Keep some comments
+	.pipe(gulp.dest('build/js'))
+	.pipe(reload({stream:true}));
 });
 
 gulp.task('bower', function() {
@@ -93,37 +84,27 @@ gulp.task('browser-sync',['php'], function() {
     browserSync({
         //server: {
             baseDir: "./build/",
-						proxy: "127.0.0.1:9998",
-						port: 9999,
-						open: true,
-						notify: false,
+	proxy: "127.0.0.1:9998",
+	port: 9999,
+	open: true,
+	notify: false,
         //}
     });
 });
 
-//gulp.task('browser-sync', function() {
-//    browserSync({
-//        server: {
-//            // baseDir: "./"
-//            baseDir: "./build/",
-//        }
-//    });
-//});
-
 // Reload all browsers
 
 gulp.task('bs-reload', function () {
-    browserSync.reload();
+browserSync.reload();
 });
 
 // Task for `gulp` command
 
 gulp.task('default',['browser-sync'], function() {
-    gulp.watch(target + 'sass/**/*.scss',['sass']);
-    gulp.watch(target + 'less/**/*.less',['less']);
-    gulp.watch(target + 'ext/**/*.*',['ext']);
-    gulp.watch(target + 'js/*.js',['js']);
-    gulp.watch(target + 'img/**/*.{png,jpg,gif,svg}',['imagemin']);
-    gulp.watch(target + "*.html", ['bs-reload']);
-    gulp.watch(target + "*.php", ['bs-reload']);
+	gulp.watch(target + 'sass/**/*.scss',['sass']);
+	gulp.watch(target + 'ext/**/*.*',['ext']);
+	gulp.watch(target + 'js/**/*.js',['js']);
+	gulp.watch(target + 'img/**/*.{png,jpg,gif,svg}',['imagemin']);
+	gulp.watch(target + "*.html", ['bs-reload']);
+	gulp.watch(target + "*.php", ['bs-reload']);
 });

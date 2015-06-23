@@ -16,15 +16,16 @@
 
 $(document).ready(function () {
     // SCROLL SCRIPTS 
-        $('.scroll-me a').bind('click', function (event) { //just pass scroll-me class and start scrolling
+    $('.scroll-me a').bind('click', function (event) { //just pass scroll-me class and start scrolling
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top
         }, 1000, 'easeInOutQuad');
         event.preventDefault();
-        });
+    });
+
     // BACKGROUND VIDEO SCRIPTS
-        $(function () {
-            $(".player").mb_YTPlayer(); // .player - class to add for playing video ( see the div above to understand)
-        });
+    $(function () {
+        $(".player").mb_YTPlayer(); // .player - class to add for playing video ( see the div above to understand)
+    });
 });
