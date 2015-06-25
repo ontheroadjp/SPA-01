@@ -1,4 +1,6 @@
 <?php
+// Movie.php
+
 require_once( 'modules/Module.php' );
 class Movie extends Module {
 	function __construct( $path ) {
@@ -12,9 +14,9 @@ class Movie extends Module {
 		$this->doc .= '<div class="container">';
 		$this->doc .= '<div class="row text-center">';
 		$this->doc .= '<div class="col-md-12">';
-		$this->doc .= '<h1>'.$this->content['text01'].'</h1>';
-		$this->doc .= '<h4>'.$this->content['text02'].'</h4>';
-		$this->doc .= '<h4>t'.$this->content['text03'].'</h4>';
+		$this->doc .= '<h1 data-type="text">'.$this->content['text01'].'</h1>';
+		$this->doc .= '<h4 data-type="text">'.$this->content['text02'].'</h4>';
+		$this->doc .= '<h4 data-type="text">'.$this->content['text03'].'</h4>';
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 		$this->doc .= '</div><!-- end of .container -->';

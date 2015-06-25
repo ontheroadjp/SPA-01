@@ -3,53 +3,90 @@
 jQuery( function($) {
 
 	// 一つ一つの内容を保持するためeachを利用
-	$( 'p, h1, h2, h3, h4, h5' ).each( function() {
-		var backup = $( this ).text();
+	// .data()を利用して最初の内容を残しておく
+	$('p, h1, h2, h3, h4, h5').each( function() {
+		var backup = $(this).text();
 
-		// .data()を利用して最初の内容を残しておく
-		$( this ).data( 'backup', backup ).click( function() {
+		// マウスオーバー処理
+		$(this).data('backup', backup).hover(
+			function() {
+				if( !$('*.on')[0] && !$('*.editing')[0] ) {
+					$(this).css('border','1px solid #ff9900');
+				}
+			},
+			function() {
+				if( !$(this).hasClass('on') && !$(this).hasClass('editing') ) {
+					$(this).css('border','none');
+				}
+			}
+		);
 
-			if( $('*.editing')[0] && !$( this ).hasClass('editing') ) {
-				//				alert('編集中のコンテンツがあります');
+		// ダブルクリックされたときの処理
+		$(this).data('backup', backup).dblclick(function() {
+
+			if( $('*.editing')[0] && !$(this).hasClass('editing') ) {
 				return;
 			}
 
-			if( !$( this ).hasClass( 'on' ) ) {
-				$( this ).addClass( 'on' );
+			if( !$( this ).hasClass('on') ) {
+				$( this ).addClass('on');
 
-				if( $( this ).hasClass( 'editing' ) ) {
-					$( 'button#save' ).remove();
-					$( 'button#cancel' ).remove();
+				// 再編集の場合
+				if( $(this).hasClass('editing') ) {
+					resetEdit();
 				}
 
-				var txt = $( this ).text();
-				$( this ).html( '<input type="text" value="'+txt+'" class="form-control" />' );
+				// 元の内容取得
+				var txt = $(this).text();
+
+				// data- の内容取得
+				var inputType = $(this).data('type');
+				var inputRows = $(this).data('rows');
+				var inputTextAlign = $(this).data('textAlign');
+
+				// INPUT(TEXT) の入力
+				if( inputType === 'text' ) {
+					$(this).html( '<input type="text" value="'+txt+'" style="
+						background-color:transparent;
+						outline:0;
+						width:100%;
+						text-align:center;
+						-webkit-appearance:none;
+						border: none;
+						background: none;
+						" />' );
+				}
+
+				// TEXTAREA の入力
+				if( inputType === 'textarea' ) {
+					var tag = '<textarea rows="'+inputRows+'">'+txt+'</textarea>';
+					$(this).html(tag);
+					$('textarea').css('width','100%').css('border','none').css('background','transparent').css('resize','none').css('text-align',inputTextAlign);
+				}
 
 				// フォーカスが外れた時の処理
-				$( 'p > input, h1 > input, h2 > input, h3 > input, h4 > input, h5 > input' ).focus().blur( function() {
-					var inputVal = $( this ).val();
-					var backup = $( this ).parent().data( 'backup' );
+				$( 'p > input, h1 > input, h2 > input, h3 > input, h4 > input, h5 > input, p > textarea, h1 > textarea, h2 > textarea, h3 > textarea, h4 > textarea, h5 > textarea' ).focus().blur( function() {
+					var inputVal = $(this).val();
+					var backup = $(this).parent().data('backup');
 
-					// 空白なら元の内容に戻す
+					// (1) 空白なら元の内容に戻す
 					if( inputVal==='' ) {
 						inputVal = this.defaultValue;
 					}
 
-					// .data()の内容と比較し変化していた場合
+					// (2) 値が変化していた場合
 					if( backup !== inputVal ) {
-						// 						$( 'button' ).removeAttr( 'disabled' );	// クリックできるように
+						$( 'p.on, h1.on, h2.on, h3.on, h4.on, h5.on' ).after( '<button id="save" class="btn btn-default" onClick="save()">保存</button>' ).after( '<button id="cancel" class="btn btn-default" onClick="cancel()">キャンセル</button>' );
 
-						//						$( this ).parent().css( 'border', '1px solid red' );
-						$( 'p.on, h1.on, h2.on, h3.on, h4.on, h5.on' )
-					.after( '<button id="save" class="btn btn-default" onClick="save()">保存</button>' );
-				$( 'p.on, h1.on, h2.on, h3.on, h4.on, h5.on' )
-					.after( '<button id="cancel" class="btn btn-default" onClick="cancel()">キャンセル</button>' );
-				$( this ).parent().addClass( 'editing' );
+						$(this).parent().addClass('editing');
+
+					// (3) 値が変化していなかった場合
 					} else {
-						$( this ).parent().removeClass( 'editing' );
+						$(this).parent().removeClass('editing').css('border','none');
 					}
 
-					$( this ).parent().removeClass( 'on' ).text( inputVal );
+					// 入力された値で置き換える
+					$( this ).parent().removeClass('on').text( inputVal );
 				});
 			}
 		});
@@ -86,8 +123,8 @@ function save(e) {
 		},
 		dataType: 'html',
 		cache: false,
-		async: true,                
-		timeout: 10000             // タイムアウトの指定
+		async: true,
+		timeout: 10000
 	})
 	.done(function( data ) {
 		alert(data);
@@ -101,19 +138,17 @@ function save(e) {
 		// ...
 	});
 
-
-
-	post_edit();
+	resetEdit();
 }
 
 function cancel() {
 	//alert('キャンセルしてもよろしいですか？');
 	var original = $('button#cancel').prev().data('backup');
-	$('button#cancel').prev().html(original);
-	post_edit();
+	$('button#cancel').prev().html(original).css('border','none');
+	resetEdit();
 }
 
-function post_edit(){
+function resetEdit(){
 	$('button#cancel').remove();
 	$('button#save').remove();
 	$('*.editing').removeClass('editing');

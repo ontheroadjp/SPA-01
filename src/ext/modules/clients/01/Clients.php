@@ -1,4 +1,6 @@
 <?php
+// Clients.php
+
 require_once( 'modules/Module.php' );
 class Clients extends Module {
 	function __construct( $path ) {

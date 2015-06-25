@@ -1,5 +1,6 @@
-
 <?php
+// Parallax.php
+
 require_once( 'modules/Module.php' );
 class Parallax extends Module {
 	function __construct( $path ) {
@@ -15,22 +16,22 @@ class Parallax extends Module {
 
 		$this->doc .= '<div class="col-lg-4 col-md-4 col-sm-4">';
 		$this->doc .= '<div>';
-		$this->doc .= '<strong>'.$this->content['text01'].'</strong>';
-		$this->doc .= '<p>'.$this->content['text02'].'</p>';
+		$this->doc .= '<strong data-type="text">'.$this->content['text01'].'</strong>';
+		$this->doc .= '<p data-type="text">'.$this->content['text02'].'</p>';
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 			
 		$this->doc .= '<div class="col-lg-4 col-md-4 col-sm-4">';
 		$this->doc .= '<div>';
-		$this->doc .= '<strong>'.$this->content['text03'].'</strong>';
-		$this->doc .= '<p>'.$this->content['text04'].'</p>';
+		$this->doc .= '<strong data-type="text">'.$this->content['text03'].'</strong>';
+		$this->doc .= '<p data-type="text">'.$this->content['text04'].'</p>';
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 			
 		$this->doc .= '<div class="col-lg-4 col-md-4 col-sm-4 ">';
 		$this->doc .= '<div>';
-		$this->doc .= '<strong>'.$this->content['text05'].'</strong>';
-		$this->doc .= '<p>'.$this->content['text06'].'</p>';
+		$this->doc .= '<strong data-type="text">'.$this->content['text05'].'</strong>';
+		$this->doc .= '<p data-type="text">'.$this->content['text06'].'</p>';
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 

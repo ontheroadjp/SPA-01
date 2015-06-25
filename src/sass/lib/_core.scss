@@ -35,6 +35,15 @@ section {
 	padding-bottom: 60px;
 }
 
+/* -------------------------------- */
+/* for Editing */
+
+.editing {
+	border-radius: 5px;
+	// background-color: rgba(18, 23, 21, 0.96);
+	// color: #fff;
+}
+
 
 /*================================
 NAVBAR STYLES
@@ -66,10 +75,11 @@ NAVBAR STYLES
 HOME SECTION STYLES
 ==================================*/
 #home {
-	background: url(../img/home/01/home.jpg) no-repeat center center; /*Full Witdth background image*/
+	// background: url(../img/home/01/home.jpg) no-repeat center center; /*Full Witdth background image*/
 	padding: 0;
 	background-size: cover;
 	min-height: 600px;
+	font-family: 'Lato', sans-serif;
 	.overlay {
 		padding-top: 90px;
 		background-color: rgba(35, 133, 161,0.75); /*.75 opacity of the color so that background image is visible*/
@@ -77,11 +87,14 @@ HOME SECTION STYLES
 		color: #fff;	
 	};
 	h1 {
-		padding-top: 80px;
-		font-weight: 900;
-		font-size: 100px;
-		font-family: 'Lato', sans-serif;
+		font-size: 600%;
+		margin-top: 15%;
+		margin-bottom: 25%;
 	};
+	h2 {
+		font-size: 200%;
+		margin-bottom: 5%;
+	}
 }
 
 /*SMPLE CLASS TO ADJUST SECTION PADDING & HEIGHT*/
