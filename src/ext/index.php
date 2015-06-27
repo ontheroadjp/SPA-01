@@ -55,19 +55,13 @@
 </head>
 
 <body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="../"><?php echo $site_title; ?></a>
-            <ul class="nav pull-right">
-                <li><a href="../"><?php echo $editor_button_view; ?></a></li>
-                <li><a href="?action=logout"><?php echo $editor_button_logout; ?></a></li>
-            </ul>
-        </div><!-- .container -->
-    </div><!-- .navbar-inner-->
-</div><!-- .navpbar-->
+<div class="navbar navbar-default navbar-fixed-top">
+	<?php include('./modules/admin-bar.php'); ?>
+</div>
+<div style="margin-top: 50px;">
+	<?php include('./modules/top-bar.php'); ?>
+</div>
 
-<?php include('./modules/topbar.php'); ?>
 
 <?php
 	$doc_edit_prefix = '';

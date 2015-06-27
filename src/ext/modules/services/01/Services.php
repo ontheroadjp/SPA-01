@@ -36,9 +36,8 @@ class Services extends Module {
 			$this->doc .= '<p data-type="textarea" data-rows="5" data-textAlign="center">'.$this->content['text08'].'</p>';
 			$this->doc .= '</div>';
 
-		$this->doc .= '</div><!-- end of .row .text-center -->';
-
-		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</div><!-- / .row .text-center -->';
+		$this->doc .= '</div><!-- / .container -->';
 		$this->doc .= '</section>';
 
 	}

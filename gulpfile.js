@@ -19,7 +19,7 @@ gulp.task('build',['ext','sass','js','img']);
 
 // ext
 gulp.task('ext', function () {
-	gulp.src(target + 'ext/**/*.*')
+	gulp.src(target + 'ext/**')
 		.pipe(gulp.dest('build'))
 		.pipe(reload({stream:true}));
 });

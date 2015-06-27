@@ -1,5 +1,4 @@
 
-<div class="navbar navbar-default navbar-fixed-top">
 <div class="container">
 
 <div class="navbar-header">
@@ -12,7 +11,7 @@
 <a class="navbar-brand" href="#">
 	<img src="img/vivaldi-logo.png" alt="" class="img-responsive" />
 </a>
-</div><!-- end of .navbar-header -->
+</div><!-- / .navbar-header -->
 
 <div class="navbar-collapse collapse navbar-right scroll-me">
 <ul class="nav navbar-nav ">
@@ -23,5 +22,6 @@
 </ul>
 </div>
 
-</div><!-- end of .container -->
-</div><!-- end of .navbar navbar-default navbar-fixed-top -->
+</div><!-- / .container -->
+
+

@@ -44,8 +44,8 @@ class Portfolio extends Module {
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 
-		$this->doc .= '</div><!-- end of .row text-center portfolio-item -->';
-		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</div><!-- / .row text-center portfolio-item -->';
+		$this->doc .= '</div><!-- / .container -->';
 		$this->doc .= '</section>';
 	}
 }

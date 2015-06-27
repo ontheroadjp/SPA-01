@@ -35,11 +35,11 @@ class Parallax extends Module {
 		$this->doc .= '</div>';
 		$this->doc .= '</div>';
 
-		$this->doc .= '</div><!-- end of .row -->';
-		$this->doc .= '</div><!-- end of .container -->';
+		$this->doc .= '</div><!-- / .row -->';
+		$this->doc .= '</div><!-- / .container -->';
 
-		$this->doc .= '</div><!-- end of .overlay -->';
-		$this->doc .= '</div><!-- end of .parallax-like -->';
+		$this->doc .= '</div><!-- / .overlay -->';
+		$this->doc .= '</div><!-- / .parallax-like -->';
 	}
 }
 ?>
