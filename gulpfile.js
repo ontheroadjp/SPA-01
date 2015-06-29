@@ -11,15 +11,38 @@ var php = require('gulp-connect-php');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
+var shell = require('gulp-shell');
+
+
 // ソースコードの Directory を指定(最後に / 必要)
 var target = 'src/';
 
 // build
 gulp.task('build',['ext','sass','js','img']);
 
+gulp.task('shell', shell.task([
+			  'cp -r ./src/ext ./build',
+					]))
+
 // ext
 gulp.task('ext', function () {
-	gulp.src(target + 'ext/**')
+	gulp.src(
+							//'*.js', {matchBase: true}
+							//'*.{php,css,js,jpg,png,gif,svg,json}',
+							//target + 'ext/**/*.{html,php,css,js,jpg,png,gif,svg,json}'
+							target + 'ext/**'
+							//target + 'ext/**/*.php',
+							//target + 'ext/**/*.css',
+							//target + 'ext/**/*.js',
+							//target + 'ext/**/*.jpg',
+							//target + 'ext/**/*.png',
+							//target + 'ext/**/*.gif',
+							//target + 'ext/**/*.svg',
+							//target + 'ext/**/*.json',
+						//], { "base" : target + "ext" }, {cwd: 'build'})
+						//], {cwd: 'src/ext/', matchBase:'true'})
+						//], { matchBase: true})
+						)
 		.pipe(gulp.dest('build'))
 		.pipe(reload({stream:true}));
 });
