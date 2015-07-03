@@ -1,6 +1,26 @@
-// http://gihyo.jp/design/serial/01/jquery-site-production/0017?page=2
 
+// --------------------------------------------------
+// パネルスワップ
+// --------------------------------------------------
+function swapbtn() {
+	$('.smoothswap-panel').each(function(index){
+	var panel = $(this).children('.swap-buttons');
+		if(index == 0) {
+			panel.css('display', 'none');
+		} else {
+			panel.css('display', 'block');
+		}
+	});
+}
+
+
+// --------------------------------------------------
+// テキストライブ編集
+// http://gihyo.jp/design/serial/01/jquery-site-production/0017?page=2
+// --------------------------------------------------
 jQuery( function($) {
+
+	swapbtn();
 
 	// 一つ一つの内容を保持するためeachを利用
 	// .data()を利用して最初の内容を残しておく

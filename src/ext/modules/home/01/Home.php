@@ -21,6 +21,7 @@ class Home extends Module {
 		// $this->doc .= '</div><!-- / container -->';
 		// $this->doc .= '</div><!-- / .overlay -->';
 		// $this->doc .= '</section><!-- / #home -->';
+		// 
 	}
 }
 ?>

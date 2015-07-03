@@ -16,6 +16,7 @@ abstract class Module {
 	protected $content  = array();
 	protected $css = array();
 	protected $doc = '';
+	protected $editDoc = '';
 
 	public $colors = array(
 		"background-color" => "#0F2651",
@@ -68,10 +69,10 @@ abstract class Module {
 	 */
 	public function getDoc() {
 
-		$pre = $this->getPreDoc();
-		$post = $this->getPostDoc();
+		$preDoc = $this->getPreDoc();
+		$postDoc = $this->getPostDoc();
 
-		return $pre.$this->doc.$post;
+		return $preDoc.$this->doc.$postDoc;
 	}
 
 	public function getPreDoc() {
@@ -89,8 +90,6 @@ abstract class Module {
 		$val .= '</section>';
 		return $val;
 	}
-
-
 
 }
 

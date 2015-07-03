@@ -37,6 +37,33 @@
 </div>
 
 
+<!-- <div id="smoothswap"> -->
+<?php
+	// //$count = 0;
+	// foreach( $modules_class as $name => $dir_path ) {
+	// 	//$count ++;
+	// 	require_once( $dir_path.$name.'.php' );
+	// 	$module = new $name( $dir_path );
+	// 	echo '<div class="smoothswap-panel">';
+	// 		echo '<div class="swap-buttons">';
+	// 			echo '<button class="smoothswap-up btn btn-default">▲（パネルの入れ替え）▼</button>';
+	// 			//echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
+	// 			//echo '<button class="add-panel btn btn-primary">パネル追加</button>';
+	// 			//echo '<button class="change-panel btn btn-edit" data-panel-no="'.$count.'">パネル変更</button>';
+	// 			//echo '<button class="add-panel btn btn-danger">パネル削除</button>';
+	// 		echo '</div>';
+
+	// 		//echo '<div class="panel-'.$count.'">';
+	// 		echo $module->getDoc();
+	// 		//echo '</div>';
+	// 	echo '</div><!-- / .smoothswap-panel -->';
+	// }
+?>
+<!-- </div>/ .smoothswap -->
+
+
+
+
 <div id="smoothswap">
 <?php
 	$count = 0;
@@ -44,72 +71,46 @@
 		$count ++;
 		require_once( $dir_path.$name.'.php' );
 		$module = new $name( $dir_path );
-		echo '<div class="smoothswap-panel">';
-			echo '<div class="swap-buttons">';
-				echo '<button class="smoothswap-up btn btn-default">▲（上へ移動）</button>';
-				echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
-				echo '<button class="add-panel btn btn-primary">パネル追加</button>';
-				echo '<button class="change-panel btn btn-edit" data-panel-no="'.$count.'">パネル変更</button>';
-				echo '<button class="add-panel btn btn-danger">パネル削除</button>';
-			echo '</div>';
 
-			echo '<div class="panel-'.$count.'">';
-			echo $module->getDoc();
-			echo '</div>';
+		// パネルスワップ
+		echo '<div class="smoothswap-panel">';
+		echo '<div class="swap-buttons">';
+		echo '<button class="smoothswap-up btn btn-default">▲（パネルの入れ替え）▼</button>';
+		echo '</div>';
+
+			// パネルカルーセル
+			echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
+			echo '<div class="carousel-inner">';
+
+				echo '<div class="item active">';
+					echo $module->getDoc();
+				echo '</div>';
+
+				echo '<div class="item">';
+					echo $module->getDoc();
+				echo '</div>';
+
+				echo '<div class="item">';
+					echo '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
+				echo '</div>';
+			echo '</div><!-- / .carousel-inner -->';
+
+			// カルーセル左ボタン
+			echo '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
+			echo '<span class="glyphicon glyphicon-chevron-left"></span></a>';
+
+			// カルーセル右ボタン
+			echo '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
+			echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
+
+			echo '</div><!-- / #my-carousel .carousel .slide -->';
+
+		// パネルスワップ
 		echo '</div><!-- / .smoothswap-panel -->';
+
 	}
 ?>
-</div><!-- / .smoothswap -->
-
-
-
-
-
-
-
-
-<!-- <div id="smoothswap"> -->
-<?php
-	// $count = 0;
-	// foreach( $modules_class as $name => $dir_path ) {
-	// 	$count ++;
-	// 	require_once( $dir_path.$name.'.php' );
-	// 	$module = new $name( $dir_path );
-	// 	echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
-	// 		echo '<div class="carousel-inner">';
-	// 			echo '<div class="item active">';
-	
-	// 			echo '<div class="smoothswap-panel">';
-	// 				echo '<div class="swap-buttons">';
-	// 					echo '<button class="smoothswap-up btn btn-default">▲（上へ移動）</button>';
-	// 					echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
-	// 					echo '<button class="smoothswap-down btn btn-primary">パネル変更</button>';
-	// 				echo '</div>';
-	// 				echo $module->getDoc();
-	// 			echo '</div><!-- / .smoothswap-panel -->';
-	
-	// 			echo '</div><!-- / .item active -->';
-	// 			echo '<div class="item">';
-	// 				echo '<img src="holder.js/900x500/auto/#777:#fff/text:Secound slide" alt="">';
-	// 			echo '</div><!-- / .item -->';
-	// 			echo '<div class="item">';
-	// 				echo '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
-	// 			echo '</div><!-- / .item -->';
-	// 		echo '</div><!-- / .carousel-inner -->';
-	
-	// 		// カルーセル左ボタン
-	// 		echo '<a class="left carousel-control" href="#my-carousel" data-slide="prev">';
-	// 		echo '<span class="glyphicon glyphicon-chevron-left"></span></a>';
-	
-	// 		// カルーセル右ボタン
-	// 		echo '<a class="right carousel-control" href="#my-carousel" data-slide="next">';
-	// 		echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
-	
-	// 	echo '</div><!-- / #my-carousel .carousel .slide -->';
-
-	// }
-?>
-<!-- </div>/ .smoothswap -->
+</div>/ .smoothswap
 
 <footer>
 © 2015 YourDomain.com  | <a href="http://www.designbootstrap.com/" target="_blank">by DesignBootstrap</a>
@@ -129,71 +130,44 @@
 
 <script src="js/scripts.js"></script>
 
-<script type="text/javascript">
-<!--
-	$('#my-carousel').carousel();
-// -->
-</script>
+
 
 <script type="text/javascript"> 
 $(function(){
-  $('#smoothswap').smoothswap({
-	panel:'.smoothswap-panel',
-	up:'.smoothswap-up',
-	down:'.smoothswap-down',
-	opacity: 0.6,
-	duration: 1000, // slow, normal, fast
-	marginHeight: 1
-//    onswapped: function(base,first,second){alert('done!');}
-  });
-});
-</script>
 
+	// パネルカルーセル
+	var num = $('.carousel-inner').length;
+	alert(num);
+	for( n=1; n<num; n++) {
+		$('#my-carousel-'+n)
+			.carousel('pause')
+			.on('slid.bs.carousel', function () {
+				var a = $('.item.active').each(function(index) {
+					 alert( $(this).children('section').attr('id') );
+				});
+//				alert('carousel@index.php - '+a[0]);
+				});
+	}
 
-<script type="text/javascript"> 
-jQuery( function($) {
-	$('.change-panel').click( function() {
-
-		var url = 'http://localhost:9999/carousel.php';
-		var type = 'POST';
-
-		var panelNo = $(this).data('panel-no');
-		$('.panel-' + panelNo).load(url);
-
-		// $.ajax({
-		// 	url: url,
-		// 	type: type,
-		// 	data: {
-		// 		id: 1,
-		// 	mode: 'hoge',
-		// 	type: 'entry'
-		// 	},
-		// 	dataType: 'html',
-		// 	cache: false,
-		// 	async: true,
-		// 	timeout: 10000
-		// })
-		// .done(function( data ) {
-		// 	alert(data);
-		// 	$(this).next('.panel').html(data);
-		// })
-		// .fail(function( data ) {
-		// 	alert('ajax;fail');
-		// 	// ...
-		// })
-		// .always(function( data ) {
-		// 	// alert('ajax;always');
-		// 	// ...
-		// });
-
-		// resetEdit();
-
+	// パネルスワップ
+	$('#smoothswap').smoothswap({
+		panel:'.smoothswap-panel',
+		up:'.smoothswap-up',
+		down:'.smoothswap-down',
+		opacity: 0.6,
+		duration: 600, // slow, normal, fast
+		marginHeight: 1,
+    	onswapped: function(base,first,second) {
+    		swapbtn();	// editable.js に定義
+    		base.find('.item.active').each(function(index) {
+				 alert( $(this).children('section').attr('id') );
+    	});
+//    		alert('swap@index.php');
+    	}
 
 	});
 });
-
 </script>
-
 
 
 </body>

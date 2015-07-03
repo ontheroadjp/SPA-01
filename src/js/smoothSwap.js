@@ -14,7 +14,6 @@
 									'duration':'slow',
 									'marginHeight':'1'
 								}, userOptions);
-
 		return this.each(function(baseIndex){
 			var base = $(this).css('position', 'relative');
 			var swap = function(panelIndex, type) {
@@ -65,15 +64,15 @@
 					.animate(
 						{'top': (secondHeight + marginHeight) + 'px'},
 						{'complete': onswapped, 'duration': options.duration}
-					)
-				;
+					);
+
 				second
 					.css('opacity', options.opacity)
 					.animate(
 						{'top': '-' + (firstHeight + marginHeight) + 'px'},
 						{'complete': onswapped, 'duration': options.duration}
-					)
-				;
+					);
+				
 			}
 			base.find(options.panel).each(function(panelIndex){
 				var panel = $(this);
