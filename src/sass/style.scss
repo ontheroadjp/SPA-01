@@ -1,3 +1,9 @@
+@import "venders/bootstrap";
+@import "venders/font-awesome";
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lato:100);
+@import url(http://fonts.googleapis.com/css?family=Erica+One);
+
 @import "lib/normalize";
 @import "lib/variable";
 @import "lib/mixin";
@@ -5,8 +11,3 @@
 
 @import "lib/admin-bar";
 
-@import "venders/bootstrap";
-@import "venders/font-awesome";
-@import url(http://fonts.googleapis.com/css?family=Roboto);
-@import url(http://fonts.googleapis.com/css?family=Lato:100);
-@import url(http://fonts.googleapis.com/css?family=Erica+One);

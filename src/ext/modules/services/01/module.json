@@ -1,5 +1,6 @@
 {
-	"id" : "services",
+	"id" : "services-01",
+	"path" : "services/01/",
 	"content" : {
 		"text01" : "OUR SERVICES",
 		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
@@ -9,5 +10,15 @@
 		"text06" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
 		"text07" : "100% FREE TO USE",
 		"text08" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere."
+	},
+	"css" : {
+		"section" : {
+			"background-color" : "#fff",
+			"color" : "#000"
+		},
+		"overlay" : {
+
+		}
 	}
 }
+

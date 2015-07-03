@@ -1,5 +1,6 @@
 {
-	"id" : "services",
+	"id" : "parallax-01",
+	"path" : "parallax/01/",
 	"content" : {
 		"text01" : "1300+",
 		"text02" : "Projects",
@@ -7,5 +8,20 @@
 		"text04" : "Locations",
 		"text05" : "5000+",
 		"text06" : "Employees"
+	},
+	"css" : {
+		"section" : {
+			"background" : "url(../img/stats.jpg) no-repeat center center",
+			"padding": "0",
+			"background-size": "cover",
+			"background-attachment": "fixed"
+		},
+		"overlay" : {
+			"min-height": "200px",
+			"font-size": "40px",
+			"padding-bottom": "60px",
+			"padding-top": "60px"
+		}
 	}
 }
+

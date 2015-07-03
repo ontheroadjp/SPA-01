@@ -22,8 +22,12 @@ body {
 }
 
 section {
-	padding-top: 80px;
-	padding-bottom: 120px;
+	padding-top: 60px;
+	padding-bottom: 100px;
+	// background-color: #BA4141;
+	// color: #24B26C;
+	background-color: #f4f4f4;
+	color: #000;
 }
 
 .head-set {
@@ -33,6 +37,21 @@ section {
 
 .pad-bottom {
 	padding-bottom: 60px;
+}
+
+/* -------------------------------- */
+/* for swap */
+.swap-buttons {
+	border: 1px solid #999;
+	padding: 10px;
+}
+
+.add-panel {
+	margin-right: 10px;
+}
+
+.smoothswap-up, .smoothswap-down {
+	margin-right: 10px;
 }
 
 /* -------------------------------- */
@@ -74,53 +93,53 @@ NAVBAR STYLES
 /*================================
 HOME SECTION STYLES
 ==================================*/
-#home {
-	// background: url(../img/home/01/home.jpg) no-repeat center center; /*Full Witdth background image*/
-	padding: 0;
-	background-size: cover;
-	min-height: 600px;
-	font-family: 'Lato', sans-serif;
-	.overlay {
-		padding-top: 90px;
-		background-color: rgba(35, 133, 161,0.75); /*.75 opacity of the color so that background image is visible*/
-		min-height: 600px;
-		color: #fff;	
-	};
-	h1 {
-		font-size: 600%;
-		margin-top: 15%;
-		margin-bottom: 25%;
-	};
-	h2 {
-		font-size: 200%;
-		margin-bottom: 5%;
-	}
-}
+// #home {
+// 	// background: url(../img/home/01/home.jpg) no-repeat center center; /*Full Witdth background image*/
+// 	padding: 0;
+// 	background-size: cover;
+// 	min-height: 600px;
+// 	font-family: 'Lato', sans-serif;
+// 	.overlay {
+// 		padding-top: 90px;
+// 		background-color: rgba(35, 133, 161,0.75); /*.75 opacity of the color so that background image is visible*/
+// 		min-height: 600px;
+// 		color: #fff;	
+// 	};
+// 	h1 {
+// 		font-size: 600%;
+// 		margin-top: 15%;
+// 		margin-bottom: 25%;
+// 	};
+// 	h2 {
+// 		font-size: 200%;
+// 		margin-bottom: 5%;
+// 	}
+// }
 
 /*SMPLE CLASS TO ADJUST SECTION PADDING & HEIGHT*/
 /*CLASS TO FORMAT TEXT*/
-.p-cls {
-	padding-top: 30px;
-	padding-bottom: 40px;
-}
+// .p-cls {
+// 	padding-top: 30px;
+// 	padding-bottom: 40px;
+// }
 
 /*======================================
 PARALLAX LIKE / STATS SECTION STYLES
 =========================================*/
-.parallax-like {
-	background: url(../img/stats.jpg) no-repeat center center; /* DEFINE IMAGE PATH CAREFULLY*/
-	padding: 0;
-	background-size: cover;
-	color: #fff;
-	background-attachment: fixed;
-	.overlay {
-		min-height: 200px;
-		background: rgba(35, 133, 161,0.9);
-		font-size: 40px;
-		padding-bottom: 60px;
-		padding-top: 60px;
-	};
-}
+// .parallax-like {
+// 	background: url(../img/stats.jpg) no-repeat center center; /* DEFINE IMAGE PATH CAREFULLY*/
+// 	padding: 0;
+// 	background-size: cover;
+// 	color: #fff;
+// 	background-attachment: fixed;
+// 	.overlay {
+// 		min-height: 200px;
+// 		background: rgba(35, 133, 161,0.9);
+// 		font-size: 40px;
+// 		padding-bottom: 60px;
+// 		padding-top: 60px;
+// 	};
+// }
 
 /*================================
 PORTFOLIO / WORK SECTION STYLES
@@ -135,33 +154,33 @@ PORTFOLIO / WORK SECTION STYLES
 /*================================
 VIDEO SECTION STYLES
 ==================================*/
-#video-sec {
-	color: #fff;
-	text-align: center;
-	.overlay {
-		background-color: rgba(0, 0, 0, 0.85);
-		min-height: 300px;
-		color: #fff;
-	};
-	h1 {
-		padding-top: 80px;
-		font-size: 50px;
-		font-weight: 900;
-		padding-bottom: 30px;
-	};
-}
+// #video-sec {
+// 	color: #fff;
+// 	text-align: center;
+// 	.overlay {
+// 		background-color: rgba(0, 0, 0, 0.85);
+// 		min-height: 300px;
+// 		color: #fff;
+// 	};
+// 	h1 {
+// 		padding-top: 80px;
+// 		font-size: 50px;
+// 		font-weight: 900;
+// 		padding-bottom: 30px;
+// 	};
+// }
 
 /*================================
 CLIENTS SECTION STYLES
 ==================================*/
 #clients {
-	background-color:#f4f4f4;
+	// background-color:#f4f4f4;
 	padding-bottom:50px;
 	padding-top:50px;
 	img {
 		opacity:0.5;
 		cursor:pointer;
-		&hover {
+		&:hover {
 			opacity: 1;
 		};
 	};

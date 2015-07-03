@@ -16,31 +16,6 @@
 <?php include('./modules/head.php'); ?>
 
 <style>
-
-.edit-section {
-}
-
-.edit-section dt {
-	display: block;
-	width: 100px;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	border: #666 1px solid;
-	cursor: pointer;
-	float: right;
-	position: relative;
-	bottom: 30;
-	background-color: rgba(255, 0, 213, 0.65);
-	color: #fff;
-}
-
-.edit-section dd {
-	background:#f2f2f2;
-	text-align:center;
-	display:none;
-}
-
 .preview {
 	cursor: pointer;
 	-webkit-transform: scale(0.6,0.6);
@@ -50,7 +25,6 @@
 	z-index: 1;
 	border: 1px solid #000
 }
-
 </style>
 </head>
 
@@ -63,55 +37,79 @@
 </div>
 
 
+<div id="smoothswap">
 <?php
-	$doc_edit_prefix = '';
-	$doc_edit_prefix .='<dl id="acMenu" class="edit-section">';
-	$doc_edit_prefix .='<dt>Edit</dt><!-- 開閉ボタン -->';
-	$doc_edit_prefix .='<dd><!-- 開閉される内容 -->';
-// 	$doc_edit_prefix .='<div class="preview">';
-
-	$doc_edit_suffix = '';
-// 	$doc_edit_suffix .= '</div>';
-	$doc_edit_suffix .= '</dd>';
-	$doc_edit_suffix .= '</dl>';
-
+	$count = 0;
 	foreach( $modules_class as $name => $dir_path ) {
+		$count ++;
 		require_once( $dir_path.$name.'.php' );
 		$module = new $name( $dir_path );
-		echo $module->getDoc();
+		echo '<div class="smoothswap-panel">';
+			echo '<div class="swap-buttons">';
+				echo '<button class="smoothswap-up btn btn-default">▲（上へ移動）</button>';
+				echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
+				echo '<button class="add-panel btn btn-primary">パネル追加</button>';
+				echo '<button class="change-panel btn btn-edit" data-panel-no="'.$count.'">パネル変更</button>';
+				echo '<button class="add-panel btn btn-danger">パネル削除</button>';
+			echo '</div>';
 
-
-//		echo $doc_edit_prefix;			
-// 		echo '<div class="preview">';	// 編集用プレビュー
-// 		echo $doc;
-// 		echo '</div>';
-
-// 		echo '<form><fieldset><legend>コンテンツの編集</legend>';	
-// 		foreach( $editable as $key => $val ) {
-// 
-// 			echo '<script type="text/javascript">';
-// 			echo '$(document).ready( function(){';
-// 			echo '$(".'.$prefix.'_'.$key.'").realPre(".'.$prefix.'_'.$key.'");';
-// 			echo '});';
-// 			echo '</script>';
-// 
-// 			switch( $val ) {
-// 				case "text" :
-// 					echo '<label>'.$key.'</label>';
-// 					echo '<input class="form-control '.$prefix.'_'.$key.'" type="text" name="'.$prefix.'_'.$key.'">';
-// 					break;
-// 				case "color" :
-// 					echo '<div>色選択</div>';
-// 					break;
-// 				default:
-// 					echo 'エラー';
-// 			}
-// 		}
-// 		echo '</fieldset></form>';
-// 		echo '<button>全て元に戻す</button>';
-// 		echo $doc_edit_suffix;
+			echo '<div class="panel-'.$count.'">';
+			echo $module->getDoc();
+			echo '</div>';
+		echo '</div><!-- / .smoothswap-panel -->';
 	}
 ?>
+</div><!-- / .smoothswap -->
+
+
+
+
+
+
+
+
+<!-- <div id="smoothswap"> -->
+<?php
+	// $count = 0;
+	// foreach( $modules_class as $name => $dir_path ) {
+	// 	$count ++;
+	// 	require_once( $dir_path.$name.'.php' );
+	// 	$module = new $name( $dir_path );
+	// 	echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
+	// 		echo '<div class="carousel-inner">';
+	// 			echo '<div class="item active">';
+	
+	// 			echo '<div class="smoothswap-panel">';
+	// 				echo '<div class="swap-buttons">';
+	// 					echo '<button class="smoothswap-up btn btn-default">▲（上へ移動）</button>';
+	// 					echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
+	// 					echo '<button class="smoothswap-down btn btn-primary">パネル変更</button>';
+	// 				echo '</div>';
+	// 				echo $module->getDoc();
+	// 			echo '</div><!-- / .smoothswap-panel -->';
+	
+	// 			echo '</div><!-- / .item active -->';
+	// 			echo '<div class="item">';
+	// 				echo '<img src="holder.js/900x500/auto/#777:#fff/text:Secound slide" alt="">';
+	// 			echo '</div><!-- / .item -->';
+	// 			echo '<div class="item">';
+	// 				echo '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
+	// 			echo '</div><!-- / .item -->';
+	// 		echo '</div><!-- / .carousel-inner -->';
+	
+	// 		// カルーセル左ボタン
+	// 		echo '<a class="left carousel-control" href="#my-carousel" data-slide="prev">';
+	// 		echo '<span class="glyphicon glyphicon-chevron-left"></span></a>';
+	
+	// 		// カルーセル右ボタン
+	// 		echo '<a class="right carousel-control" href="#my-carousel" data-slide="next">';
+	// 		echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
+	
+	// 	echo '</div><!-- / #my-carousel .carousel .slide -->';
+
+	// }
+?>
+<!-- </div>/ .smoothswap -->
 
 <footer>
 © 2015 YourDomain.com  | <a href="http://www.designbootstrap.com/" target="_blank">by DesignBootstrap</a>
@@ -128,6 +126,75 @@
 	js/accordion.js 			// アコーディオン
 	js/realPre1.01.js 		//  テキストボックへの入力をリアルタイムで画面表示
 -->
+
 <script src="js/scripts.js"></script>
+
+<script type="text/javascript">
+<!--
+	$('#my-carousel').carousel();
+// -->
+</script>
+
+<script type="text/javascript"> 
+$(function(){
+  $('#smoothswap').smoothswap({
+	panel:'.smoothswap-panel',
+	up:'.smoothswap-up',
+	down:'.smoothswap-down',
+	opacity: 0.6,
+	duration: 1000, // slow, normal, fast
+	marginHeight: 1
+//    onswapped: function(base,first,second){alert('done!');}
+  });
+});
+</script>
+
+
+<script type="text/javascript"> 
+jQuery( function($) {
+	$('.change-panel').click( function() {
+
+		var url = 'http://localhost:9999/carousel.php';
+		var type = 'POST';
+
+		var panelNo = $(this).data('panel-no');
+		$('.panel-' + panelNo).load(url);
+
+		// $.ajax({
+		// 	url: url,
+		// 	type: type,
+		// 	data: {
+		// 		id: 1,
+		// 	mode: 'hoge',
+		// 	type: 'entry'
+		// 	},
+		// 	dataType: 'html',
+		// 	cache: false,
+		// 	async: true,
+		// 	timeout: 10000
+		// })
+		// .done(function( data ) {
+		// 	alert(data);
+		// 	$(this).next('.panel').html(data);
+		// })
+		// .fail(function( data ) {
+		// 	alert('ajax;fail');
+		// 	// ...
+		// })
+		// .always(function( data ) {
+		// 	// alert('ajax;always');
+		// 	// ...
+		// });
+
+		// resetEdit();
+
+
+	});
+});
+
+</script>
+
+
+
 </body>
 </html>

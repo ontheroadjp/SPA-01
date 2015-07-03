@@ -1,5 +1,6 @@
 {
-	"id" : "services",
+	"id" : "portfolio-01",
+	"path" : "portfolio/01/",
 	"content" : {
 		"text01" : "OUR WORKS",
 		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.",
@@ -9,5 +10,14 @@
 		"text06" : "<a href='#'><strong>Click Here</strong> </a>to go to the project",
 		"text07" : "Project Title Here",
 		"text08" : "<a href='#'><strong>Click Here</strong> </a>to go to the project"
+	},
+	"css" : {
+		"section" : {
+
+			},
+		"overlay" : {
+
+		}
 	}
 }
+

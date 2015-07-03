@@ -1,8 +1,32 @@
 {
-	"id" : "home",
+	"id" : "home-01",
+	"path" : "home/01/",
 	"content" : {
 		"text01" : "ON THE ROAD",
 		"text02" : "be happy with our service",
 		"text03" : "月額5,000円から始める自分だけのWEBサイト"
+	},
+	"css" : {
+		"section" : {
+			"padding" : "0",
+			"background-size" : "cover",
+			"min-height" : "600px",
+			"background-color" : "$$$",
+			"color" : "$$$",
+			"font-family" : "Lato, sans-self"
+		},
+		"overlay" : {
+			"padding-top" : "90px",
+			"min-height" : "600px"
+		},
+		"h1" : {
+			"font-size" : "600%",
+			"margin-top" : "15%",
+			"margin-bottom" : "25%"
+		},
+		"h2" : {
+			"font-size": "200%",
+			"margin-bottom": "5%"
+		}
 	}
 }

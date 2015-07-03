@@ -29,8 +29,9 @@ gulp.task('ext', function () {
 	gulp.src(
 							//'*.js', {matchBase: true}
 							//'*.{php,css,js,jpg,png,gif,svg,json}',
-							//target + 'ext/**/*.{html,php,css,js,jpg,png,gif,svg,json}'
-							target + 'ext/**'
+							//target + 'ext/**/*.{html,php,css,js,jpg,png,gif,svg,json}',
+							target + 'ext/**/*.*'
+							//target + 'ext/**'
 							//target + 'ext/**/*.php',
 							//target + 'ext/**/*.css',
 							//target + 'ext/**/*.js',
