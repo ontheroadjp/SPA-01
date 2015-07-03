@@ -75,7 +75,15 @@
 		// パネルスワップ
 		echo '<div class="smoothswap-panel">';
 		echo '<div class="swap-buttons">';
+
+		echo '<div class="row">';
+		echo '<div class="col-md-4 col-md-offset-4 text-center">';
+
 		echo '<button class="smoothswap-up btn btn-default">▲（パネルの入れ替え）▼</button>';
+
+		echo '</div>';
+		echo '</div>';
+
 		echo '</div>';
 
 			// パネルカルーセル
