@@ -1,5 +1,37 @@
 
 <?php
+
+define("META_FILE_NAME", "site.json");
+
+$sitemap = '';
+
+try {
+	if( $sitemap = file_get_contents(META_FILE_NAME) ) {
+		echo 'OK';
+	} else {
+		echo 'NG';
+		$modules_class = array(
+			'Home' => 'modules/home/01/'
+			, 'Services' => 'modules/services/01/'
+			, 'Parallax' => 'modules/parallax/01/'
+			, 'Portfolio' => 'modules/portfolio/01/'
+			, 'Movie' => 'modules/movie/01/'
+			, 'Location' => 'modules/location/01/'
+			, 'Clients' => 'modules/clients/01/'
+		);
+
+		$sitemap = init();
+	}
+} catch(Exception $e) {
+	$e->getMessage();
+}
+
+
+echo '<pre>';
+	//var_dump( $sitemap );
+echo '</pre>';
+
+
 	$modules_class = array(
 		'Home' => 'modules/home/01/'
 		, 'Services' => 'modules/services/01/'
@@ -9,6 +41,28 @@
 		, 'Location' => 'modules/location/01/'
 		, 'Clients' => 'modules/clients/01/'
 	);
+
+function init() {
+	$modules_class = array(
+		'Home' => 'modules/home/01/'
+		, 'Services' => 'modules/services/01/'
+		, 'Parallax' => 'modules/parallax/01/'
+		, 'Portfolio' => 'modules/portfolio/01/'
+		, 'Movie' => 'modules/movie/01/'
+		, 'Location' => 'modules/location/01/'
+		, 'Clients' => 'modules/clients/01/'
+	);
+	$sitemap = array();
+	foreach( $modules_class as $key => $val ) {
+		$file = file_get_contents($val.'module.json');
+		$module = json_decode($file);
+		array_push($sitemap, $module);
+	}
+	file_put_contents(META_FILE_NAME,json_encode($sitemap));
+	return $sitemap;
+}
+
+
 ?>
 
 <html>
@@ -36,6 +90,7 @@
 	<?php include('./modules/top-bar.php'); ?>
 </div>
 
+<div id="msg"></div>
 
 <!-- <div id="smoothswap"> -->
 <?php
@@ -79,7 +134,7 @@
 		echo '<div class="row">';
 		echo '<div class="col-md-4 col-md-offset-4 text-center">';
 
-		echo '<button class="smoothswap-up btn btn-default">▲（パネルの入れ替え）▼</button>';
+		echo '<button class="smoothswap-up btn btn-default">▲（上下入れ替え）▼</button>';
 
 		echo '</div>';
 		echo '</div>';
@@ -145,16 +200,15 @@ $(function(){
 
 	// パネルカルーセル
 	var num = $('.carousel-inner').length;
-	alert(num);
+
 	for( n=1; n<num; n++) {
 		$('#my-carousel-'+n)
 			.carousel('pause')
 			.on('slid.bs.carousel', function () {
 				var a = $('.item.active').each(function(index) {
-					 alert( $(this).children('section').attr('id') );
+					 // alert( $(this).children('section').attr('id') );
 				});
-//				alert('carousel@index.php - '+a[0]);
-				});
+			});
 	}
 
 	// パネルスワップ
@@ -167,10 +221,32 @@ $(function(){
 		marginHeight: 1,
     	onswapped: function(base,first,second) {
     		swapbtn();	// editable.js に定義
-    		base.find('.item.active').each(function(index) {
-				 alert( $(this).children('section').attr('id') );
-    	});
-//    		alert('swap@index.php');
+				
+				$.ajax({
+					url: 'http://localhost:9999/ajax.php',
+					type: 'POST',
+					data: {
+						ids: 1,
+						mode: 'hoge',
+						type: 'entry'
+					},
+					dataType: 'html',
+					cache: false,
+					async: true,
+					timeout: 10000
+				
+				})
+				.done(function(data){
+					$('#msg').html(data);	
+				})
+				.fail(function(data){
+				})
+				.always(function(data){
+				});
+				
+				base.find('.item.active').each(function(index) {
+					//alert( $(this).children('section').attr('id') );
+	    	});
     	}
 
 	});
