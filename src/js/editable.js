@@ -1,18 +1,4 @@
 
-// --------------------------------------------------
-// パネルスワップ
-// --------------------------------------------------
-function swapbtn() {
-	$('.smoothswap-panel').each(function(index){
-	var panel = $(this).children('.swap-buttons');
-		if(index == 0) {
-			panel.css('display', 'none');
-		} else {
-			panel.css('display', 'block');
-		}
-	});
-}
-
 
 // --------------------------------------------------
 // テキストライブ編集
