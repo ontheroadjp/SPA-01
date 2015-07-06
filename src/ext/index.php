@@ -90,7 +90,7 @@ function init() {
 	<?php include('./modules/top-bar.php'); ?>
 </div>
 
-<div id="msg"></div>
+<!-- <div id="msg"></div> -->
 
 
 <div id="smoothswap">
@@ -115,7 +115,7 @@ function init() {
 			echo '</div>';	
 		
 			echo '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
-				echo '<a class="add-panel" href="hoge.php" target="_blank">';
+				echo '<a class="smoothswap-add" href="hoge.php" target="_blank">';
 				echo '<i class="fa fa-plus-circle  fa-2x"></i>';
 				echo '</a>';
 			echo '</div>';
@@ -200,6 +200,7 @@ $(function(){
 		panel:'.smoothswap-panel',
 		up:'.smoothswap-up',
 		down:'.smoothswap-down',
+		add:'.smoothswap-add',
 		opacity: 0.6,
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
@@ -221,7 +222,7 @@ $(function(){
 				
 				})
 				.done(function(data){
-					$('#msg').html(data);	
+				//	$('#msg').html(data);	
 				})
 				.fail(function(data){
 				})
