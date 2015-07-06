@@ -1,4 +1,11 @@
+<?php
+	$path = 'modules/Services/01/Services.php';
 
-<h1>Hello Ajax!</h1>
+//	require_once('modules/Module.php');
+	require_once('modules/Services/01/Services.php');
+	$obj = new Services('modules/Services/01/');
+	echo $obj->getEditDoc();
+?>
+
 
 

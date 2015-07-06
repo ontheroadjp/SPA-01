@@ -91,6 +91,66 @@ abstract class Module {
 		return $val;
 	}
 
+	public function getEditDoc(){
+		// パネルスワップ
+		$val = '';
+		$val .= '<div class="smoothswap-panel">';
+		$val .= '<div class="swap-buttons">';
+
+		$val .= '<div class="container">';
+		$val .= '<div class="row">';
+			$val .= '<div class="
+						col-md-8 col-md-offset-2 
+						col-sm-8 col-sm-offset-2 
+						col-xs-8 col-xs-offset-2 text-center">';
+				$val .= '<button class="smoothswap-up btn btn-default">▲（上下入れ替え）▼</button>';
+			$val .= '</div>';	
+		
+			$val .= '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
+				$val .= '<a class="smoothswap-add" href="hoge.php" target="_blank">';
+				$val .= '<i class="fa fa-plus-circle  fa-2x"></i>';
+				$val .= '</a>';
+			$val .= '</div>';
+			
+		$val .= '</div><!-- / .row -->';
+		$val .= '</div><!-- / .container -->';
+		$val .= '</div><!-- / .swap-buttons -->';
+
+			// パネルカルーセル
+			$val .= '<div id="my-carousel-'.$count.'" class="carousel slide">';
+			$val .= '<div class="carousel-inner">';
+
+				$val .= '<div class="item active">';
+					$val .= $this->getDoc();
+				$val .= '</div>';
+
+				$val .= '<div class="item">';
+					$val .= $this->getDoc();
+				$val .= '</div>';
+
+				$val .= '<div class="item">';
+					$val .= '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
+				$val .= '</div>';
+			$val .= '</div><!-- / .carousel-inner -->';
+
+			// カルーセル左ボタン
+			$val .= '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
+			$val .= '<span class="glyphicon glyphicon-chevron-left"></span></a>';
+
+			// カルーセル右ボタン
+			$val .= '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
+			$val .= '<span class="glyphicon glyphicon-chevron-right"></span></a>';
+
+			$val .= '</div><!-- / #my-carousel .carousel .slide -->';
+
+
+		// パネルスワップ
+		$val .= '</div><!-- / .smoothswap-panel -->';
+
+		return $val;
+
+	}
+
 }
 
 ?>
