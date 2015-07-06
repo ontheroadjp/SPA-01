@@ -92,32 +92,6 @@ function init() {
 
 <div id="msg"></div>
 
-<!-- <div id="smoothswap"> -->
-<?php
-	// //$count = 0;
-	// foreach( $modules_class as $name => $dir_path ) {
-	// 	//$count ++;
-	// 	require_once( $dir_path.$name.'.php' );
-	// 	$module = new $name( $dir_path );
-	// 	echo '<div class="smoothswap-panel">';
-	// 		echo '<div class="swap-buttons">';
-	// 			echo '<button class="smoothswap-up btn btn-default">▲（パネルの入れ替え）▼</button>';
-	// 			//echo '<button class="smoothswap-down btn btn-default">▼（下へ移動）</button>';
-	// 			//echo '<button class="add-panel btn btn-primary">パネル追加</button>';
-	// 			//echo '<button class="change-panel btn btn-edit" data-panel-no="'.$count.'">パネル変更</button>';
-	// 			//echo '<button class="add-panel btn btn-danger">パネル削除</button>';
-	// 		echo '</div>';
-
-	// 		//echo '<div class="panel-'.$count.'">';
-	// 		echo $module->getDoc();
-	// 		//echo '</div>';
-	// 	echo '</div><!-- / .smoothswap-panel -->';
-	// }
-?>
-<!-- </div>/ .smoothswap -->
-
-
-
 
 <div id="smoothswap">
 <?php
@@ -131,15 +105,24 @@ function init() {
 		echo '<div class="smoothswap-panel">';
 		echo '<div class="swap-buttons">';
 
+		echo '<div class="container">';
 		echo '<div class="row">';
-		echo '<div class="col-md-4 col-md-offset-4 text-center">';
-
-		echo '<button class="smoothswap-up btn btn-default">▲（上下入れ替え）▼</button>';
-
-		echo '</div>';
-		echo '</div>';
-
-		echo '</div>';
+			echo '<div class="
+						col-md-8 col-md-offset-2 
+						col-sm-8 col-sm-offset-2 
+						col-xs-8 col-xs-offset-2 text-center">';
+				echo '<button class="smoothswap-up btn btn-default">▲（上下入れ替え）▼</button>';
+			echo '</div>';	
+		
+			echo '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
+				echo '<a class="add-panel" href="hoge.php" target="_blank">';
+				echo '<i class="fa fa-plus-circle  fa-2x"></i>';
+				echo '</a>';
+			echo '</div>';
+			
+		echo '</div><!-- / .row -->';
+		echo '</div><!-- / .container -->';
+		echo '</div><!-- / .swap-buttons -->';
 
 			// パネルカルーセル
 			echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
@@ -167,6 +150,7 @@ function init() {
 			echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
 
 			echo '</div><!-- / #my-carousel .carousel .slide -->';
+
 
 		// パネルスワップ
 		echo '</div><!-- / .smoothswap-panel -->';
