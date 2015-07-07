@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-#content_dir="/Users/hideaki/Vagrant/LAMP/www/SPA-01"
 content_dir="$HOME/Vagrant/LAMP/www/SPA-01"
 
 set -x
