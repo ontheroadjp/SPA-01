@@ -1,27 +1,37 @@
 
-function initpanelindex( base, options ) {
+function initPanel( base, options ) {
 			base.find(options.panel).each(function(panelIndex){
 				var panel = $(this);
 
 				// smoothswap-panel の初期化
-				panel.addClass('index' + panelIndex);
+				//panel.addClass('index' + panelIndex);
 				panel.data('panel-index',panelIndex).css('position','relative');
 
 				// smoothswap-up の初期化
+				panel.find(options.up).unbind();
 				panel.find(options.up).click(function() {
 					swap(base, panelIndex, 'up', options);
 					return false;
 				});
 
 				// smoothswap-down の初期化
+				panel.find(options.down).unbind();
 				panel.find(options.down).click(function() {
 					swap(base, panelIndex, 'down', options);
 					return false;
 				});
 
-				// smoothswap-add の初期化
+				// add-panel-btn の初期化
+				panel.find(options.add).unbind();
 				panel.find(options.add).click(function() {
 					swap(base, panelIndex, 'add', options);
+					return false;
+				});
+				
+				// delete-panel-btn の初期化
+				panel.find(options.delete).unbind();
+				panel.find(options.delete).click(function() {
+					swap(base, panelIndex, 'delete', options);
 					return false;
 				});
 
@@ -29,7 +39,7 @@ function initpanelindex( base, options ) {
 }
 
 
-// function initpanelindex( base, options ) {
+// function initPanel( base, options ) {
 // 			base.find(options.panel).each(function(panelIndex){
 // 				var panel = $(this);
 
@@ -78,13 +88,12 @@ function initpanelindex( base, options ) {
  */
 function swap( base, panelIndex, type, options) {
 	var swaps;
-	//var targetPanel = 'smoothswap-panel-' + panelIndex;
 	var panels = base.find(options.panel);
 
 	panels.each(function(i){
 		var panel = $(this);
-		//if (panel.hasClass(targetPanel)) {
-		alert('panel index: ' + i +' - data = ' + panel.data('panel-index'));
+		//alert('each(' + i +') - data-panel-index = ' + panel.data('panel-index'));
+		
 		if(panel.data('panel-index') == panelIndex ) {
 			switch (type) {
 				case 'up':
@@ -106,20 +115,20 @@ function swap( base, panelIndex, type, options) {
 						async: false,
 						timeout: 10000
 					})
-					// .done(function(data){
-					// 	panel.before(data);
-					// 	initpanelindex( base, options );
-					// 	//swaps = [panels.get(i-1)];
-					// 	return false;
-					// 	//alert('new panel: ' + data);
-					// });
 					.done(function(data){
-						panel.before(data).css("ocupide, 0.0");
-						initpanelindex( base, options );
+						panel.before(data);
+						panel.prev(options.panel).css({'dispray':'none'});
+						panel.prev(options.panel).show("slow");
+						initPanel(base,options);
 						//swaps = [panels.get(i-1)];
-						return false;
 						//alert('new panel: ' + data);
 					});
+					break;
+				case 'delete':
+					panel.hide("slow", function(){
+						panel.remove();
+					});
+					initPanel(base,options);
 					break;
 			}
 			return false;
@@ -144,7 +153,7 @@ function swap( base, panelIndex, type, options) {
 		second.css({'opacity': '1', 'top': '0'});
 		first.before(second);
 		if (!!options.onswapped) {
-			options.onswapped(base, first, second);
+			options.onswapped(base, first, second,options);
 		}
 	};
 
@@ -159,7 +168,6 @@ function swap( base, panelIndex, type, options) {
 			{'top': '-' + (firstHeight + marginHeight) + 'px'},
 			{'complete': onswapped, 'duration': options.duration}
 		);
-
 
 }
 
@@ -215,7 +223,8 @@ function getNewPanel() {
 							'panel':'.smoothswap-panel',
 							'up':'.smoothswap-up',
 							'down':'.smoothswap-down',
-							'add': 'smoothswap-add',
+							'add': 'add-panel-btn',
+							'delete': 'delete-panel-btn',
 							'opacity':'0.6',
 							'duration':'slow',
 							'marginHeight':'1'
@@ -306,7 +315,7 @@ function getNewPanel() {
 				
 			// }
 
-			initpanelindex(base, options);
+			initPanel(base, options);
 			// base.find(options.panel).each(function(panelIndex){
 			// 	var panel = $(this);
 			// 	panel.addClass('smoothswap-panel-' + panelIndex).css('position', 'relative');

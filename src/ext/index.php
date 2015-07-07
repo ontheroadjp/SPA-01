@@ -82,6 +82,8 @@ function init() {
 </style>
 </head>
 
+
+
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
 	<?php include('./modules/admin-bar.php'); ?>
@@ -90,9 +92,6 @@ function init() {
 <div> 
 	<?php include('./modules/top-bar.php'); ?>
 </div>
-
-<!-- <div id="msg"></div> -->
-
 
 <div id="smoothswap">
 <?php
@@ -103,7 +102,7 @@ function init() {
 		$module = new $name( $dir_path );
 
 		// パネルスワップ
-		echo '<div class="smoothswap-panel">';
+		echo '<div class="smoothswap-panel" data-panel-index="">';
 		echo '<div class="swap-buttons">';
 
 		echo '<div class="container">';
@@ -116,9 +115,11 @@ function init() {
 			echo '</div>';	
 		
 			echo '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
-				echo '<a class="smoothswap-add" href="hoge.php" target="_blank">';
-				echo '<i class="fa fa-plus-circle  fa-2x"></i>';
-				echo '</a>';
+				echo '<a class="add-panel-btn" href="hoge.php" target="_blank">';
+				echo '<i class="fa fa-plus-circle  fa-2x"></i></a>';
+
+				echo '<a class="delete-panel-btn" href="hoge.php" target="_blank">';
+				echo '<i class="fa fa-times fa-2x"></i></a>';
 			echo '</div>';
 			
 		echo '</div><!-- / .row -->';
@@ -199,13 +200,14 @@ $(function(){
 		panel:'.smoothswap-panel',
 		up:'.smoothswap-up',
 		down:'.smoothswap-down',
-		add:'.smoothswap-add',
+		add:'.add-panel-btn',
+		delete:'.delete-panel-btn',
 		opacity: 0.6,
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
-    	onswapped: function(base,first,second) {
+    	onswapped: function(base,first,second,options) {
     		swapbtn();
-				
+				initPanel(base,options);
 			$.ajax({
 				url: 'http://localhost:9999/ajax.php',
 				type: 'POST',
