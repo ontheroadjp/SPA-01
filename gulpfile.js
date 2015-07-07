@@ -72,7 +72,7 @@ gulp.task('sass', function () {
 // Js-concat-uglify
 
 gulp.task('js', function() {
-	gulp.src([target + 'js/*.js'])
+	gulp.src([target + 'js/**/*.js'])
 	.pipe(concat('scripts.js'))
 	.pipe(uglify({preserveComments: 'some'})) // Keep some comments
 	.pipe(gulp.dest('build/js'))

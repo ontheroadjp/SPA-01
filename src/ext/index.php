@@ -86,7 +86,8 @@ function init() {
 <div class="navbar navbar-default navbar-fixed-top">
 	<?php include('./modules/admin-bar.php'); ?>
 </div>
-<div style="margin-top: 50px;">
+<!-- <div style="margin-top: 50px;"> -->
+<div> 
 	<?php include('./modules/top-bar.php'); ?>
 </div>
 
@@ -157,7 +158,7 @@ function init() {
 
 	}
 ?>
-</div>/ .smoothswap
+</div>
 
 <footer>
 © 2015 YourDomain.com  | <a href="http://www.designbootstrap.com/" target="_blank">by DesignBootstrap</a>
@@ -170,14 +171,12 @@ function init() {
 	js/jquery.easing.min.js 	// エフェクトの動きを加減速させる
 	js/custom.js
 
-	js/editable.js 			// 直接編集
+	js/editable.js 				// リアルタイム編集
 	js/accordion.js 			// アコーディオン
-	js/realPre1.01.js 		//  テキストボックへの入力をリアルタイムで画面表示
+	js/realPre1.01.js 			// テキストボックへの入力をリアルタイムで画面表示
 -->
 
 <script src="js/scripts.js"></script>
-
-
 
 <script type="text/javascript"> 
 $(function(){
@@ -205,34 +204,24 @@ $(function(){
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
     	onswapped: function(base,first,second) {
-    		swapbtn();	// editable.js に定義
+    		swapbtn();
 				
-				$.ajax({
-					url: 'http://localhost:9999/ajax.php',
-					type: 'POST',
-					data: {
-						ids: 1,
-						mode: 'hoge',
-						type: 'entry'
-					},
-					dataType: 'html',
-					cache: false,
-					async: true,
-					timeout: 10000
-				
-				})
-				.done(function(data){
-				//	$('#msg').html(data);	
-				})
-				.fail(function(data){
-				})
-				.always(function(data){
-				});
-				
-				base.find('.item.active').each(function(index) {
-					//alert( $(this).children('section').attr('id') );
-	    	});
-    	}
+			$.ajax({
+				url: 'http://localhost:9999/ajax.php',
+				type: 'POST',
+				dataType: 'html',
+				cache: false,
+				async: true,
+				timeout: 10000
+			})
+			.done(function(data){
+			//	$('#msg').html(data);	
+			})
+			.fail(function(data){
+			})
+			.always(function(data){
+			});
+		}
 
 	});
 });
