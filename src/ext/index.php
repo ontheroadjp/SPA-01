@@ -69,7 +69,7 @@ function init() {
 <head>
 <?php include('./modules/head.php'); ?>
 
-<style>
+<!-- <style>
 .preview {
 	cursor: pointer;
 	-webkit-transform: scale(0.6,0.6);
@@ -79,7 +79,7 @@ function init() {
 	z-index: 1;
 	border: 1px solid #000
 }
-</style>
+</style> -->
 </head>
 
 
@@ -93,69 +93,71 @@ function init() {
 	<?php include('./modules/top-bar.php'); ?>
 </div>
 
-<div id="smoothswap">
+<div id="panelcontrol">
 <?php
 	$count = 0;
 	foreach( $modules_class as $name => $dir_path ) {
-		$count ++;
+//		$count ++;
 		require_once( $dir_path.$name.'.php' );
 		$module = new $name( $dir_path );
 
-		// パネルスワップ
-		echo '<div class="smoothswap-panel" data-panel-index="">';
-		echo '<div class="swap-buttons">';
+		echo $module->getEditDoc();
 
-		echo '<div class="container">';
-		echo '<div class="row">';
-			echo '<div class="
-						col-md-8 col-md-offset-2 
-						col-sm-8 col-sm-offset-2 
-						col-xs-8 col-xs-offset-2 text-center">';
-				echo '<button class="smoothswap-up btn btn-default">▲（上下入れ替え）▼</button>';
-			echo '</div>';	
+		// // パネルスワップ
+		// echo '<div class="panelcontrol-panel" data-panel-index="">';
+		// echo '<div class="panelcontrol-buttons">';
+
+		// echo '<div class="container">';
+		// echo '<div class="row">';
+		// 	echo '<div class="
+		// 				col-md-8 col-md-offset-2 
+		// 				col-sm-8 col-sm-offset-2 
+		// 				col-xs-8 col-xs-offset-2 text-center">';
+		// 		echo '<button class="panelcontrol-up btn btn-default">▲（上下入れ替え）▼</button>';
+		// 	echo '</div>';	
 		
-			echo '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
-				echo '<a class="add-panel-btn" href="hoge.php" target="_blank">';
-				echo '<i class="fa fa-plus-circle  fa-2x"></i></a>';
+		// 	echo '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
+		// 		echo '<a class="add-panel-btn" href="hoge.php" target="_blank">';
+		// 		echo '<i class="fa fa-plus-circle  fa-2x"></i></a>';
 
-				echo '<a class="delete-panel-btn" href="hoge.php" target="_blank">';
-				echo '<i class="fa fa-times fa-2x"></i></a>';
-			echo '</div>';
+		// 		echo '<a class="delete-panel-btn" href="hoge.php" target="_blank">';
+		// 		echo '<i class="fa fa-times fa-2x"></i></a>';
+		// 	echo '</div>';
 			
-		echo '</div><!-- / .row -->';
-		echo '</div><!-- / .container -->';
-		echo '</div><!-- / .swap-buttons -->';
+		// echo '</div><!-- / .row -->';
+		// echo '</div><!-- / .container -->';
+		// echo '</div><!-- / .panelcontrol-buttons -->';
 
-			// パネルカルーセル
-			echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
-			echo '<div class="carousel-inner">';
+		// 	// パネルカルーセル
+		// 	echo '<div id="my-carousel-'.$count.'" class="carousel slide">';
+		// 	echo '<div class="carousel-inner">';
 
-				echo '<div class="item active">';
-					echo $module->getDoc();
-				echo '</div>';
+		// 		echo '<div class="item active">';
+		// 			echo $module->getDoc();
+		// 		echo '</div>';
 
-				echo '<div class="item">';
-					echo $module->getDoc();
-				echo '</div>';
+		// 		echo '<div class="item">';
+		// 			echo $module->getDoc();
+		// 		echo '</div>';
 
-				echo '<div class="item">';
-					echo '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
-				echo '</div>';
-			echo '</div><!-- / .carousel-inner -->';
+		// 		echo '<div class="item">';
+		// 			echo '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
+		// 		echo '</div>';
+		// 	echo '</div><!-- / .carousel-inner -->';
 
-			// カルーセル左ボタン
-			echo '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
-			echo '<span class="glyphicon glyphicon-chevron-left"></span></a>';
+		// 	// カルーセル左ボタン
+		// 	echo '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
+		// 	echo '<span class="glyphicon glyphicon-chevron-left"></span></a>';
 
-			// カルーセル右ボタン
-			echo '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
-			echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
+		// 	// カルーセル右ボタン
+		// 	echo '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
+		// 	echo '<span class="glyphicon glyphicon-chevron-right"></span></a>';
 
-			echo '</div><!-- / #my-carousel .carousel .slide -->';
+		// 	echo '</div><!-- / #my-carousel .carousel .slide -->';
 
 
-		// パネルスワップ
-		echo '</div><!-- / .smoothswap-panel -->';
+		// // パネルスワップ
+		// echo '</div><!-- / .panelcontrol-panel -->';
 
 	}
 ?>
@@ -195,11 +197,11 @@ $(function(){
 			});
 	}
 
-	// パネルスワップ
-	$('#smoothswap').smoothswap({
-		panel:'.smoothswap-panel',
-		up:'.smoothswap-up',
-		down:'.smoothswap-down',
+	// パネルコントロール（追加、削除、入れ替え）
+	$('#panelcontrol').panelcontrol({
+		panel:'.panelcontrol-panel',
+		up:'.panelcontrol-up',
+		down:'.panelcontrol-down',
 		add:'.add-panel-btn',
 		delete:'.delete-panel-btn',
 		opacity: 0.6,
@@ -207,7 +209,7 @@ $(function(){
 		marginHeight: 1,
     	onswapped: function(base,first,second,options) {
     		swapbtn();
-				initPanel(base,options);
+			initPanelController(base,options);
 			$.ajax({
 				url: 'http://localhost:9999/ajax.php',
 				type: 'POST',

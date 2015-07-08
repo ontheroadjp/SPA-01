@@ -71,21 +71,16 @@ section {
 }
 
 /* -------------------------------- */
-/* for swap */
-.swap-buttons {
+/* for panelcontrol */
+
+.panelcontrol-buttons {
 	border: 1px solid #999;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-/*
-.add-panel {
-	margin-right: 10px;
-}
-*/
-
-.smoothswap-up, .smoothswap-down {
-	margin-right: 10px;
+.panelcontrol-up, .panelcontrol-down {
+	// margin-right: 10px;
 }
 
 /* -------------------------------- */

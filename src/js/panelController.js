@@ -1,74 +1,97 @@
+/**
+ * パネルが先頭の場合、swp btn を非表示にする
+ * @return {[type]} [description]
+ */
+function swapbtn() {
+	$('.panelcontrol-panel').each(function(index){
+	var btnPanel = $(this).children('.panelcontrol-buttons');
+		if(index == 0) {
+			btnPanel.css('display', 'none');
+		} else {
+			btnPanel.css('display', 'block');
+		}
+	});
+}
 
-function initPanel( base, options ) {
-			base.find(options.panel).each(function(panelIndex){
-				var panel = $(this);
+/**
+ * パネルコントローラーの初期化
+ * (1) panel-index を割り付け
+ * (2) イベントの登録
+ *
+ * @param  {[type]} base    [description]
+ * @param  {[type]} options [description]
+ * @return {[type]}         [description]
+ */
+function initPanelController( base, options ) {
+	base.find(options.panel).each(function(panelIndex){
+		var panel = $(this);
 
-				// smoothswap-panel の初期化
-				//panel.addClass('index' + panelIndex);
-				panel.data('panel-index',panelIndex).css('position','relative');
+		// panelcontrol-panel の初期化
+		//panel.addClass('index' + panelIndex);
+		panel.data('panel-index',panelIndex).css('position','relative');
 
-				// smoothswap-up の初期化
-				panel.find(options.up).unbind();
-				panel.find(options.up).click(function() {
-					swap(base, panelIndex, 'up', options);
-					return false;
-				});
+		// panelcontrol-up の初期化
+		panel.find(options.up).unbind();
+		panel.find(options.up).click(function() {
+			swap(base, panelIndex, 'up', options);
+			return false;
+		});
 
-				// smoothswap-down の初期化
-				panel.find(options.down).unbind();
-				panel.find(options.down).click(function() {
-					swap(base, panelIndex, 'down', options);
-					return false;
-				});
+		// panelcontrol-down の初期化
+		panel.find(options.down).unbind();
+		panel.find(options.down).click(function() {
+			swap(base, panelIndex, 'down', options);
+			return false;
+		});
 
-				// add-panel-btn の初期化
-				panel.find(options.add).unbind();
-				panel.find(options.add).click(function() {
-					swap(base, panelIndex, 'add', options);
-					return false;
-				});
-				
-				// delete-panel-btn の初期化
-				panel.find(options.delete).unbind();
-				panel.find(options.delete).click(function() {
-					swap(base, panelIndex, 'delete', options);
-					return false;
-				});
+		// add-panel-btn の初期化
+		panel.find(options.add).unbind();
+		panel.find(options.add).click(function() {
+			swap(base, panelIndex, 'add', options);
+			return false;
+		});
+		
+		// delete-panel-btn の初期化
+		panel.find(options.delete).unbind();
+		panel.find(options.delete).click(function() {
+			swap(base, panelIndex, 'delete', options);
+			return false;
+		});
 
-			});
+	});
 }
 
 
-// function initPanel( base, options ) {
+// function initPanelController( base, options ) {
 // 			base.find(options.panel).each(function(panelIndex){
 // 				var panel = $(this);
 
-// 				// smoothswap-panel の初期化	
-// 				//panel.addClass('smoothswap-panel-' + panelIndex).css('position', 'relative');
+// 				// panelcontrol-panel の初期化	
+// 				//panel.addClass('panelcontrol-panel-' + panelIndex).css('position', 'relative');
 // 				panel.addClass('index' + panelIndex);
 // 				panel.data('panel-index',panelIndex).css('position','relative');
 
-// 				// smoothswap-up の初期化
+// 				// panelcontrol-up の初期化
 // 				panel.find(options.up).each(function() {
-// 					//$(this).addClass('smoothswap-up-' + panelIndex);
+// 					//$(this).addClass('panelcontrol-up-' + panelIndex);
 // 					$(this).data('swap-up-btn-index',panelIndex);
 // 				}).click(function() {
 // 					swap(base, panelIndex, 'up', options);
 // 					return false;
 // 				});
 
-// 				// smoothswap-down の初期化
+// 				// panelcontrol-down の初期化
 // 				panel.find(options.down).each(function() {
-// 					//$(this).addClass('smoothswap-down-' + panelIndex);
+// 					//$(this).addClass('panelcontrol-down-' + panelIndex);
 // 					$(this).data('swap-down-btn-index',panelIndex);
 // 				}).click(function() {
 // 					swap(base, panelIndex, 'down', options);
 // 					return false;
 // 				});
 
-// 				// smoothswap-add の初期化
+// 				// panelcontrol-add の初期化
 // 				panel.find(options.add).each(function() {
-// 					//$(this).addClass('smoothswap-add-' + panelIndex);
+// 					//$(this).addClass('panelcontrol-add-' + panelIndex);
 // 					$(this).data('add-panel-btn-index',panelIndex);
 // 				}).click(function() {
 // 					swap(base, panelIndex, 'add', options);
@@ -116,19 +139,17 @@ function swap( base, panelIndex, type, options) {
 						timeout: 10000
 					})
 					.done(function(data){
-						panel.before(data);
-						panel.prev(options.panel).css({'dispray':'none'});
-						panel.prev(options.panel).show("slow");
-						initPanel(base,options);
-						//swaps = [panels.get(i-1)];
-						//alert('new panel: ' + data);
+						var newPanel = $(data);
+						panel.before(newPanel.css({'display':'none'}));
+						newPanel.show("slow");
+						initPanelController(base,options);
 					});
 					break;
 				case 'delete':
 					panel.hide("slow", function(){
 						panel.remove();
 					});
-					initPanel(base,options);
+					initPanelController(base,options);
 					break;
 			}
 			return false;
@@ -172,57 +193,43 @@ function swap( base, panelIndex, type, options) {
 }
 
 
-/**
- * パネルが先頭の場合、swp btn を非表示にする
- * @return {[type]} [description]
- */
-function swapbtn() {
-	$('.smoothswap-panel').each(function(index){
-	var btnPanel = $(this).children('.swap-buttons');
-		if(index == 0) {
-			btnPanel.css('display', 'none');
-		} else {
-			btnPanel.css('display', 'block');
-		}
-	});
-}
 
-/**
- * 新規パネルを取得する
- * @return {[type]} [description]
- */
-function getNewPanel() {
-	$.ajax({
-		url: 'http://localhost:9999/ajax.php',
-		type: 'POST',
-		dataType: 'html',
-		cache: false,
-		async: false,
-		timeout: 10000
+// /**
+//  * 新規パネルを取得する
+//  * @return {[type]} [description]
+//  */
+// function getNewPanel() {
+// 	$.ajax({
+// 		url: 'http://localhost:9999/ajax.php',
+// 		type: 'POST',
+// 		dataType: 'html',
+// 		cache: false,
+// 		async: false,
+// 		timeout: 10000
 	
-	})
-	.done(function(data){
-		return data;
-	})
-	.fail(function(data){
-	})
-	.always(function(data){
-	});
+// 	})
+// 	.done(function(data){
+// 		return data;
+// 	})
+// 	.fail(function(data){
+// 	})
+// 	.always(function(data){
+// 	});
 
-}
+// }
 
 /*
- * jQuery smoothSwap plugin
+ * jQuery panelcontrol plugin
  * Copyright (c) 2011 Otchy
  * This source file is subject to the MIT license.
  * http://www.otchy.net
  */
 (function($){
-	$.fn.smoothswap = function(userOptions) {
+	$.fn.panelcontrol = function(userOptions) {
 		var options = $.extend({
-							'panel':'.smoothswap-panel',
-							'up':'.smoothswap-up',
-							'down':'.smoothswap-down',
+							'panel':'.panelcontrol-panel',
+							'up':'.panelcontrol-up',
+							'down':'.panelcontrol-down',
 							'add': 'add-panel-btn',
 							'delete': 'delete-panel-btn',
 							'opacity':'0.6',
@@ -235,7 +242,7 @@ function getNewPanel() {
 
 			// var swap = function(panelIndex, type) {
 			// 	var swaps;
-			// 	var targetPanelClass = 'smoothswap-panel-' + panelIndex;
+			// 	var targetPanelClass = 'panelcontrol-panel-' + panelIndex;
 			// 	var panels = base.find(options.panel);
 
 			// 	panels.each(function(i){
@@ -315,30 +322,30 @@ function getNewPanel() {
 				
 			// }
 
-			initPanel(base, options);
+			initPanelController(base, options);
 			// base.find(options.panel).each(function(panelIndex){
 			// 	var panel = $(this);
-			// 	panel.addClass('smoothswap-panel-' + panelIndex).css('position', 'relative');
+			// 	panel.addClass('panelcontrol-panel-' + panelIndex).css('position', 'relative');
 
-			// 	// smoothswap-up の初期化
+			// 	// panelcontrol-up の初期化
 			// 	panel.find(options.up).each(function() {
-			// 		$(this).addClass('smoothswap-up-' + panelIndex);
+			// 		$(this).addClass('panelcontrol-up-' + panelIndex);
 			// 	}).click(function() {
 			// 		swap(panelIndex, 'up');
 			// 		return false;
 			// 	});
 
-			// 	// smoothswap-down の初期化
+			// 	// panelcontrol-down の初期化
 			// 	panel.find(options.down).each(function() {
-			// 		$(this).addClass('smoothswap-down-' + panelIndex);
+			// 		$(this).addClass('panelcontrol-down-' + panelIndex);
 			// 	}).click(function() {
 			// 		swap(panelIndex, 'down');
 			// 		return false;
 			// 	});
 
-			// 	// smoothswap-add の初期化
+			// 	// panelcontrol-add の初期化
 			// 	panel.find(options.add).each(function() {
-			// 		$(this).addClass('smoothswap-add-' + panelIndex);
+			// 		$(this).addClass('panelcontrol-add-' + panelIndex);
 			// 	}).click(function() {
 			// 		swap(panelIndex, 'add');
 			// 		return false;
