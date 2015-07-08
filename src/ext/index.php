@@ -167,6 +167,8 @@ function init() {
 © 2015 YourDomain.com  | <a href="http://www.designbootstrap.com/" target="_blank">by DesignBootstrap</a>
 </footer>
 
+
+<script src="js/scripts.js"></script>
 <!--
 	js/jquery-1.11.1.js
 	js/bootstrap.js
@@ -174,30 +176,25 @@ function init() {
 	js/jquery.easing.min.js 	// エフェクトの動きを加減速させる
 	js/custom.js
 
-	js/editable.js 				// リアルタイム編集
-	js/accordion.js 			// アコーディオン
-	js/realPre1.01.js 			// テキストボックへの入力をリアルタイムで画面表示
+	js/panelEditor.js 			// リアルタイム編集
+	js/panelController.js 		// パネル操作（追加、削除、上下入替）
+	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
 
-<script src="js/scripts.js"></script>
 
 <script type="text/javascript"> 
 $(function(){
 
-	// パネルカルーセル
-	var num = $('.carousel-inner').length;
+	// パネルエディターの初期化
+	// @ panelEditor.js
+	initPanelEditor();
 
-	for( n=1; n<num; n++) {
-		$('#my-carousel-'+n)
-			.carousel('pause')
-			.on('slid.bs.carousel', function () {
-				var a = $('.item.active').each(function(index) {
-					 // alert( $(this).children('section').attr('id') );
-				});
-			});
-	}
+	// パネルカルーセルの初期化
+	// @ panelChanger.js
+//	initPanelChanger();
 
 	// パネルコントロール（追加、削除、入れ替え）
+	// @ panelController.js
 	$('#panelcontrol').panelcontrol({
 		panel:'.panelcontrol-panel',
 		up:'.panelcontrol-up',
@@ -207,7 +204,7 @@ $(function(){
 		opacity: 0.6,
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
-    	onswapped: function(base,first,second,options) {
+    	onpanelswapped: function(base,first,second,options) {
     		swapbtn();
 			initPanelController(base,options);
 			$.ajax({
@@ -225,9 +222,17 @@ $(function(){
 			})
 			.always(function(data){
 			});
+		},
+		onpaneladded: function(base,options) {
+			initPanelController(base,options);
+			initPanelEditor();
+		},
+		onpaneldeleted: function(base, options) {
+			initPanelController(base,options);
 		}
 
 	});
+
 });
 </script>
 

@@ -102,12 +102,12 @@ function initPanelController( base, options ) {
 // }
 
 /**
- * パネルの上下入れ替え
+ * パネル操作（追加、削除、上下入替）の実行
  * @param  {[type]} base       [description]
- * @param  {[type]} panelIndex [description]
- * @param  {[type]} type       [description]
- * @param  {[type]} options    [description]
- * @return {[type]}            [description]
+ * @param  jQueryObj	panelIndex	イベントが発生したパネル
+ * @param  String		type		up, down, ad, delete のいずれかを指定
+ * @param  Array		options		タグの cass 名など
+ * @return none
  */
 function swap( base, panelIndex, type, options) {
 	var swaps;
@@ -142,14 +142,19 @@ function swap( base, panelIndex, type, options) {
 						var newPanel = $(data);
 						panel.before(newPanel.css({'display':'none'}));
 						newPanel.show("slow");
-						initPanelController(base,options);
+						if (!!options.onpaneladded) {
+							options.onpaneladded(base, options);
+						}
 					});
 					break;
 				case 'delete':
 					panel.hide("slow", function(){
 						panel.remove();
 					});
-					initPanelController(base,options);
+
+					if (!!options.onpaneldeleted) {
+						options.onpaneldeleted(base, options);
+					}
 					break;
 			}
 			return false;
@@ -167,27 +172,27 @@ function swap( base, panelIndex, type, options) {
 	}
 
 	var finishedCount = 0;
-	var onswapped = function() {
+	var onpanelswapped = function() {
 		finishedCount++;
 		if (finishedCount < 2) return;
 		first.css({'opacity': '1', 'top': '0'});
 		second.css({'opacity': '1', 'top': '0'});
 		first.before(second);
-		if (!!options.onswapped) {
-			options.onswapped(base, first, second,options);
+		if (!!options.onpanelswapped) {
+			options.onpanelswapped(base, first, second,options);
 		}
 	};
 
 	first.css('opacity', options.opacity)
 		.animate(
 			{'top': (secondHeight + marginHeight) + 'px'},
-			{'complete': onswapped, 'duration': options.duration}
+			{'complete': onpanelswapped, 'duration': options.duration}
 		);
 
 	second.css('opacity', options.opacity)
 		.animate(
 			{'top': '-' + (firstHeight + marginHeight) + 'px'},
-			{'complete': onswapped, 'duration': options.duration}
+			{'complete': onpanelswapped, 'duration': options.duration}
 		);
 
 }
@@ -206,7 +211,7 @@ function swap( base, panelIndex, type, options) {
 // 		cache: false,
 // 		async: false,
 // 		timeout: 10000
-	
+
 // 	})
 // 	.done(function(data){
 // 		return data;
@@ -322,6 +327,7 @@ function swap( base, panelIndex, type, options) {
 				
 			// }
 
+			swapbtn();
 			initPanelController(base, options);
 			// base.find(options.panel).each(function(panelIndex){
 			// 	var panel = $(this);

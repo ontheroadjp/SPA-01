@@ -160,7 +160,7 @@ abstract class Module {
 		//---------------------------
 
 
-		// パネルスワップ
+		// パネルコントロール
 		$val .= '<div class="panelcontrol-panel" data-panel-index="">';
 		$val .= '<div class="panelcontrol-buttons">';
 
@@ -185,35 +185,35 @@ abstract class Module {
 		$val .= '</div><!-- / .container -->';
 		$val .= '</div><!-- / .panelcontrol-buttons -->';
 
-			// パネルカルーセル
-			$val .= '<div id="my-carousel-'.$count.'" class="carousel slide">';
-			$val .= '<div class="carousel-inner">';
+			// パネルチェンジ（カルーセル）
+			// $val .= '<div id="my-carousel-'.$count.'" class="carousel slide">';
+			// $val .= '<div class="carousel-inner">';
 
-				$val .= '<div class="item active">';
+			// 	$val .= '<div class="item active">';
 					$val .= $this->getDoc();
-				$val .= '</div>';
+			// 	$val .= '</div>';
 
-				$val .= '<div class="item">';
-					$val .= $this->getDoc();
-				$val .= '</div>';
+			// 	$val .= '<div class="item">';
+			// 		$val .= $this->getDoc();
+			// 	$val .= '</div>';
 
-				$val .= '<div class="item">';
-					$val .= '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
-				$val .= '</div>';
-			$val .= '</div><!-- / .carousel-inner -->';
+			// 	$val .= '<div class="item">';
+			// 		$val .= '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
+			// 	$val .= '</div>';
+			// $val .= '</div><!-- / .carousel-inner -->';
 
-			// カルーセル左ボタン
-			$val .= '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
-			$val .= '<span class="glyphicon glyphicon-chevron-left"></span></a>';
+			// // カルーセル左ボタン
+			// $val .= '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
+			// $val .= '<span class="glyphicon glyphicon-chevron-left"></span></a>';
 
-			// カルーセル右ボタン
-			$val .= '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
-			$val .= '<span class="glyphicon glyphicon-chevron-right"></span></a>';
+			// // カルーセル右ボタン
+			// $val .= '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
+			// $val .= '<span class="glyphicon glyphicon-chevron-right"></span></a>';
 
-			$val .= '</div><!-- / #my-carousel .carousel .slide -->';
+			// $val .= '</div><!-- / #my-carousel .carousel .slide -->';
 
 
-		// パネルスワップ
+		// パネルコントロール
 		$val .= '</div><!-- / .panelcontrol-panel -->';		// パネルスワップ
 		return $val;
 
