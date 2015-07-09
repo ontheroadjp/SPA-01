@@ -6,7 +6,6 @@ define("SITEMAP_FILE_NAME", "sitemap.json");
 class ModuleManager {
 
 	private $sitemap = array();
-
 	private $defaultModules = array(
 		'Home' => 'modules/home/01/'
 		, 'Services' => 'modules/services/01/'
@@ -23,6 +22,7 @@ class ModuleManager {
 	}
 
 	/**
+	 * setSitemap()
 	 * サイトマップファイルを読み込んでクラス変数（$sitemap）にセットする
 	 * $sitemap は配列
 	 * サイトマップファイルが存在しない場合は新規作成する。
@@ -57,11 +57,7 @@ class ModuleManager {
 	}
 
 	private function saveSitemap() {
-		try {
-			file_put_contents( SITEMAP_FILE_NAME, json_encode($this->sitemap,JSON_PRETTY_PRINT) );
-		} catch( Exception $e ) {
-			$e->getMessage();
-		}
+		return file_put_contents( SITEMAP_FILE_NAME, json_encode($this->sitemap,JSON_PRETTY_PRINT) );
 	}
 
 	public function moduleCount() {
@@ -84,7 +80,9 @@ class ModuleManager {
 
 
 	/**
-	 * サイトマップのモジュールを上下入替る（swap）
+	 * swapModule()
+	 * サイトマップ上のモジュールを上下入替る（swap）
+	 *
 	 * @param  [type] $first   [description]
 	 * @param  [type] $secound [description]
 	 * @return [type]          [description]
@@ -96,7 +94,9 @@ class ModuleManager {
 	}
 
 	/**
+	 * addModule()
 	 * サイトマップにモジュールを追加する
+	 *
 	 * @param [type] $newmodule [description]
 	 * @param [type] $position  [description]
 	 */
@@ -117,7 +117,9 @@ class ModuleManager {
 	}
 
 	/**
+	 * deleteModule()
 	 * サイトマップのモジュールを削除する
+	 *
 	 * @param  [type] $position [description]
 	 * @return [type]           [description]
 	 */

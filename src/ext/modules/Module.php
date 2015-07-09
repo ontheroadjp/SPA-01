@@ -8,7 +8,6 @@ define( "JSON_CSS_KEY", "css" );
 define( "CSS_SECTION", "section" );
 define( "CSS_OVERLAY", "overlay" );
 
-
 abstract class Module {
 
 	protected $id = '';
@@ -24,7 +23,9 @@ abstract class Module {
 	);
 
 	/**
+	 * __construct()
 	 * JSON を読み込む
+	 *
 	 * @param String $path モジュールディレクトリへの相対パス（最後の / 必要）
 	 *                     ex: modules/home/
 	 */
@@ -47,7 +48,9 @@ abstract class Module {
 
 
 	/**
+	 * getStyle()
 	 * style 要素を返す（ex. "margin:0;badding:0;"）
+	 *
 	 * @param  array 	$node 	[description]
 	 * @return String 	$style 	[description]
 	 */
@@ -64,7 +67,9 @@ abstract class Module {
 	}
 
 	/**
+	 * getDoc()
 	 * HTMLドキュメントを返す
+	 *
 	 * @return String HTML ドキュメント
 	 */
 	public function getDoc() {
@@ -92,6 +97,7 @@ abstract class Module {
 	}
 
 	/**
+	 * getEditDoc()
 	 * 編集タグ付きのドキュメントを返す
 	 *
 	 * 2015/07/07 時点でカルーセル動かない（$count が入ってないため）	※入れれば動く

@@ -67,9 +67,9 @@ $(function(){
 
 	// パネルカルーセルの初期化
 	// @ panelChanger.js
-//	initPanelChanger();
+	// initPanelChanger();
 
-	// パネルコントロール（追加、削除、入れ替え）
+	// パネルコントロールの初期化
 	// @ panelController.js
 	$('#panelcontrol').panelcontrol({
 		panel:'.panelcontrol-panel',
@@ -80,7 +80,10 @@ $(function(){
 		opacity: 0.6,
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
-    	onpanelswapped: function(base,first,second,options) {
+
+		// スワップ時の後処理
+		onpanelswapped: function(base,first,second,options) {
+
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
 				type: 'POST',
@@ -95,7 +98,7 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-	    		swapbtn();
+				swapbtn();
 				initPanelController(base,options);
 			})
 			.fail(function(data){
@@ -103,10 +106,12 @@ $(function(){
 			.always(function(data){
 			});
 		},
+
+		// パネル追加の後処理
 		onpaneladded: function(base, data,panelIndex,options) {
-    		swapbtn();
-			initPanelController(base,options);
-			initPanelEditor();
+			// swapbtn();
+			// initPanelController(base,options);
+			// initPanelEditor();
 
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
@@ -122,14 +127,13 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-	   //  		swapbtn();
-				// alert('panel added');
-				// initPanelController(base,options);
-				// alert('panel added');
-				// initPanelEditor();
-				// alert('panel added');
+				swapbtn();
+				initPanelController(base,options);
+				initPanelEditor();
 			})
 		},
+
+		// パネル削除の後処理
 		onpaneldeleted: function(base, panelIndex, options) {
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
