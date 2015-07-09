@@ -1,6 +1,7 @@
 {
 	"id" : "portfolio-01",
 	"path" : "portfolio/01/",
+	"classname" : "Portfolio",
 	"content" : {
 		"text01" : "OUR WORKS",
 		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere.",

@@ -102,83 +102,23 @@ abstract class Module {
 	public function getEditDoc(){
 		$val = '';
 
-		// // パネルスワップ
-		// $val .= '<div class="panelcontrol-panel">';
-		// $val .= '<div class="panelcontrol-buttons">';
-
-		// $val .= '<div class="container">';
-		// $val .= '<div class="row">';
-		// 	$val .= '<div class="
-		// 				col-md-8 col-md-offset-2 
-		// 				col-sm-8 col-sm-offset-2 
-		// 				col-xs-8 col-xs-offset-2 text-center">';
-		// 		$val .= '<button class="panelcontrol-up btn btn-default">▲（上下入れ替え）▼</button>';
-		// 	$val .= '</div>';	
-		
-		// 	$val .= '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
-		// 		$val .= '<a class="panelcontrol-add" href="hoge.php" target="_blank">';
-		// 		$val .= '<i class="fa fa-plus-circle  fa-2x"></i>';
-		// 		$val .= '</a>';
-		// 	$val .= '</div>';
-			
-		// $val .= '</div><!-- / .row -->';
-		// $val .= '</div><!-- / .container -->';
-		// $val .= '</div><!-- / .panelcontrol-buttons -->';
-
-		// 	// パネルカルーセル
-		// 	$val .= '<div id="my-carousel-'.$count.'" class="carousel slide">';
-		// 	$val .= '<div class="carousel-inner">';
-
-		// 		$val .= '<div class="item active">';
-		// 			$val .= $this->getDoc();
-		// 		$val .= '</div>';
-
-		// 		$val .= '<div class="item">';
-		// 			$val .= $this->getDoc();
-		// 		$val .= '</div>';
-
-		// 		$val .= '<div class="item">';
-		// 			$val .= '<img src="holder.js/900x500/auto/#777:#fff/text:Third slide" alt="">';
-		// 		$val .= '</div>';
-		// 	$val .= '</div><!-- / .carousel-inner -->';
-
-		// 	// カルーセル左ボタン
-		// 	$val .= '<a class="left carousel-control" href="#my-carousel-'.$count.'" data-slide="prev">';
-		// 	$val .= '<span class="glyphicon glyphicon-chevron-left"></span></a>';
-
-		// 	// カルーセル右ボタン
-		// 	$val .= '<a class="right carousel-control" href="#my-carousel-'.$count.'" data-slide="next">';
-		// 	$val .= '<span class="glyphicon glyphicon-chevron-right"></span></a>';
-
-		// 	$val .= '</div><!-- / #my-carousel .carousel .slide -->';
-
-
-		// // パネルスワップ
-		// $val .= '</div><!-- / .panelcontrol-panel -->';
-
-
-		//---------------------------
-
-
 		// パネルコントロール
-		$val .= '<div class="panelcontrol-panel" data-panel-index="">';
-		$val .= '<div class="panelcontrol-buttons">';
+		$val .= '<div class="panelcontrol-panel">';
 
+		$val .= '<div class="panelcontrol-buttons">';
 		$val .= '<div class="container">';
 		$val .= '<div class="row">';
-			$val .= '<div class="
-						col-md-8 col-md-offset-2 
-						col-sm-8 col-sm-offset-2 
-						col-xs-8 col-xs-offset-2 text-center">';
-				$val .= '<button class="panelcontrol-up btn btn-default">▲（上下入れ替え）▼</button>';
-			$val .= '</div>';	
-		
-			$val .= '<div class="col-md-2 col-sm-2 col-xs-2 text-right">';
-				$val .= '<a class="add-panel-btn" href="hoge.php" target="_blank">';
-				$val .= '<i class="fa fa-plus-circle  fa-2x"></i></a>';
 
-				$val .= '<a class="delete-panel-btn" href="hoge.php" target="_blank">';
-				$val .= '<i class="fa fa-times fa-2x"></i></a>';
+			$val .= '<div class="col-md-2 col-sm-2 col-xs-4 text-left">';
+			$val .= '<button class="delete-panel-btn btn btn-danger btn-sm">パネル削除</button>';
+			$val .= '</div>';
+
+			$val .= '<div class="col-md-8 col-sm-8 col-xs-4 text-center">';
+			$val .= '<button class="panelcontrol-up btn btn-default btn-sm">▲（上下入れ替え）▼</button>';
+			$val .= '</div>';
+
+			$val .= '<div class="col-md-2 col-sm-2 col-xs-4 text-right">';
+			$val .= '<button class="add-panel-btn btn btn-default btn-sm">◀︎◀︎パネル追加</button>';
 			$val .= '</div>';
 			
 		$val .= '</div><!-- / .row -->';

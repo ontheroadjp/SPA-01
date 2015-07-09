@@ -1,16 +1,28 @@
+
 /**
- * パネルが先頭の場合、swp btn を非表示にする
- * @return {[type]} [description]
+ * コントロールボタンの表示/非表示制御
+ * @return none
  */
 function swapbtn() {
 	$('.panelcontrol-panel').each(function(index){
 	var btnPanel = $(this).children('.panelcontrol-buttons');
-		if(index == 0) {
+		if(index == 0 && $('.panelcontrol-panel').length != 1){
 			btnPanel.css('display', 'none');
 		} else {
 			btnPanel.css('display', 'block');
 		}
 	});
+
+	var upbtn = $('.panelcontrol-panel .panelcontrol-up');
+	var delbtn = $('.panelcontrol-panel .delete-panel-btn');
+	if($('.panelcontrol-panel').length == 1) {
+		upbtn.hide();
+		delbtn.hide();
+	} else {
+		upbtn.show();
+		delbtn.show();
+	}
+
 }
 
 /**
@@ -134,6 +146,9 @@ function swap( base, panelIndex, type, options) {
 						url: 'http://localhost:9999/ajax.php',
 						type: 'POST',
 						dataType: 'html',
+						data: {
+							type: 'editDoc'
+						},
 						cache: false,
 						async: false,
 						timeout: 10000
@@ -150,11 +165,10 @@ function swap( base, panelIndex, type, options) {
 				case 'delete':
 					panel.hide("slow", function(){
 						panel.remove();
+						if (!!options.onpaneldeleted) {
+							options.onpaneldeleted(base, options);
+						}
 					});
-
-					if (!!options.onpaneldeleted) {
-						options.onpaneldeleted(base, options);
-					}
 					break;
 			}
 			return false;
@@ -359,5 +373,5 @@ function swap( base, panelIndex, type, options) {
 
 			// });
 		});
-	}
+	};
 })(jQuery);

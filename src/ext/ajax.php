@@ -1,10 +1,21 @@
 <?php
-	$path = 'modules/Services/01/Services.php';
 
-//	require_once('modules/Module.php');
+	$path = 'modules/Services/01/Services.php';
 	require_once('modules/Services/01/Services.php');
 	$obj = new Services('modules/Services/01/');
-	echo $obj->getEditDoc();
+
+	$type = $_POST['type'];
+
+
+	switch($type) {
+		case 'editDoc':
+			echo $obj->getEditDoc();
+			break;
+		case 'panelControlButtons':
+			echo $obj->getPanelControlButtons();
+			break;
+	}
+//	echo $obj->getEditDoc();
 ?>
 
 

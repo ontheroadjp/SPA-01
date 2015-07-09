@@ -2,6 +2,7 @@
 {
 	"id" : "movie-01",
 	"path" : "movie/01/",
+	"classname" : "Movie",
 	"content" : {
 		"text01" : "HERE IS BACKGROUND VEDIO",
 		"text02" : "This scripts uses plugin <strong>jquery.mb.YTPlayer</strong>",

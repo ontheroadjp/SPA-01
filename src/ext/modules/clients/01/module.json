@@ -1,6 +1,7 @@
 {
 	"id" : "clients-01",
 	"path" : "clients/01/",
+	"classname" : "Clients",
 	"content" : {
 		"text01" : "",
 		"text02" : "",

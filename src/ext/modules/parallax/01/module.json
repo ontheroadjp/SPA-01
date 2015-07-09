@@ -1,6 +1,7 @@
 {
 	"id" : "parallax-01",
 	"path" : "parallax/01/",
+	"classname" : "Parallax",
 	"content" : {
 		"text01" : "1300+",
 		"text02" : "Projects",

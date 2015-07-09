@@ -1,6 +1,7 @@
 {
 	"id" : "services-01",
 	"path" : "services/01/",
+	"classname" : "Services",
 	"content" : {
 		"text01" : "OUR SERVICES",
 		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",

@@ -1,6 +1,7 @@
 {
 	"id" : "location-01",
 	"path" : "location/01/",
+	"classname" : "Location",
 	"content" : {
 		"text01" : "OUR LOCATION",
 		"text02" : "Curabitur nec nisl odio. Mauris vehicula at nunc id posuere",
