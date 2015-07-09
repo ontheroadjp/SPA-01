@@ -13,7 +13,7 @@
 			$mm->addModule($_POST['module'], $_POST['position']);
 			break;
 		case 'paneldelete':
-			$mm->deletepModule($_POST['position']);
+			$mm->deleteModule($_POST['position']);
 			break;
 	}
 ?>

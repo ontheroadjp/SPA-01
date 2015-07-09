@@ -122,6 +122,8 @@ class ModuleManager {
 	 * @return [type]           [description]
 	 */
 	public function deleteModule($position){
+		unset($this->sitemap[$position]);
+		$this->sitemap = array_values($this->sitemap);
 		$this->saveSitemap();
 	}
 
