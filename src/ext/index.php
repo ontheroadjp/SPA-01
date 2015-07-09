@@ -1,14 +1,5 @@
 
 <?php
-	// $modules_class = array(
-	// 	'Home' => 'modules/home/01/'
-	// 	, 'Services' => 'modules/services/01/'
-	// 	, 'Parallax' => 'modules/parallax/01/'
-	// 	, 'Portfolio' => 'modules/portfolio/01/'
-	// 	, 'Movie' => 'modules/movie/01/'
-	// 	, 'Location' => 'modules/location/01/'
-	// 	, 'Clients' => 'modules/clients/01/'
-	// );
 	require_once('core/ModuleManager.php');
 	$mm = new ModuleManager();
 
@@ -16,7 +7,13 @@
 	echo $mode;
 	switch($mode) {
 		case 'panelswap':
-			$mm->swapModule($_POST['first'], $_POST['secound']);
+			$mm->swapModule($_POST['first'], $_POST['second']);
+			break;
+		case 'paneladd':
+			$mm->addModule($_POST['module'], $_POST['position']);
+			break;
+		case 'paneldelete':
+			$mm->deletepModule($_POST['position']);
 			break;
 	}
 ?>
@@ -35,7 +32,6 @@
 <div id="panelcontrol">
 <?php
 
-//	$modulecount = $mm->moduleCount();
 	for( $n=0; $n<$mm->modulecount(); $n++ ) {
 		$module = $mm->getModule($n);
 		echo $module->getEditDoc();
@@ -85,37 +81,73 @@ $(function(){
 		duration: 600, // slow, normal, fast
 		marginHeight: 1,
     	onpanelswapped: function(base,first,second,options) {
-    		swapbtn();
-			initPanelController(base,options);
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
 				type: 'POST',
-				// data: {
-				// 	mode: 'panelswap'
-				// },
+				data: {
+					mode: 'panelswap',
+					first: first.data('panel-index'),
+					second: second.data('panel-index')
+				},
 				dataType: 'html',
 				cache: false,
 				async: true,
 				timeout: 10000
 			})
 			.done(function(data){
-				alert(data);
-			//	$('#msg').html(data);	
+	    		swapbtn();
+				initPanelController(base,options);
 			})
 			.fail(function(data){
 			})
 			.always(function(data){
 			});
 		},
-		onpaneladded: function(base,options) {
+		onpaneladded: function(base, data,panelIndex,options) {
     		swapbtn();
 			initPanelController(base,options);
 			initPanelEditor();
+
+			$.ajax({
+				url: 'http://localhost:9999/index.php',
+				type: 'POST',
+				data: {
+					mode: 'paneladd',
+					module: data,
+					position: panelIndex
+				},
+				dataType: 'html',
+				cache: false,
+				async: true,
+				timeout: 10000
+			})
+			.done(function(data){
+	   //  		swapbtn();
+				// alert('panel added');
+				// initPanelController(base,options);
+				// alert('panel added');
+				// initPanelEditor();
+				// alert('panel added');
+			})
 		},
-		onpaneldeleted: function(base, options) {
-    		swapbtn();
-			initPanelController(base,options);
-		}
+		onpaneldeleted: function(base, panelIndex, options) {
+			$.ajax({
+				url: 'http://localhost:9999/index.php',
+				type: 'POST',
+				data: {
+					mode: 'paneldelete',
+					position: panelIndex
+				},
+				dataType: 'html',
+				cache: false,
+				async: true,
+				timeout: 10000
+			})
+			.done(function(data){
+		   		swapbtn();
+				initPanelController(base,options);
+			})
+ 		}
 
 	});
 

@@ -17,18 +17,16 @@ class ModuleManager {
 		, 'Clients' => 'modules/clients/01/'
 	);
 
+
 	function __construct() {
 		$this->setSitemap();
 	}
 
-	private function isSitemapExist() {
-		if( file_exists(SITEMAP_FILE_NAME) ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
+	/**
+	 * サイトマップファイルを読み込んでクラス変数（$sitemap）にセットする
+	 * $sitemap は配列
+	 * サイトマップファイルが存在しない場合は新規作成する。
+	 */
 	private function setSitemap() {
 		if( $this->isSitemapExist() ) {
 			try {
@@ -46,11 +44,23 @@ class ModuleManager {
 				}
 				array_push( $this->sitemap, $json );
 			}
-			try {
-				file_put_contents( SITEMAP_FILE_NAME, json_encode($this->sitemap,JSON_PRETTY_PRINT) );
-			} catch( Exception $e ) {
-				$e->getMessage();
-			}
+			$this->saveSitemap();
+		}
+	}
+
+	private function isSitemapExist() {
+		if( file_exists(SITEMAP_FILE_NAME) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private function saveSitemap() {
+		try {
+			file_put_contents( SITEMAP_FILE_NAME, json_encode($this->sitemap,JSON_PRETTY_PRINT) );
+		} catch( Exception $e ) {
+			$e->getMessage();
 		}
 	}
 
@@ -66,22 +76,53 @@ class ModuleManager {
 		return new $name('modules/'.$path);
 	}
 
-	public function addModule(){
+// ---------------------- ここまで sitemap.json 関連 ------------------
 
+	private function loadModuleJson($path) {
+		return json_decode( file_get_contents($path.'module.json'),true);
 	}
 
-	public function swapModule($first, $secound){
-				echo '<h1>hello</h1>';
 
+	/**
+	 * サイトマップのモジュールを上下入替る（swap）
+	 * @param  [type] $first   [description]
+	 * @param  [type] $secound [description]
+	 * @return [type]          [description]
+	 */
+	public function swapModule($first, $secound){
 		list($this->sitemap[$first], $this->sitemap[$secound]) = 
 			array($this->sitemap[$secound], $this->sitemap[$first]);
-
-		file_put_contents( SITEMAP_FILE_NAME, json_encode($this->sitemap,JSON_PRETTY_PRINT) );
-
+		$this->saveSitemap();
 	}
 
-	public function deleteModule(){
+	/**
+	 * サイトマップにモジュールを追加する
+	 * @param [type] $newmodule [description]
+	 * @param [type] $position  [description]
+	 */
+	public function addModule($newmodule, $position) {
 
+		$path = 'modules/services/01/';
+		$newmodule = $this->loadModuleJson($path);
+
+
+		$last = array_splice($this->sitemap, $position);	//挿入する位置～末尾までを切り出す
+		array_push($this->sitemap, $newmodule);				//先頭～挿入前位置までの配列に、挿入する値を追加
+
+		for( $n=0; $n<count($last); $n++ ) {
+			array_push($this->sitemap, $last[$n]);
+		}
+//		$array = array_merge($this->sitemap, $last);
+		$this->saveSitemap();
+	}
+
+	/**
+	 * サイトマップのモジュールを削除する
+	 * @param  [type] $position [description]
+	 * @return [type]           [description]
+	 */
+	public function deleteModule($position){
+		$this->saveSitemap();
 	}
 
 

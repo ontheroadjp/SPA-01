@@ -158,7 +158,7 @@ function swap( base, panelIndex, type, options) {
 						panel.before(newPanel.css({'display':'none'}));
 						newPanel.show("slow");
 						if (!!options.onpaneladded) {
-							options.onpaneladded(base, options);
+							options.onpaneladded(base, data, panelIndex, options);
 						}
 					});
 					break;
@@ -166,7 +166,7 @@ function swap( base, panelIndex, type, options) {
 					panel.hide("slow", function(){
 						panel.remove();
 						if (!!options.onpaneldeleted) {
-							options.onpaneldeleted(base, options);
+							options.onpaneldeleted(base, panelIndex, options);
 						}
 					});
 					break;
