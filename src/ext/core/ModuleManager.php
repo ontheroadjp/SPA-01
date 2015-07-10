@@ -9,6 +9,7 @@ class ModuleManager {
 	private $defaultModules = array(
 		'Home' => 'modules/home/01/'
 		, 'Services' => 'modules/services/01/'
+		, 'General' => 'modules/general/01/'
 		, 'Parallax' => 'modules/parallax/01/'
 		, 'Portfolio' => 'modules/portfolio/01/'
 		, 'Movie' => 'modules/movie/01/'

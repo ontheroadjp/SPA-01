@@ -5,25 +5,46 @@
  * 
  * @return none
  */
-function swapbtn() {
-	$('.panelcontrol-panel').each(function(index){
-	var btnPanel = $(this).children('.panelcontrol-buttons');
-		if(index == 0 && $('.panelcontrol-panel').length != 1){
+function swapbtn(options) {
+	$(options.panel).each(function(index){
+		var btnPanel = $(this).children(options.btns);
+		if(index == 0 && $(options.panel).length != 1){
 			btnPanel.css('display', 'none');
 		} else {
 			btnPanel.css('display', 'block');
 		}
 	});
 
-	var upbtn = $('.panelcontrol-panel .panelcontrol-up');
-	var delbtn = $('.panelcontrol-panel .delete-panel-btn');
-	if($('.panelcontrol-panel').length == 1) {
+	// 削除ボタンと上下入替ボタンの制御
+	var upbtn = $(options.panel+' '+options.up);
+	var delbtn = $(options.panel+' '+options.delete);
+	if($(options.panel).length == 1) {
 		upbtn.hide();
 		delbtn.hide();
 	} else {
 		upbtn.show();
 		delbtn.show();
 	}
+
+	// $('.panelcontrol-panel').each(function(index){
+	// 	var btnPanel = $(this).children('.panelcontrol-buttons');
+	// 	if(index == 0 && $('.panelcontrol-panel').length != 1){
+	// 		btnPanel.css('display', 'none');
+	// 	} else {
+	// 		btnPanel.css('display', 'block');
+	// 	}
+	// });
+
+	// // 削除ボタンと上下入替ボタンの制御
+	// var upbtn = $('.panelcontrol-panel .panelcontrol-up');
+	// var delbtn = $('.panelcontrol-panel .delete-panel-btn');
+	// if($('.panelcontrol-panel').length == 1) {
+	// 	upbtn.hide();
+	// 	delbtn.hide();
+	// } else {
+	// 	upbtn.show();
+	// 	delbtn.show();
+	// }
 }
 
 /**
@@ -42,7 +63,6 @@ function initPanelController( base, options ) {
 		var panel = $(this);
 
 		// panelcontrol-panel の初期化
-		//panel.addClass('index' + panelIndex);
 		panel.data('panel-index',panelIndex).css('position','relative');
 
 		// panelcontrol-up の初期化
@@ -195,7 +215,6 @@ function panelSwap(first, second, options) {
 		first.css({'opacity': '1', 'top': '0'});
 		second.css({'opacity': '1', 'top': '0'});
 		first.before(second);
-		return;
 	};
 
 	first.css('opacity', options.opacity)
@@ -264,6 +283,7 @@ function panelDelete(panel) {
 	$.fn.panelcontrol = function(userOptions) {
 		var options = $.extend({
 			'panel':'.panelcontrol-panel',
+			'btns':'.panelcontrol-buttons',
 			'up':'.panelcontrol-up',
 			'down':'.panelcontrol-down',
 			'add': 'add-panel-btn',
@@ -275,8 +295,8 @@ function panelDelete(panel) {
 
 		return this.each(function(baseIndex){
 			var base = $(this).css('position', 'relative');
-			swapbtn();
 			initPanelController(base, options);
+			swapbtn(options);
 		});
 	};
 })(jQuery);

@@ -1,8 +1,10 @@
 
 <?php
+	// sitemap.json の読み込み or 新規作成
 	require_once('core/ModuleManager.php');
 	$mm = new ModuleManager();
 
+	// パネル操作の処理
 	$mode = $_POST['mode'];
 	echo $mode;
 	switch($mode) {
@@ -18,9 +20,10 @@
 	}
 ?>
 
+<!-- ここから HTML 出力 -->
 <?php include('./modules/header.php'); ?>
 
-
+<!-- ヘッダメニューの出力 -->
 <div class="navbar navbar-default navbar-fixed-top">
 	<?php include('./modules/admin-bar.php'); ?>
 </div>
@@ -29,6 +32,7 @@
 	<?php include('./modules/top-bar.php'); ?>
 </div>
 
+<!-- パネルの出力 -->
 <div id="panelcontrol">
 <?php
 
@@ -39,6 +43,7 @@
 
 ?>
 </div><!-- / #panelcontrol -->
+
 
 <footer>
 © 2015 ontheroad.jp  | <a href="<?= $url ?>">Created by SPA-01</a>
@@ -73,6 +78,7 @@ $(function(){
 	// @ panelController.js
 	$('#panelcontrol').panelcontrol({
 		panel:'.panelcontrol-panel',
+		btns: '.panelcontrol-buttons',
 		up:'.panelcontrol-up',
 		down:'.panelcontrol-down',
 		add:'.add-panel-btn',
@@ -98,8 +104,8 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-				swapbtn();
 				initPanelController(base,options);
+				swapbtn(options);
 			})
 			.fail(function(data){
 			})
@@ -127,9 +133,9 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-				swapbtn();
 				initPanelController(base,options);
 				initPanelEditor();
+				swapbtn(options);
 			})
 		},
 
@@ -148,8 +154,8 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-		   		swapbtn();
 				initPanelController(base,options);
+		   		swapbtn(options);
 			})
  		}
 

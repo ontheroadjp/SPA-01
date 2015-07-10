@@ -24,7 +24,7 @@ abstract class Module {
 
 	/**
 	 * __construct()
-	 * JSON を読み込む
+	 * module.json を読み込んでローカル変数の初期化する
 	 *
 	 * @param String $path モジュールディレクトリへの相対パス（最後の / 必要）
 	 *                     ex: modules/home/
@@ -34,11 +34,12 @@ abstract class Module {
 			$json = json_decode( $file, true );	// true 付けると連想配列
 
 			// ローカル変数の初期化
-			$this->id = $json[JSON_ID_KEY];
+			// $this->id = $json[JSON_ID_KEY];
+			$this->id = mt_rand();
 			$this->content = $json[JSON_CONTENT_KEY];
-			$css = $json[JSON_CSS_KEY];
-			foreach( $css as $key => $val ) {
-				$this->css[$key] = $this->getStyle($css[$key]);
+			$csstemp = $json[JSON_CSS_KEY];
+			foreach( $csstemp as $key => $val ) {
+				$this->css[$key] = $this->getStyle($csstemp[$key]);
 			}
 		} else {
 			echo '読み込みエラー<br>';
@@ -49,7 +50,7 @@ abstract class Module {
 
 	/**
 	 * getStyle()
-	 * style 要素を返す（ex. "margin:0;badding:0;"）
+	 * 初期化用メソッド - style 要素を返す（ex. "margin:0;badding:0;"）
 	 *
 	 * @param  array 	$node 	[description]
 	 * @return String 	$style 	[description]
