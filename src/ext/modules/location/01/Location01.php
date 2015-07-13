@@ -2,7 +2,7 @@
 // Location.php
 
 require_once( 'modules/Module.php' );
-class Location extends Module {
+class Location01 extends Module {
 	function __construct( $path ) {
 		parent::__construct( $path );
 

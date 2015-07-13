@@ -1,7 +1,7 @@
 
 <?php
 require_once( 'modules/Module.php' );
-class Home extends Module {
+class Home01 extends Module {
 
 	function __construct( $path ) {
 		parent::__construct( $path );

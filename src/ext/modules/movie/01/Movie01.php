@@ -2,7 +2,7 @@
 // Movie.php
 
 require_once( 'modules/Module.php' );
-class Movie extends Module {
+class Movie01 extends Module {
 	function __construct( $path ) {
 		parent::__construct( $path );
 

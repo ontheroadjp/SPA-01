@@ -2,7 +2,7 @@
 // Portfolio.php
 
 require_once( 'modules/Module.php' );
-class Portfolio extends Module {
+class Portfolio01 extends Module {
 	function __construct( $path ) {
 		parent::__construct( $path );
 

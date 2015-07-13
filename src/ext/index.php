@@ -20,13 +20,17 @@
 	}
 ?>
 
+<?php $editmode = 1; ?>
+
 <!-- ここから HTML 出力 -->
 <?php include('./modules/header.php'); ?>
 
 <!-- ヘッダメニューの出力 -->
-<div class="navbar navbar-default navbar-fixed-top">
-	<?php include('./modules/admin-bar.php'); ?>
-</div>
+<?php if( $editmode == 1 ) { ?>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<?php include('./modules/admin-bar.php'); ?>
+	</div>
+<?php } ?>
 
 <div> 
 	<?php include('./modules/top-bar.php'); ?>
@@ -38,7 +42,11 @@
 
 	for( $n=0; $n<$mm->modulecount(); $n++ ) {
 		$module = $mm->getModule($n);
-		echo $module->getEditDoc();
+		if( $editmode == 1 ) { 
+			echo $module->getEditDoc();
+		} else {
+			echo $module->getDoc();
+		}
 	}
 
 ?>

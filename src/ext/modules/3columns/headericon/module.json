@@ -1,7 +1,7 @@
 {
-	"id" : "services-01",
-	"path" : "services/01/",
-	"classname" : "Services",
+	"id" : "3columns-headericon",
+	"path" : "3columns/headericon/",
+	"classname" : "HeaderIcon",
 	"content" : {
 		"text01" : "OUR SERVICES",
 		"text02" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris v:icula at nunc id posuere.",
@@ -14,8 +14,10 @@
 	},
 	"css" : {
 		"section" : {
-			"background-color" : "#fff",
-			"color" : "#000"
+			"background-color" : "$$secondary-color$$",
+			"color" : "$$primary-color$$",
+			"font-family" : "Lato, sans-self"
+
 		},
 		"overlay" : {
 

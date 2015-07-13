@@ -2,7 +2,7 @@
 // Clients.php
 
 require_once( 'modules/Module.php' );
-class Clients extends Module {
+class Clients01 extends Module {
 	function __construct( $path ) {
 		parent::__construct( $path );
 

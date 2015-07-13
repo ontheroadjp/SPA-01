@@ -1,8 +1,8 @@
 <?php
 
-	$path = 'modules/Services/01/Services.php';
-	require_once('modules/Services/01/Services.php');
-	$obj = new Services('modules/Services/01/');
+	$path = 'modules/2columns/txtimg/TxtImg.php';
+	require_once('modules/2columns/txtimg/TxtImg.php');
+	$obj = new TxtImg('modules/2columns/txtimg/');
 
 	$type = $_POST['type'];
 

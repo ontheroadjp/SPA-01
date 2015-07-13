@@ -18,8 +18,8 @@ abstract class Module {
 	protected $editDoc = '';
 
 	public $colors = array(
-		"background-color" => "#0F2651",
-		"color" => "#fff"
+		"primary-color" => "#0F2651",
+		"secondary-color" => "#fff"
 	);
 
 	/**
@@ -58,8 +58,10 @@ abstract class Module {
 	private function getStyle( $node ){
 		$style = '"';
 		foreach( $node as $key => $val ) {
-			if( $val == '$$$') {
-				$val = $this->colors[$key];
+			if( $val == '$$primary-color$$') {
+				$val = $this->colors['primary-color'];
+			} else if( $val == '$$secondary-color$$' ) {
+				$val = $this->colors['secondary-color'];
 			}
 			$style .= $key.":".$val.";";
 		}

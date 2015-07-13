@@ -7,14 +7,17 @@ class ModuleManager {
 
 	private $sitemap = array();
 	private $defaultModules = array(
-		'Home' => 'modules/home/01/'
-		, 'Services' => 'modules/services/01/'
-		, 'General' => 'modules/general/01/'
-		, 'Parallax' => 'modules/parallax/01/'
-		, 'Portfolio' => 'modules/portfolio/01/'
-		, 'Movie' => 'modules/movie/01/'
-		, 'Location' => 'modules/location/01/'
-		, 'Clients' => 'modules/clients/01/'
+		'Home01'			=> 'modules/home/01/'
+		, 'HeaderIcon'		=> 'modules/3columns/headericon/'
+		, 'H2p'				=> 'modules/1column/h2p/'
+		, 'TxtImg'			=> 'modules/2columns/txtimg/'
+		, 'ImgTxt'			=> 'modules/2columns/imgtxt/'
+		, 'Parallax01'		=> 'modules/3columns/parallax01/'
+		, 'Portfolio01'		=> 'modules/portfolio/01/'
+		, 'Movie01'			=> 'modules/movie/01/'
+		, 'Location01'		=> 'modules/location/01/'
+		, 'Location02'		=> 'modules/location/02/'
+		, 'Clients01'		=> 'modules/clients/01/'
 	);
 
 
@@ -69,6 +72,7 @@ class ModuleManager {
 	public function getModule($index) {
 		$path = $this->sitemap[$index]['path'];
 		$name = $this->sitemap[$index]['classname'];
+		//var_dump($path.'/'.$name.'.php');
 		require_once('modules/'.$path.$name.'.php');
 		return new $name('modules/'.$path);
 	}
