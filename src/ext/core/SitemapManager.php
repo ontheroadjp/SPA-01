@@ -2,8 +2,8 @@
 <?php
 define("SITEMAP_FILE_NAME", "sitemap.json");
 
-
-class ModuleManager {
+require_once('ModuleManager.php');
+class SitemapManager extends ModuleManager {
 
 	private $sitemap = array();
 	private $defaultModules = array(

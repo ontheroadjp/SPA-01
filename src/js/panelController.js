@@ -11,7 +11,7 @@ function swapbtn(options) {
 		if(index == 0 && $(options.panel).length != 1){
 			btnPanel.css('display', 'none');
 		} else {
-			btnPanel.css('display', 'block');
+//			btnPanel.css('display', 'block');
 		}
 	});
 
@@ -85,13 +85,28 @@ function initPanelController( base, options ) {
 			action(base, panelIndex, 'add', options);
 			return false;
 		});
-		
+
 		// delete-panel-btn の初期化
 		panel.find(options.delete).unbind();
 		panel.find(options.delete).click(function() {
 			action(base, panelIndex, 'delete', options);
 			return false;
 		});
+
+		// add-panel-ok-btn の初期化
+		panel.find(options.addok).unbind();
+		panel.find(options.addok).click(function() {
+			action(base, panelIndex, 'add-ok', options);
+			return false;
+		});
+
+		// add-panel-cancel-btn の初期化
+		panel.find(options.addcancel).unbind();
+		panel.find(options.addcancel).click(function() {
+			action(base, panelIndex, 'add-cancel', options);
+			return false;
+		});
+
 
 	});
 }
@@ -143,6 +158,15 @@ function action( base, panelIndex, type, options) {
 					break;
 
 				case 'delete':
+					panelDelete(panel);
+					if (!!options.onpaneldeleted) {
+						options.onpaneldeleted(base, panelIndex, options);
+					}
+					break;
+				case 'add-ok':
+					alert('add-ok');
+					break;
+				case 'add-cancel':
 					panelDelete(panel);
 					if (!!options.onpaneldeleted) {
 						options.onpaneldeleted(base, panelIndex, options);
@@ -254,6 +278,8 @@ function panelAdd(panel) {
 		var newPanel = $(data);
 		panel.before(newPanel.css({'display':'none'}));
 		newPanel.show("slow");
+		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
+		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
 		return data;
 	});
 }
@@ -287,6 +313,8 @@ function panelDelete(panel) {
 			'up':'.panelcontrol-up',
 			'down':'.panelcontrol-down',
 			'add': 'add-panel-btn',
+			'addok': 'add-panel-ok-btn',
+			'addcancel': 'add-panel-cancel-btn',
 			'delete': 'delete-panel-btn',
 			'opacity':'0.6',
 			'duration':'slow',

@@ -75,14 +75,22 @@ section {
 /* -------------------------------- */
 /* for panelcontrol */
 
+
+
 .panelcontrol-buttons {
-	border: 1px solid #999;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	@include panel-control;
+	// border: 1px solid #999;
+	// padding-top: 10px;
+	// padding-bottom: 10px;
 }
 
 .panelcontrol-up, .panelcontrol-down {
 	// margin-right: 10px;
+}
+
+.panelcontrol-add {
+	@include panel-control;
+	background-color: #2C2C2C;
 }
 
 /* -------------------------------- */

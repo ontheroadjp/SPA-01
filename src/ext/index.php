@@ -1,8 +1,8 @@
 
 <?php
 	// sitemap.json の読み込み or 新規作成
-	require_once('core/ModuleManager.php');
-	$mm = new ModuleManager();
+	require_once('core/SitemapManager.php');
+	$mm = new SitemapManager();
 
 	// パネル操作の処理
 	$mode = $_POST['mode'];
@@ -90,6 +90,8 @@ $(function(){
 		up:'.panelcontrol-up',
 		down:'.panelcontrol-down',
 		add:'.add-panel-btn',
+		addok:'.add-panel-ok-btn',
+		addcancel:'.add-panel-cancel-btn',
 		delete:'.delete-panel-btn',
 		opacity: 0.6,
 		duration: 600, // slow, normal, fast
