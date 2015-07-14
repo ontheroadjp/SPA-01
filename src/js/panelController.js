@@ -1,5 +1,23 @@
 
 /**
+ * btnenable()
+ * コントロールボタンの enabel / disable の制御
+ * 
+ * @param  boolean val     true で disable、false で enable
+ * @param  {[type]} options [description]
+ * @return {[type]}         [description]
+ */
+function btnenable(val,options) {
+	var upbtn	= $(options.panel + ' ' + options.up);
+	var addbtn 	= $(options.panel + ' ' + options.add);
+	var delbtn 	= $(options.panel + ' ' + options.delete);
+
+	upbtn.prop('disabled', val);
+	addbtn.prop('disabled', val);
+	delbtn.prop('disabled', val);
+}
+
+/**
  * swapbtn()
  * コントロールボタンの表示/非表示制御
  * 
@@ -11,7 +29,9 @@ function swapbtn(options) {
 		if(index == 0 && $(options.panel).length != 1){
 			btnPanel.css('display', 'none');
 		} else {
-//			btnPanel.css('display', 'block');
+			if(!$(options.panel).hasClass('added')) {
+				btnPanel.css('display', 'block');
+			}
 		}
 	});
 
@@ -25,26 +45,6 @@ function swapbtn(options) {
 		upbtn.show();
 		delbtn.show();
 	}
-
-	// $('.panelcontrol-panel').each(function(index){
-	// 	var btnPanel = $(this).children('.panelcontrol-buttons');
-	// 	if(index == 0 && $('.panelcontrol-panel').length != 1){
-	// 		btnPanel.css('display', 'none');
-	// 	} else {
-	// 		btnPanel.css('display', 'block');
-	// 	}
-	// });
-
-	// // 削除ボタンと上下入替ボタンの制御
-	// var upbtn = $('.panelcontrol-panel .panelcontrol-up');
-	// var delbtn = $('.panelcontrol-panel .delete-panel-btn');
-	// if($('.panelcontrol-panel').length == 1) {
-	// 	upbtn.hide();
-	// 	delbtn.hide();
-	// } else {
-	// 	upbtn.show();
-	// 	delbtn.show();
-	// }
 }
 
 /**
@@ -107,7 +107,7 @@ function initPanelController( base, options ) {
 			return false;
 		});
 
-
+		console.log('initPanelController() OK');
 	});
 }
 
@@ -122,14 +122,15 @@ function initPanelController( base, options ) {
  * @param  Array		options		タグの cass 名など
  * @return none
  */
-function action( base, panelIndex, type, options) {
-	// var swaps;
+function action(base, panelIndex, type, options) {
 
 	var panels = base.find(options.panel);
 	panels.each(function(i){
 		var panel = $(this);
 		//alert('each(' + i +') - data-panel-index = ' + panel.data('panel-index'));
 		
+		btnenable(true,options);
+
 		if(panel.data('panel-index') == panelIndex ) {
 			switch (type) {
 				case 'up':
@@ -137,40 +138,30 @@ function action( base, panelIndex, type, options) {
 						// swaps = [panels.get(i-1), panels.get(i)];
 						var first = $(panels.get(i-1));
 						var second = $(panels.get(i));
-						panelSwap(first,second,options);
-						if (!!options.onpanelswapped) {
-							options.onpanelswapped(base,first,second,options);
-						}
+						panelSwap(base,first,second,options);
 					}
 					break;
 
 				case 'down':
 					if (i<panels.length-1) {
-						swaps = [this, panels.get(i+1)];
+						// swaps = [this, panels.get(i+1)];
 					}
 					break;
 
 				case 'add':
-					var data = panelAdd(panel);
-					if (!!options.onpaneladded) {
-						options.onpaneladded(base, data, panelIndex, options);
-					}
+					var data = panelAdd(base,panel,panelIndex,options);
 					break;
 
 				case 'delete':
-					panelDelete(panel);
-					if (!!options.onpaneldeleted) {
-						options.onpaneldeleted(base, panelIndex, options);
-					}
+					panelDelete(base,panel,panelIndex,options);
 					break;
+
 				case 'add-ok':
 					alert('add-ok');
 					break;
+
 				case 'add-cancel':
-					panelDelete(panel);
-					if (!!options.onpaneldeleted) {
-						options.onpaneldeleted(base, panelIndex, options);
-					}
+					panelDelete(base,panel,options);
 					break;
 			}
 			return false;
@@ -222,7 +213,7 @@ function action( base, panelIndex, type, options) {
  * @param  {[type]} options [description]
  * @return {[type]}         [description]
  */
-function panelSwap(first, second, options) {
+function panelSwap(base, first, second, options) {
 
 	var firstHeight = first.outerHeight();
 	var secondHeight = second.outerHeight();
@@ -239,6 +230,17 @@ function panelSwap(first, second, options) {
 		first.css({'opacity': '1', 'top': '0'});
 		second.css({'opacity': '1', 'top': '0'});
 		first.before(second);
+
+		//アニメーション後の処理
+		initPanelController(base,options);
+		swapbtn(options);
+		btnenable(false,options);
+
+		// Ajax
+		if (!!options.onpanelswapped) {
+			options.onpanelswapped(base,first,second,options);
+		}
+
 	};
 
 	first.css('opacity', options.opacity)
@@ -262,7 +264,7 @@ function panelSwap(first, second, options) {
  * @param  {[type]} panel [description]
  * @return {[type]}       [description]
  */
-function panelAdd(panel) {
+function panelAdd(base,panel,panelIndex,options) {
 	$.ajax({
 		url: 'http://localhost:9999/ajax.php',
 		type: 'POST',
@@ -271,16 +273,21 @@ function panelAdd(panel) {
 			type: 'editDoc'
 		},
 		cache: false,
-		async: false,
+		async: true,
 		timeout: 10000
 	})
 	.done(function(data){
 		var newPanel = $(data);
+		newPanel.addClass('added');
 		panel.before(newPanel.css({'display':'none'}));
 		newPanel.show("slow");
 		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
 		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
-		return data;
+
+		// Ajax
+		if (!!options.onpaneladded) {
+			options.onpaneladded(base, data, panelIndex, options);
+		}
 	});
 }
 
@@ -292,9 +299,18 @@ function panelAdd(panel) {
  * @param  {[type]} panel [description]
  * @return {[type]}       [description]
  */
-function panelDelete(panel) {
+function panelDelete(base,panel,panelIndex,options) {
 	panel.hide("slow", function(){
 		panel.remove();
+		initPanelController(base,options);
+   		swapbtn(options);
+		btnenable(false,options);
+
+		// Ajax
+		if (!!options.onpaneldeleted) {
+			options.onpaneldeleted(base, panelIndex, options);
+		}
+
 	});
 }
 
@@ -328,3 +344,16 @@ function panelDelete(panel) {
 		});
 	};
 })(jQuery);
+
+// assert
+function assert(actual, expected) {
+  console.log('.');
+  console.assert(actual === expected, '\nact: ' + actual + '\nexp: ' + expected);
+}
+
+function TestSum() {
+  assert(1+2, 3);
+}
+
+// exec
+TestSum();

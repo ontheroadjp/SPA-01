@@ -6,14 +6,16 @@
 
 	// パネル操作の処理
 	$mode = $_POST['mode'];
-	echo $mode;
+	// echo $mode;
 	switch($mode) {
 		case 'panelswap':
 			$mm->swapModule($_POST['first'], $_POST['second']);
 			break;
+
 		case 'paneladd':
 			$mm->addModule($_POST['module'], $_POST['position']);
 			break;
+
 		case 'paneldelete':
 			$mm->deleteModule($_POST['position']);
 			break;
@@ -110,12 +112,10 @@ $(function(){
 				},
 				dataType: 'html',
 				cache: false,
-				async: true,
+				async: false,
 				timeout: 10000
 			})
 			.done(function(data){
-				initPanelController(base,options);
-				swapbtn(options);
 			})
 			.fail(function(data){
 			})
@@ -139,14 +139,15 @@ $(function(){
 				},
 				dataType: 'html',
 				cache: false,
-				async: true,
+				async: false,
 				timeout: 10000
 			})
 			.done(function(data){
 				initPanelController(base,options);
 				initPanelEditor();
 				swapbtn(options);
-			})
+				btnenable(true,options);
+			});
 		},
 
 		// パネル削除の後処理
@@ -160,13 +161,11 @@ $(function(){
 				},
 				dataType: 'html',
 				cache: false,
-				async: true,
+				async: false,
 				timeout: 10000
 			})
 			.done(function(data){
-				initPanelController(base,options);
-		   		swapbtn(options);
-			})
+			});
  		}
 
 	});
