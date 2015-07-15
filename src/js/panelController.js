@@ -149,7 +149,7 @@ function action(base, panelIndex, type, options) {
 					break;
 
 				case 'add':
-					var data = panelAdd(base,panel,panelIndex,options);
+					panelAdd(base,panel,panelIndex,options);
 					break;
 
 				case 'delete':
@@ -283,6 +283,11 @@ function panelAdd(base,panel,panelIndex,options) {
 		newPanel.show("slow");
 		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
 		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
+
+		initPanelController(base,options);
+		initPanelEditor();
+		swapbtn(options);
+		btnenable(false,options);
 
 		// Ajax
 		if (!!options.onpaneladded) {

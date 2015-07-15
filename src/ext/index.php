@@ -143,10 +143,10 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-				initPanelController(base,options);
-				initPanelEditor();
-				swapbtn(options);
-				btnenable(true,options);
+				// initPanelController(base,options);
+				// initPanelEditor();
+				// swapbtn(options);
+				// btnenable(true,options);
 			});
 		},
 
