@@ -93,9 +93,9 @@ class ModuleManager {
 		return json_decode(file_get_contents($filepath), true);
 	}
 
-	protected function loadModuleJson($path) {
-		return json_decode( file_get_contents($path.'module.json'),true);
-	}
+	// protected function loadModuleJson($path) {
+	// 	return json_decode( file_get_contents($path.'module.json'),true);
+	// }
 
 
 // ---------------------------------------------------------
@@ -107,6 +107,13 @@ class ModuleManager {
 		return count( $this->sitemap );
 	}
 
+	/**
+	 * getModule()
+	 * モジュールオブジェクトを返す
+	 * 
+	 * @param  int 	$index [description]
+	 * @return obj
+	 */
 	public function getModule($index) {
 		$path = $this->sitemap[$index]['path'];
 		$name = $this->sitemap[$index]['classname'];

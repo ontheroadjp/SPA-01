@@ -29,7 +29,7 @@ function swapbtn(options) {
 		if(index == 0 && $(options.panel).length != 1){
 			btnPanel.css('display', 'none');
 		} else {
-			if(!$(options.panel).hasClass('added')) {
+			if(!$(options.panel).hasClass('adding')) {
 				btnPanel.css('display', 'block');
 			}
 		}
@@ -46,6 +46,7 @@ function swapbtn(options) {
 		delbtn.show();
 	}
 }
+
 
 /**
  * initPanelController()
@@ -107,7 +108,7 @@ function initPanelController( base, options ) {
 			return false;
 		});
 
-		console.log('initPanelController() OK');
+		// console.log('initPanelController() OK');
 	});
 }
 
@@ -157,11 +158,40 @@ function action(base, panelIndex, type, options) {
 					break;
 
 				case 'add-ok':
-					alert('add-ok');
+					// alert('add-ok');
+					// var ctrlBtns = panel.children('.panelcontrol-buttons').css({'display':'block'});
+					var ctrlBtns = panel.children('.panelcontrol-buttons').show('slow');
+
+					var addBtn = panel.children('.panelcontrol-add').css({'display':'none'});
+					// var addBtn = panel.children('.panelcontrol-add').hide('slow');
+
+
+					var activePill = panel.find('.tab-pane.fade.active.in');
+					var activeItem = activePill.find('.item.active');
+					var section = activeItem.find('section');
+
+					panel.children('.tab-content').remove();
+					addBtn.after(section);
+
+
+					panel.removeClass('adding');
+
+					initPanelController(base,options);
+					swapbtn(options);
+					btnenable(false,options);
+
+					var data = section;
+
+					// Ajax
+					if (!!options.onpaneladded) {
+						options.onpaneladded(base, data, panelIndex, options);
+					}
+
+
 					break;
 
 				case 'add-cancel':
-					panelDelete(base,panel,options);
+					panelDelete(base,panel,panelIndex,options);
 					break;
 			}
 			return false;
@@ -278,21 +308,17 @@ function panelAdd(base,panel,panelIndex,options) {
 	})
 	.done(function(data){
 		var newPanel = $(data);
-		newPanel.addClass('added');
+		newPanel.addClass('adding');
 		panel.before(newPanel.css({'display':'none'}));
 		newPanel.show("slow");
 		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
 		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
 
 		initPanelController(base,options);
-		initPanelEditor();
 		swapbtn(options);
-		btnenable(false,options);
+		// initPanelEditor();
+		// btnenable(false,options);
 
-		// Ajax
-		if (!!options.onpaneladded) {
-			options.onpaneladded(base, data, panelIndex, options);
-		}
 	});
 }
 

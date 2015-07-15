@@ -56,7 +56,7 @@
 
 
 <footer>
-© 2015 ontheroad.jp  | <a href="<?= $url ?>">Created by SPA-01</a>
+	© 2015 ontheroad.jp  | <a href="<?= $url ?>">Created by SPA-01</a>
 </footer>
 
 
@@ -101,7 +101,6 @@ $(function(){
 
 		// スワップ時の後処理
 		onpanelswapped: function(base,first,second,options) {
-
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
 				type: 'POST',
@@ -125,10 +124,6 @@ $(function(){
 
 		// パネル追加の後処理
 		onpaneladded: function(base, data,panelIndex,options) {
-			// swapbtn();
-			// initPanelController(base,options);
-			// initPanelEditor();
-
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
 				type: 'POST',
@@ -143,10 +138,6 @@ $(function(){
 				timeout: 10000
 			})
 			.done(function(data){
-				// initPanelController(base,options);
-				// initPanelEditor();
-				// swapbtn(options);
-				// btnenable(true,options);
 			});
 		},
 
