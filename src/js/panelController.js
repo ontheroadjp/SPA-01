@@ -158,35 +158,37 @@ function action(base, panelIndex, type, options) {
 					break;
 
 				case 'add-ok':
-					// alert('add-ok');
-					// var ctrlBtns = panel.children('.panelcontrol-buttons').css({'display':'block'});
+
+					// ボタンパネルの表示/非表示
 					var ctrlBtns = panel.children('.panelcontrol-buttons').show('slow');
-
 					var addBtn = panel.children('.panelcontrol-add').css({'display':'none'});
-					// var addBtn = panel.children('.panelcontrol-add').hide('slow');
 
-
+					// 選択されたパネルを抽出
 					var activePill = panel.find('.tab-pane.fade.active.in');
 					var activeItem = activePill.find('.item.active');
 					var section = activeItem.find('section');
 
+					// 選択されたパネルを追加
 					panel.children('.tab-content').remove();
 					addBtn.after(section);
 
-
+					// 後処理
 					panel.removeClass('adding');
 
+					// 初期化
 					initPanelController(base,options);
 					swapbtn(options);
 					btnenable(false,options);
 
-					var data = section;
+
+					var modulepath = String(section.attr('data-path'));
+					modulepath = modulepath.replace( /-/g , "/" ) + 'module.json';
+					// var modulepath = 'modules/2columns/txtimg/module.json';
 
 					// Ajax
 					if (!!options.onpaneladded) {
-						options.onpaneladded(base, data, panelIndex, options);
+						options.onpaneladded(base, modulepath, panelIndex, options);
 					}
-
 
 					break;
 
@@ -318,6 +320,11 @@ function panelAdd(base,panel,panelIndex,options) {
 		swapbtn(options);
 		// initPanelEditor();
 		// btnenable(false,options);
+
+		// // Ajax
+		// if (!!options.onpaneladded) {
+		// 	options.onpaneladded(base, data, panelIndex, options);
+		// }
 
 	});
 }

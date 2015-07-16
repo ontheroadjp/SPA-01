@@ -143,9 +143,9 @@ class ModuleManager {
 	 * @param [type] $newmodule [description]
 	 * @param [type] $position  [description]
 	 */
-	public function addModule($newmodule, $position) {
+	public function addModule($path, $position) {
 
-		$path = 'modules/2columns/txtimg/module.json';
+		// $path = 'modules/2columns/txtimg/module.json';
 		// $newmodule = $this->loadModuleJson($path);
 		$newmodule = $this->loadJson($path);
 

@@ -43,6 +43,8 @@ abstract class Module {
 			foreach( $csstemp as $key => $val ) {
 				$this->css[$key] = $this->getStyle($csstemp[$key]);
 			}
+			
+			$this->path = $path;
 		} else {
 			echo '読み込みエラー<br>';
 			echo $path;
@@ -79,8 +81,10 @@ abstract class Module {
 	 */
 	public function getDoc() {
 
+		$data_path = str_replace("/", "-", $this->path);
+
 		$val = '';
-		$val .= '<section id="'.$this->id.'" style='.$this->css[CSS_SECTION].'>';
+		$val .= '<section id="'.$this->id.'" data-path="'.$data_path.'" style='.$this->css[CSS_SECTION].'>';
 		$val .= '<div style='.$this->css[CSS_OVERLAY].'>';
 		$val .= '<div class="container">';
 		$val .= $this->doc;

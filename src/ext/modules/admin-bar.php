@@ -1,11 +1,11 @@
 
 <div class="admin-bar">
-    <a class="brand" href="../">サイト管理ツール</a>
+    <a class="brand" href="../">WEB サイトの編集</a>
     <ul class="nav pull-right">
 		<li><a data-toggle="modal" href="#general-settings-modal">基本設定</a>
 		<!-- <li><a data-toggle="modal" href="#image-gararry-modal">画像ギャラリー</a></li> -->
 		<li><a href="uploader/index.html">画像の追加</a></li>
-		<li><a href="/">サイトを確認する</a></li>
+		<li><a href="/?view=preview" target="_blank">サイトを確認する</a></li>
 		<li><a href="?action=logout">ログアウト</a></li>
     </ul>
 </div>

@@ -1,3 +1,13 @@
+<?php 
+$editmode = 1; 
+
+$a = $_GET['view'];
+
+$a == 'preview' ? $editmode = 0 : $editmode = 1;
+
+?>
+
+
 
 <?php
 	// sitemap.json の読み込み or 新規作成
@@ -22,7 +32,6 @@
 	}
 ?>
 
-<?php $editmode = 1; ?>
 
 <!-- ここから HTML 出力 -->
 <?php include('./modules/header.php'); ?>
@@ -123,13 +132,13 @@ $(function(){
 		},
 
 		// パネル追加の後処理
-		onpaneladded: function(base, data,panelIndex,options) {
+		onpaneladded: function(base,modulepath,panelIndex,options) {
 			$.ajax({
 				url: 'http://localhost:9999/index.php',
 				type: 'POST',
 				data: {
 					mode: 'paneladd',
-					module: data,
+					module: modulepath,
 					position: panelIndex
 				},
 				dataType: 'html',
