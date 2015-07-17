@@ -15,7 +15,9 @@ $defaultPanelGroup = array(
 	),
 	TWO_COLUMNS => array(
 		'TxtImg'	=> 'modules/2columns/txtimg/module.json',
+		'TxtImgRev'	=> 'modules/2columns/txtimg_rev/module.json',
 		'ImgTxt'	=> 'modules/2columns/imgtxt/module.json',
+		'ImgTxtRev'	=> 'modules/2columns/imgtxt_rev/module.json',
 	),
 	THREE_COLUMNS => array(
 		'HeaderIcon'=> 'modules/3columns/headericon/module.json',

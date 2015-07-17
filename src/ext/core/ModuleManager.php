@@ -117,7 +117,7 @@ class ModuleManager {
 	public function getModule($index) {
 		$path = $this->sitemap[$index]['path'];
 		$name = $this->sitemap[$index]['classname'];
-		// var_dump($path.'/'.$name.'.php');
+		// var_dump($path.$name.'.php');
 		require_once('modules/'.$path.$name.'.php');
 		return new $name('modules/'.$path);
 	}
