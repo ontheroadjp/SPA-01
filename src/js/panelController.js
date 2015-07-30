@@ -150,50 +150,55 @@ function action(base, panelIndex, type, options) {
 					break;
 
 				case 'add':
-					panelAdd(base,panel,panelIndex,options);
+					panelAddToDOM(base,panel,panelIndex,options);
 					break;
 
 				case 'delete':
-					panelDelete(base,panel,panelIndex,options);
+					panelDeleteFromDOM(base,panel,panelIndex,options);
+					panelDeleteFromServer(base,panel,panelIndex,options);
 					break;
 
 				case 'add-ok':
+					panelAddToServer(base,panel,panelIndex,options);
+					// // ボタンパネルの表示/非表示
+					// var ctrlBtns = panel.children('.panelcontrol-buttons').show('slow');
+					// var addBtn = panel.children('.panelcontrol-add').css({'display':'none'});
 
-					// ボタンパネルの表示/非表示
-					var ctrlBtns = panel.children('.panelcontrol-buttons').show('slow');
-					var addBtn = panel.children('.panelcontrol-add').css({'display':'none'});
+					// // 選択されたパネルを抽出
+					// var activePill = panel.find('.tab-pane.fade.active.in');
+					// var activeItem = activePill.find('.item.active');
+					// var section = activeItem.find('section');
 
-					// 選択されたパネルを抽出
-					var activePill = panel.find('.tab-pane.fade.active.in');
-					var activeItem = activePill.find('.item.active');
-					var section = activeItem.find('section');
+					// // 選択されたパネルを追加
+					// panel.children('.tab-content').remove();
+					// addBtn.after(section);
 
-					// 選択されたパネルを追加
-					panel.children('.tab-content').remove();
-					addBtn.after(section);
+					// // 後処理
+					// $('div#graylayer').remove();
+					// panel.removeAttr('id');
+					// panel.removeClass('adding');
 
-					// 後処理
-					panel.removeClass('adding');
-
-					// 初期化
-					initPanelController(base,options);
-					swapbtn(options);
-					btnenable(false,options);
+					// // 初期化
+					// initPanelController(base,options);
+					// swapbtn(options);
+					// btnenable(false,options);
 
 
-					var modulepath = String(section.attr('data-path'));
-					modulepath = modulepath.replace( /-/g , "/" ) + 'module.json';
-					// var modulepath = 'modules/2columns/txtimg/module.json';
+					// var modulepath = String(section.attr('data-path'));
+					// modulepath = modulepath.replace( /-/g , "/" ) + 'module.json';
+					// // var modulepath = 'modules/2columns/txtimg/module.json';
 
-					// Ajax
-					if (!!options.onpaneladded) {
-						options.onpaneladded(base, modulepath, panelIndex, options);
-					}
+					// // Ajax
+					// if (!!options.onpaneladded) {
+					// 	options.onpaneladded(base, modulepath, panelIndex, options);
+					// }
 
 					break;
 
 				case 'add-cancel':
-					panelDelete(base,panel,panelIndex,options);
+					panelDeleteFromDOM(base,panel,panelIndex,options);
+
+					// panelDelete(base,panel,panelIndex,options);
 					break;
 			}
 			return false;
@@ -290,13 +295,15 @@ function panelSwap(base, first, second, options) {
 
 
 /**
- * panelAdd()
+ * panelAddToODM()
  * 指定したパネルの前に新規パネルを追加する
+ * ブラウザ側のみに追加/サーバー側（sitemap.json）には追加しない
+ * サーバー側には確定ボタン押下時に追加
  *
  * @param  {[type]} panel [description]
  * @return {[type]}       [description]
  */
-function panelAdd(base,panel,panelIndex,options) {
+function panelAddToDOM(base,panel,panelIndex,options) {
 	$.ajax({
 		url: 'http://localhost:9999/ajax.php',
 		type: 'POST',
@@ -310,11 +317,15 @@ function panelAdd(base,panel,panelIndex,options) {
 	})
 	.done(function(data){
 		var newPanel = $(data);
-		newPanel.addClass('adding');
+		panel.before('<div id="graylayer"></div>');
 		panel.before(newPanel.css({'display':'none'}));
-		newPanel.show("slow");
+		// newPanel.attr('id','active');
+		// newPanel.addClass('adding');
+		// newPanel.show("slow");
+		newPanel.attr('id','active').addClass('adding').show("slow");
 		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
 		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
+
 
 		initPanelController(base,options);
 		swapbtn(options);
@@ -329,27 +340,73 @@ function panelAdd(base,panel,panelIndex,options) {
 	});
 }
 
+function panelAddToServer(base,panel,panelIndex,options) {
+
+	// ボタンパネルの表示/非表示
+	var ctrlBtns = panel.children('.panelcontrol-buttons').show('slow');
+	var addBtn = panel.children('.panelcontrol-add').css({'display':'none'});
+
+	// 選択されたパネルを抽出
+	var activePill = panel.find('.tab-pane.fade.active.in');
+	var activeItem = activePill.find('.item.active');
+	var section = activeItem.find('section');
+
+	// 選択されたパネルを追加
+	panel.children('.tab-content').remove();
+	addBtn.after(section);
+
+	// 後処理
+	$('div#graylayer').remove();
+	panel.removeAttr('id');
+	panel.removeClass('adding');
+
+	// 初期化
+	initPanelController(base,options);
+	swapbtn(options);
+	btnenable(false,options);
+
+
+	var modulepath = String(section.attr('data-path'));
+	modulepath = modulepath.replace( /-/g , "/" ) + 'module.json';
+	// var modulepath = 'modules/2columns/txtimg/module.json';
+
+	// Ajax
+	if (!!options.onpaneladded) {
+		options.onpaneladded(base, modulepath, panelIndex, options);
+	}
+}
 
 /**
- * panelDelete()
+ * panelDeleteFromDOM()
  * 指定したパネルを削除する
  *
  * @param  {[type]} panel [description]
  * @return {[type]}       [description]
  */
-function panelDelete(base,panel,panelIndex,options) {
+function panelDeleteFromDOM(base,panel,panelIndex,options) {
+	$('div#graylayer').remove();
 	panel.hide("slow", function(){
 		panel.remove();
 		initPanelController(base,options);
    		swapbtn(options);
 		btnenable(false,options);
+	});
+}
+
+function panelDeleteFromServer(base,panel,panelIndex,options) {
+	// $('div#graylayer').remove();
+	// panel.hide("slow", function(){
+	// 	panel.remove();
+	// 	initPanelController(base,options);
+ //   		swapbtn(options);
+	// 	btnenable(false,options);
 
 		// Ajax
 		if (!!options.onpaneldeleted) {
 			options.onpaneldeleted(base, panelIndex, options);
 		}
 
-	});
+	// });
 }
 
 

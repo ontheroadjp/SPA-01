@@ -1,3 +1,45 @@
+div#aside.fixed {
+    position:fixed;
+    left:100px;
+    top:100px;
+}
+
+#picker {
+    float: left;
+    margin: 5px 0 0 20px;
+}
+
+#selectbox {
+    width: 100%;
+    background-color: #ccc;
+    padding: 5px 5px 15px;
+}
+
+.clbox, .clboxs {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 2px;
+    border: 3px solid;
+}
+
+#bufcolor {
+    float: left;
+    padding-top: 15px;
+    margin-left: 15px;
+}
+
+
+.farbtastic .wheel {
+    background: url(http://localhost:9999/img/colorpicker/wheel.png) no-repeat !important;
+}
+.farbtastic .overlay {
+    background: url(http://localhost:9999/img/colorpicker/mask.png) no-repeat !important;
+}
+.farbtastic .marker {
+    background: url(http://localhost:9999/img/colorpicker/marker.png) no-repeat !important;
+}
+
 
 .admin-bar {
 	min-height: 50px;

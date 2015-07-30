@@ -1,15 +1,19 @@
 <?php 
 $editmode = 1; 
-
 $a = $_GET['view'];
-
 $a == 'preview' ? $editmode = 0 : $editmode = 1;
-
 ?>
 
-
-
 <?php
+	// conf.json の読み込み
+	if( $file = file_get_contents( 'conf.json' ) ) {
+		$json = json_decode( $file, true );	// true 付けると連想配列
+//		var_dump($json);
+	} else {
+		echo '読み込みエラー<br>';
+		echo $path;
+	}
+
 	// sitemap.json の読み込み or 新規作成
 	require_once('core/SitemapManager.php');
 	$mm = new SitemapManager();
@@ -84,6 +88,39 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 
 <script type="text/javascript"> 
 $(function(){
+    var $window             = $(window),
+        $aside              = $('#aside'),
+        defaultPositionLeft = $aside.css('left'),
+        setOffsetPosition   = $aside.offset(),
+        fixedClassName      = 'fixed';
+ 
+    $window.on('scroll', function() {
+        if ($(this).scrollTop() > setOffsetPosition.top) {
+            $aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
+        } else {
+            if ($aside.hasClass(fixedClassName)) {
+                // $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
+            }
+        }
+    }).trigger('scroll');
+
+
+
+// https://github.com/Fooidge/PleaseJS
+// http://www.checkman.io/please/
+// alert( Please.make_scheme(
+// 			{
+// 			    h: 130,
+// 			    s: 0.7,
+// 			    v: 0.75
+// 			},
+// 			{
+// 			    scheme_type: 'complement',
+// 			    format: 'hex'
+// 			})
+// );
+
+
 
 	// パネルエディターの初期化
 	// @ panelEditor.js

@@ -1,0 +1,483 @@
+RGBColor.prototype.H = 0;
+RGBColor.prototype.S = 0;
+RGBColor.prototype.V = 0;
+
+RGBColor.prototype.MaxRGB = function(){
+ var max = this.r;
+ var type = "R";
+ if(max < this.g){
+  max = this.g;
+  type = "G";
+ }
+ if(max < this.b){
+  max = this.b;
+  type = "B";
+ }
+ return [max,type];
+}
+RGBColor.prototype.MinRGB = function(){
+ var min = this.r;
+ var type = "R";
+ if(min > this.g){
+  min = this.g;
+  type = "G";
+ }
+ if(min > this.b){
+  min = this.b;
+  type = "B";
+ }
+ return [min,type];
+}
+RGBColor.prototype.RGBtoHSV = function(){
+ var imax = this.MaxRGB();
+ var imin = this.MinRGB();
+ var maxtype = imax[1];
+ 
+ var max = parseInt(imax[0]);
+ var min = parseInt(imin[0]);
+ var s =  max - min;
+ if(maxtype=="R"){
+  this.H = 60*(this.g - this.b)/s;
+ }else if(maxtype=="G"){
+  this.H = 60*(this.b-this.r)/(s)+120; 
+ }else{
+  this.H = 60*(this.r-this.g)/(s)+240; 
+ }
+ this.S = s/max;
+ this.V = max;
+}
+RGBColor.prototype.HSVtoRGB = function(){
+ if(this.H>360){ this.H = 360; }
+ if(this.H<0){ this.H = 0; }
+ if(this.S>1.0){ this.S = 1.0; }
+ if(this.S<0.0){ this.S = 0.0; }
+ if(this.V>255){ this.V = 255; }
+ if(this.V<0.0){ this.V = 0.0; }
+ 
+ var h = Math.floor(this.H/60.0);
+ var P = this.V*(1.0 - this.S);
+ var Q = this.V * (1.0 - this.S*(this.H/60-h));
+ var T = this.V * (1.0 - this.S*(1 - this.H/60 + h));
+ 
+ P = parseInt(P);
+ Q = parseInt(Q);
+ T = parseInt(T);
+ this.V = parseInt(this.V);
+ switch(h){
+  case 0:
+   this.r = this.V;
+   this.g = T;
+   this.b = P;   
+   break;
+  case 1:
+   this.r = Q;
+   this.g = this.V;
+   this.b = P;   
+   break;
+  case 2:
+   this.r = P;
+   this.g = this.V;
+   this.b = T;   
+   break;
+  case 3:
+   this.r = P;
+   this.g = Q;
+   this.b = this.V;   
+   break;
+  case 4:
+   this.r = T;
+   this.g = P;
+   this.b = this.V;   
+   break;
+  case 5:
+   this.r = this.V;
+   this.g = P;
+   this.b = Q;   
+   break;
+  }
+}
+RGBColor.prototype.Saturation = function(value){
+ 
+ this.S += value;
+ if(this.S>1.0){ this.S = 1.0; }
+ if(this.S<0){ this.S = 0; }
+ 
+}
+RGBColor.prototype.Hue = function(value){
+ 
+ this.H += parseInt(value);
+ if(this.H>360){
+  this.H -= 360;
+ }
+ else if(this.H<0){
+  this.H = 360 + this.H;
+ }
+ 
+}
+
+
+//彩度を変更する
+function saido(colorcode,value){
+ var c = new RGBColor(colorcode);
+ c.Saturation(value);
+ return c.toHex();
+}
+//色相を変更する
+function sikisou(colorcode,value){
+ var c = new RGBColor(colorcode);
+ c.Hue(value);
+ return c.toHex();
+}
+//彩度と色相を変更する
+function parseHSV(colorcode,h,s,v){
+ var c = new RGBColor(colorcode);
+ c.RGBtoHSV();
+ c.Hue(h);
+ c.Saturation(s);
+ c.HSVtoRGB();
+ return c.toHex();
+}
+
+
+/**********************************/
+
+function ColorBox(w,h,boxid){
+	var width = w;
+	var height = h;
+	var colorboxclassname = "clbox";
+	var colorboxclearname = "clbox_clf";
+	var boxidname = boxid;//"#bufcolor";
+	
+	var selectedDom = null;
+	
+	//イベント用
+	var colorChange = null;
+	this.addColorChange = function(fnc){
+	 colorChange = fnc;
+	}
+
+	//色のDOMを取得する
+	function getColorBox(i,j){
+	 var idname = "#" + i.toString() + "-" + j.toString(); 
+	 return $(idname);
+	}
+	//特定の箱に対象を移す
+	function setSelectDom(dom){
+	 if(selectedDom!=null){
+	  var cl = selectedDom.attr("name");
+	  selectedDom.css("border-color",cl);
+	  selectedDom.removeClass("clboxs");
+	 }
+	 selectedDom = dom;
+	 selectedDom.addClass("clboxs");
+	}
+
+	
+	//色を変更する
+	function cngColorSub(targetDom,idname,colorcode){
+	    //var codediv = $("#"+this.id);
+	    var codediv = targetDom;
+	    //var colorcode = codediv.attr("name");
+	    var rgb = new RGBColor(colorcode);
+	    var Red = rgb.r;
+	    var Green = rgb.g;
+	    var Blue = rgb.b;
+	    var cl2=[rgb.r/255.0,rgb.g/255.0,rgb.b/255.0];
+	    for(var k=0;k<cl2.length;k++){
+	     cl2[k] = cl2[k].toPrecision(4);
+	    }
+	    
+	    $("#dstcolorcode").val(colorcode.toString());
+	    $("#dstrgb0").attr("value","rgb( "+Red+" ,"+Green+" ,"+Blue+" )");
+	    $("#dstrgb").attr("value",Red+" ,"+Green+" ,"+Blue);
+	    $("#dstrgb2").attr("value",cl2[0]+" ,"+cl2[1]+" ,"+cl2[2]);
+	    
+	    $("#dstbgr").attr("value",Blue+" ,"+Green+" ,"+Red);
+	    $("#dstbgr2").attr("value",cl2[2]+" ,"+cl2[1]+" ,"+cl2[0]);
+	    	    
+	    
+	    $(idname).css("background-color",colorcode);
+	    
+	    rgb.r = 255-rgb.r;
+	    rgb.g= 255 - rgb.g;
+	    rgb.b = 255 - rgb.b;
+	    var colorcode2 = rgb.toHex();
+	    $(idname+" span").css("color",colorcode2);
+	    
+	    rgb.RGBtoHSV();
+	    $("#dsthsv").attr("value",rgb.H.toPrecision(4)+" ,"+rgb.S.toPrecision(4)+" ,"+rgb.V.toPrecision(4));
+	    	    
+	    return codediv;
+	}
+	function cngColor(targetDom,idname){
+	 var colorcode = targetDom.attr("name");
+	 cngColorSub(targetDom,idname,colorcode);
+	}
+
+	//一時的に色を出力するところを作成する
+	this.mkColorBox = function(){
+	 $(boxidname).empty();
+	 for(var i=0;i<height;i++){
+	  for(var j=0;j<width;j++){
+	   var tmp = $("<div>"); 
+	   var idname = i.toString() + "-" + j.toString();   
+	   tmp.attr("id",idname);
+	   tmp.attr("class",colorboxclassname);
+	   
+	   $(boxidname).append(tmp); 
+	    
+	   if(j==width-1){    
+	    var clf = $("<div>");
+	    clf.attr("class",colorboxclearname);
+	    $(boxidname).append(clf);
+	   }
+	  }
+	 }
+	}
+	//色を選んだ時のイベントを付ける
+	this.dstidname = null;
+	this.setDstBox = function(idname){
+	 this.dstidname = idname;
+	 //ボックスを作る
+	 var wholestyle = 'style="float :none; margin: 5px;"';
+	 var titlestyle = 'style="width: 140px; text-align: left; display: block; float:left; font-weight: bold;"';
+	 var inputstyle = 'style="width: 200px; text-align: center;"'
+	 
+	 //<div class="form-item"><label for="farbcolor">Color:</label><input type="text" id="farbcolor" name="farbcolor" value="#123456" /></div>
+	 var ary = [
+	 
+	 '<div  class="form-item" '+wholestyle+'><span '+titlestyle+'>カラーコード</span><input id="dstcolorcode" type="text" '+inputstyle+' value="#ff0000"/></div>',
+	 '<div '+wholestyle+'><span '+titlestyle+'>RGB(0～255)</span><input type="text" id="dstrgb0" '+inputstyle+'/></div>',
+	 '<div '+wholestyle+'><span '+titlestyle+'>RGB(0～255)</span><input type="text" id="dstrgb" '+inputstyle+'/></div>',
+	 '<div '+wholestyle+'><span '+titlestyle+'>RGB(0.00～1.00)</span><input type="text" id="dstrgb2" '+inputstyle+'/></div>',
+	 '<div '+wholestyle+'><span '+titlestyle+'>BGR(0～255)</span><input type="text" id="dstbgr" '+inputstyle+'/></div>',
+	 '<div '+wholestyle+'><span '+titlestyle+'>BGR(0.00～1.00)</span><input type="text" id="dstbgr2" '+inputstyle+'/></div>',
+	 //'<div '+wholestyle+'><span '+titlestyle+'>HSV</span><input type="text" id="dsthsv" '+inputstyle+'/></div>',
+	 '<div style="clear: both;"></div>'
+	 
+	 //'<span '+titlestyle+'>'
+	 ];
+	 
+	 var html = '<div class="dstwrap">';
+	 for(var i=0;i<ary.length;i++){
+	  html += ary[i];
+	 }
+	 html+= '</div>';
+	 //var rgbbox = $("<div>");
+	 //rgbbox.html(html);
+	 $(idname).append(html);
+	 
+
+	 //クリックイベントを追加する
+	 for(var i=0;i<height;i++){
+	  for(var j=0;j<width;j++){
+	   getColorBox(i,j).click(function(){
+	    var dm = $("#"+this.id);
+	    var codediv = cngColor(dm,idname);
+	    setSelectDom(dm);
+	    
+	    //ev
+	    if(colorChange!=null){
+	     var colorcode = selectedDom.attr("name");
+	     //colorChange(colorcode);
+	    }
+	   });
+	   
+	   //ダブルクリック(真ん中に移動)
+	   getColorBox(i,j).dblclick(function(){
+	    var code = selectedDom.attr("name");
+	    setAllColorBox(code,true);
+	    
+	    //ev
+	    if(colorChange!=null){
+	     colorChange(code);
+	    }
+	   });
+	   
+	  }
+	 }
+	 
+
+	 
+	}
+	
+	
+
+	//特定の色の箱に色を設定する(background-colorとname)
+	function setColorBox(i,j,colorcode){
+	 var dm = getColorBox(i,j);
+	 dm.css("background-color",colorcode);
+	 dm.attr("name",colorcode);
+	}
+	
+	//カーソルを中心に持ってくる
+	this.selectCenter = function(){
+	 var i = parseInt(height/2);
+	 var j = parseInt(width/2);
+	 setSelectDom(getColorBox(i,j));
+	}
+	
+	
+	//色を一つ決めたら色の箱に全部入れる
+	function setAllColorBox(colorcode,centerflag){
+	 var satu = 0.3;
+	 var hu = 20;
+	 
+	 var hm = parseInt(height/2);
+	 var wm = parseInt(width/2);
+	 for(var i=0;i<height;i++){
+	  for(var j=0;j<width;j++){
+	   var th = (j-wm)*hu;
+	   var ts = (i-hm)*satu;
+	   
+	   //var nc = colorcode;
+	   var nc = parseHSV(colorcode,th,ts,0);
+	   getColorBox(i,j).css("border-color",nc);
+	   if(th==0 && ts==0 && centerflag){
+	    setSelectDom(getColorBox(i,j));
+	   }
+
+	   setColorBox(i,j,nc);	  
+	  }
+	 }
+
+	}
+	this.setColorBox = function(colorcode){
+	 setAllColorBox(colorcode,true);
+	}
+	
+	//色を変更する
+	this.changeColor = function(colorcode){
+	 setAllColorBox(colorcode,false);
+	 //selectedDom.click();
+	 cngColorSub(selectedDom,this.dstidname,colorcode);
+	}
+	
+
+}
+
+
+//-------------------------------//
+
+$(function(){
+ var box = new ColorBox(5,3,"#bufcolor");
+
+ 
+ var init = "#0000ff";
+ 
+
+
+ box.mkColorBox();
+ box.setDstBox("#dstbox");
+
+ box.setColorBox(init);
+ box.changeColor(init);
+
+
+
+$('#picker').farbtastic(function(c) {
+ $('#dstcolorcode').val(c);
+ box.changeColor(c);
+});
+
+  var f = $.farbtastic('#picker');
+ f.setColor(init);
+ box.addColorChange( function(c){
+  f.setColor(c);
+ });
+
+
+
+//コードを入力して色を変える
+$('#dstcolorcode').change(function(){
+   var vl = $("#dstcolorcode").attr("value");
+    if(vl[0]!="#"){
+     vl = "#" + vl;
+    }
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+
+function RGBtoHex(r,g,b){
+  var rc = new RGBColor("#000000");
+  rc.r = parseInt(r);
+  rc.g = parseInt(g);
+  rc.b = parseInt(b);  
+  var vl = rc.toHex();
+  return vl;
+}
+$("#dstrgb0").change(function(){
+  var vl = $("#dstrgb0").attr("value");
+  var rgb = vl.replace(/(rgb|\(|\)|\s*|\t*)/gi,"");
+  rgb = rgb.split(",");
+  if(rgb.length!=3) return ;
+  
+  vl = RGBtoHex(rgb[0],rgb[1],rgb[2]);
+
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+$("#dstrgb").change(function(){
+  var vl = $("#dstrgb").attr("value");
+  var rgb = vl.replace(/(\(|\)|\s*|\t*)/gi,"");
+  rgb = rgb.split(",");
+  if(rgb.length!=3) return ;
+  
+  vl = RGBtoHex(rgb[0],rgb[1],rgb[2]);
+
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+$("#dstrgb2").change(function(){
+  var vl = $("#dstrgb2").attr("value");
+  var rgb = vl.replace(/(\(|\)|\s*|\t*)/gi,"");
+  rgb = rgb.split(",");
+  if(rgb.length!=3) return ;
+  for(var i=0;i<3;i++){
+   rgb[i] = parseFloat(rgb[i]);
+   rgb[i] = rgb[i]*255;
+   if(rgb[i]>=255){ rgb[i]=255; }
+  }
+   
+  vl = RGBtoHex(rgb[0],rgb[1],rgb[2]);
+
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+$("#dstbgr").change(function(){
+  var vl = $("#dstbgr").attr("value");
+  var rgb = vl.replace(/(\(|\)|\s*|\t*)/gi,"");
+  rgb = rgb.split(",");
+  if(rgb.length!=3) return ;
+  
+  vl = RGBtoHex(rgb[2],rgb[1],rgb[0]);
+
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+$("#dstbgr2").change(function(){
+  var vl = $("#dstbgr2").attr("value");
+  var rgb = vl.replace(/(\(|\)|\s*|\t*)/gi,"");
+  rgb = rgb.split(",");
+  if(rgb.length!=3) return ;
+  for(var i=0;i<3;i++){
+   rgb[i] = parseFloat(rgb[i]);
+   rgb[i] = rgb[i]*255;
+   if(rgb[i]>=255){ rgb[i]=255; }
+  }
+   
+  vl = RGBtoHex(rgb[2],rgb[1],rgb[0]);
+
+  box.changeColor(vl);
+  box.selectCenter();
+  f.setColor(vl);
+});
+
+
+
+});

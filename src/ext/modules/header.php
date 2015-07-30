@@ -22,17 +22,17 @@ $url = $protcol.$hostname.$uri;
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
 
-<meta property="og:title" content="" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="<?= $json['sitename'] ?>" />
+<meta property="og:description" content="<?= $json['description'] ?>" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="" />
 <meta property="og:image" content="" />
-<meta property="og:site_name" content="" />
+<meta property="og:site_name" content="<?= $json['sitename'] ?>" />
 
 <meta property="fb:app_id" content="" />
 <meta property="article:publisher" content="" />
 <meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="">
+<meta name="twitter:site" content="<?= $json['sitename'] ?>">
 
 <!-- css -->
 <!-- <link href="css/bootstrap.css" rel="stylesheet" /> -->
