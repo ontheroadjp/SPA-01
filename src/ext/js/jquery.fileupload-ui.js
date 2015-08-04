@@ -517,7 +517,7 @@
             var button = $(e.currentTarget),
                 template = button.closest('.template-upload'),
                 data = template.data('data');
-            button.prop('disabled', true);
+                closestbutton.prop('disabled', true);
             if (data && data.submit) {
                 data.submit();
             }

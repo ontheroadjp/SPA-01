@@ -23,9 +23,6 @@ $(function () {
         dropZone: $('#dropzone')
     });
 
-// $('#fileupload').fileupload({
-//     dropZone: $('#dropzone')
-// });
 
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
@@ -37,11 +34,8 @@ $(function () {
         )
     );
 
-    // ドロップエリアの変更
-    $(document).bind('drop dragover', function (e) {
-        e.preventDefault();
-    });
 
+    // ドロップエリアの変更
     $(document).bind('dragover', function (e) {
         var dropZone = $('#dropzone'),
             timeout = window.dropZoneTimeout;
@@ -69,6 +63,12 @@ $(function () {
             dropZone.removeClass('in hover');
         }, 100);
     });
+
+    // 以下追加するとアニメーション無くなる
+    $(document).bind('drop dragover', function (e) {
+        e.preventDefault();
+    });
+
 
     // if (window.location.hostname === 'blueimp.github.io') {
 

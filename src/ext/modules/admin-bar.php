@@ -41,7 +41,7 @@
 		<li><a data-toggle="modal" href="#general-settings-modal">基本設定</a>
 		<!-- <li><a data-toggle="modal" href="#image-gararry-modal">画像ギャラリー</a></li> -->
 		<li><a href="">色設定</a></li>
-		<li><a href="uploader/index.html">画像設定</a></li>
+		<li><a href="uploader.html">画像設定</a></li>
 		<li><a href="/?view=preview" target="_blank">サイトを確認する</a></li>
 		<li><a href="?action=logout">ログアウト</a></li>
     </ul>
