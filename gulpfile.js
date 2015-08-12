@@ -18,33 +18,27 @@ var shell = require('gulp-shell');
 var target = 'src/';
 
 // build
-gulp.task('build',['ext','sass','js','img']);
+gulp.task('build',['app','lib','sass','js','img']);
 
 gulp.task('shell', shell.task([
-			  'cp -r ./src/ext ./build',
+			  'cp -r ./src/app ./build',
 					]))
 
-// ext
-gulp.task('ext', function () {
+// app
+gulp.task('app', function () {
 	gulp.src(
-							//'*.js', {matchBase: true}
-							//'*.{php,css,js,jpg,png,gif,svg,json}',
-							//target + 'ext/**/*.{html,php,css,js,jpg,png,gif,svg,json}',
-							target + 'ext/**/*.*'
-							//target + 'ext/**'
-							//target + 'ext/**/*.php',
-							//target + 'ext/**/*.css',
-							//target + 'ext/**/*.js',
-							//target + 'ext/**/*.jpg',
-							//target + 'ext/**/*.png',
-							//target + 'ext/**/*.gif',
-							//target + 'ext/**/*.svg',
-							//target + 'ext/**/*.json',
-						//], { "base" : target + "ext" }, {cwd: 'build'})
-						//], {cwd: 'src/ext/', matchBase:'true'})
-						//], { matchBase: true})
+							target + 'app/**/*.*'
 						)
-		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('build/'))
+		.pipe(reload({stream:true}));
+});
+
+// lib
+gulp.task('lib', function () {
+	gulp.src(
+							target + 'Spa01/**/*.*'
+						)
+		.pipe(gulp.dest('build/Spa01'))
 		.pipe(reload({stream:true}));
 });
 
@@ -125,8 +119,9 @@ browserSync.reload();
 // Task for `gulp` command
 
 gulp.task('default',['browser-sync'], function() {
+	gulp.watch(target + 'app/*.*',['app']);
+	gulp.watch(target + 'Spa01/**/*.*',['lib']);
 	gulp.watch(target + 'sass/**/*.scss',['sass']);
-	gulp.watch(target + 'ext/**/*.*',['ext']);
 	gulp.watch(target + 'js/**/*.js',['js']);
 	gulp.watch(target + 'img/**/*.{png,jpg,gif,svg}',['imagemin']);
 	gulp.watch(target + "*.html", ['bs-reload']);
