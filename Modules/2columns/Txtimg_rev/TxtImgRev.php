@@ -11,7 +11,6 @@
 ?>
 
 <?php
-require_once( dirname(__FILE__).'/../Txtimg/TxtImg.php' );
 class TxtImgRev extends TxtImg {
 
 	function __construct( $path ) {

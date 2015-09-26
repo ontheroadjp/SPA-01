@@ -1,0 +1,31 @@
+{
+	"id" : "1column-h2p",
+	"path" : "1column/H2p/",
+	"classname" : "H2p",
+	"content" : {
+		"text01" : "Stylish Portfolio is the perfect theme for your next project!",
+		"text02" : "This theme features some wonderful photography courtesy of Death to the Stock Photo"
+	},
+	"css" : {
+		"section" : {
+			"padding" : "0",
+			"background-size" : "cover",
+			"min-height" : "300px",
+			"background-color" : "$$primary-color$$",
+			"color" : "$$secondary-color$$",
+			"font-family" : "Lato, sans-self"
+		},
+		"overlay" : {
+			"padding-top" : "20px",
+			"min-height" : "350px"
+		},
+		"h2" : {
+			"font-size": "350%",
+			"padding-top": "5%",
+			"padding-bottom": "5%"
+		},
+		"p" : {
+
+		}
+	}
+}

@@ -11,8 +11,8 @@
 ?>
 
 <?php
-require_once( dirname(__FILE__).'/../Txtimg/TxtImg.php' );
-class TxtImgRev extends TxtImg {
+require_once( dirname(__FILE__).'/../../Module.php' );
+class ImgTxtRev extends ImgTxt {
 
 	function __construct( $path ) {
 		parent::__construct( $path );

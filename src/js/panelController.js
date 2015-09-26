@@ -305,7 +305,7 @@ function panelSwap(base, first, second, options) {
  */
 function panelAddToDOM(base,panel,panelIndex,options) {
 	$.ajax({
-		url: 'http://localhost:9999/ajax.php',
+		url: 'http://localhost:9999/Spa01/ajax.php',
 		type: 'POST',
 		dataType: 'html',
 		data: {
@@ -332,10 +332,10 @@ function panelAddToDOM(base,panel,panelIndex,options) {
 		// initPanelEditor();
 		// btnenable(false,options);
 
-		// // Ajax
-		// if (!!options.onpaneladded) {
-		// 	options.onpaneladded(base, data, panelIndex, options);
-		// }
+		// Ajax
+		if (!!options.onpaneladded) {
+			options.onpaneladded(base, data, panelIndex, options);
+		}
 
 	});
 }

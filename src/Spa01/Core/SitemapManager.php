@@ -14,12 +14,6 @@ class SitemapManager extends ModuleManager {
 		, 'HeaderIcon'		=> "dirname(__FILE__)/../Modules/3columns/headericon/module.json"
 		, 'H2p'				=> "dirname(__FILE__)/../Modules/1column/h2p/module.json"
 
-		// これは動く
-		// , 'TxtImg'			=> "dirname(__FILE__)/../Modules/2columns/txtimg/module.json"
-		// , 'ImgTxt'			=> "dirname(__FILE__)/../Modules/2columns/imgtxt/module.json"
-		// , 'TxtImgRev'		=> "dirname(__FILE__)/../Modules/2columns/txtimg_rev/module.json"
-		// , 'ImgTxtRev'		=> "dirname(__FILE__)/../Modules/2columns/imgtxt_rev/module.json"
-
 		, 'TxtImgRev'		=> "dirname(__FILE__)/../Modules/2columns/txtimg_rev/module.json"
 		, 'TxtImg'			=> "dirname(__FILE__)/../Modules/2columns/txtimg/module.json"
 		, 'ImgTxt'			=> "dirname(__FILE__)/../Modules/2columns/imgtxt/module.json"
@@ -90,7 +84,6 @@ class SitemapManager extends ModuleManager {
 	 * @param [type] $position  [description]
 	 */
 	public function addModule($path, $position) {
-
 		$newmodule = $this->loadJson($path);
 
 		$last = array_splice($this->modulemap, $position);	//挿入する位置～末尾までを切り出す
