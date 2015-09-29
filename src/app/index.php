@@ -47,7 +47,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 <!-- ここから HTML 出力 -->
 <?php include(dirname('__FILE__').'/Spa01/Modules/header.php'); ?>
 
-<div class="sidebar" style="float:left;width:200px;background-color:#000">
+<!-- <div class="sidebar" style="float:left;width:200px;background-color:#000">
 		<ul>
 			<li><a href="#">Menu</a></li>
 			<li><a href="#">Menu</a></li>
@@ -56,7 +56,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 			<li><a href="#" data-role="sidemenu-toggle">Close</a></li>
 		</ul>
 </div>
-
+ -->
 <!-- <div data-role="sidemenu-container" data-sidemenu-dir="left">
 	<div data-role="sidemenu-content">
 		<div id="sidemenu">
@@ -72,10 +72,6 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	</div>
 </div>
  -->
-
-<div clas="editbody" style="">
-
-
 
 
 <!-- ヘッダメニューの出力 -->
@@ -110,8 +106,6 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	© 2015 ontheroad.jp  | <a href="<?= $url ?>">Created by SPA-01</a>
 </footer>
 
-
-</div><!-- .editbody -->
 
 <!-- ------------------------------------------------------------- -->
 <!-- JAVASCRIPT SECSSION -->
