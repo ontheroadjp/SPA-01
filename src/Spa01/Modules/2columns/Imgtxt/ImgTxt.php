@@ -17,6 +17,8 @@ class ImgTxt extends Module {
 	function __construct( $path ) {
 		parent::__construct( $path );
 
+	$this->doc .= '<button class="layout-btn">レイアウト</button>';
+
 	// <section id="'.$this->id.'" style='.$this->css[CSS_SECTION].'>
 	// <div style='.$this->css[CSS_OVERLAY].'>
 	// <div class="container">

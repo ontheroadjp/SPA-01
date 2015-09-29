@@ -3,6 +3,7 @@
 // namespace Spa01\Core;
 
 define("SITEMAP_FILE_NAME", "sitemap.json");
+
 require_once(dirname(__FILE__).'/ModuleManager.php');
 
 class SitemapManager extends ModuleManager {
@@ -31,7 +32,7 @@ class SitemapManager extends ModuleManager {
 	function __construct() {
 		$this->localPath = dirname(__FILE__).'/../../'.SITEMAP_FILE_NAME;
 
-		// sitemap.json ロード
+		// sitemap.json が存在する場合はロード
 		if( $this->isSitemapExist() ) {
 			$this->sitemap = json_decode(file_get_contents($this->localPath), true);
 

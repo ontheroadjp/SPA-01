@@ -62,6 +62,21 @@ class ModuleUtilities {
 		$val .= '</div><!-- / .container -->';
 		$val .= '</div><!-- / .panelcontrol-add -->';
 
+
+		// パネルプロパティコントロール
+		// $val .= '<div class="panel-propaty-control-buttons">';
+		// $val .= '<div class="container">';
+		// $val .= '<div class="row">';
+
+		// 	$val .= '<ul>';
+		// 	$val .= '<li><button class="add-panel-btn btn btn-default btn-md">レイアウト変更</button></li>';
+		// 	$val .= '</ul>';
+			
+		// $val .= '</div><!-- / .row -->';
+		// $val .= '</div><!-- / .container -->';
+		// $val .= '</div><!-- / .panelcontrol-buttons -->';
+
+
 		// オリジナルドキュメント
 		$val .= $doc;
 

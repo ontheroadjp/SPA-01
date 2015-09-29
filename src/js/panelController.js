@@ -135,7 +135,7 @@ function action(base, panelIndex, type, options) {
 		if(panel.data('panel-index') == panelIndex ) {
 			switch (type) {
 				case 'up':
-					if (i!=0) {
+					if (i!=0) { 
 						// swaps = [panels.get(i-1), panels.get(i)];
 						var first = $(panels.get(i-1));
 						var second = $(panels.get(i));
@@ -268,6 +268,7 @@ function panelSwap(base, first, second, options) {
 		second.css({'opacity': '1', 'top': '0'});
 		first.before(second);
 
+
 		//アニメーション後の処理
 		initPanelController(base,options);
 		swapbtn(options);
@@ -277,6 +278,7 @@ function panelSwap(base, first, second, options) {
 		if (!!options.onpanelswapped) {
 			options.onpanelswapped(base,first,second,options);
 		}
+
 
 	};
 
@@ -319,13 +321,9 @@ function panelAddToDOM(base,panel,panelIndex,options) {
 		var newPanel = $(data);
 		panel.before('<div id="graylayer"></div>');
 		panel.before(newPanel.css({'display':'none'}));
-		// newPanel.attr('id','active');
-		// newPanel.addClass('adding');
-		// newPanel.show("slow");
 		newPanel.attr('id','active').addClass('adding').show("slow");
 		var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
 		var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
-
 
 		initPanelController(base,options);
 		swapbtn(options);
@@ -336,7 +334,6 @@ function panelAddToDOM(base,panel,panelIndex,options) {
 		if (!!options.onpaneladded) {
 			options.onpaneladded(base, data, panelIndex, options);
 		}
-
 	});
 }
 
@@ -364,7 +361,6 @@ function panelAddToServer(base,panel,panelIndex,options) {
 	initPanelController(base,options);
 	swapbtn(options);
 	btnenable(false,options);
-
 
 	var modulepath = String(section.attr('data-path'));
 	modulepath = modulepath.replace( /-/g , "/" ) + 'module.json';

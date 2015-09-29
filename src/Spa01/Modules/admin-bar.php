@@ -33,19 +33,25 @@
 </div>
 </div> -->
 
+
+
+
+
 </div><!-- / .asid -->
 
-<div class="admin-bar">
+<!-- <div class="admin-bar">
     <a class="brand" href="../">WEB サイトの編集</a>
     <ul class="nav pull-right">
 		<li><a data-toggle="modal" href="#general-settings-modal">基本設定</a>
-		<!-- <li><a data-toggle="modal" href="#image-gararry-modal">画像ギャラリー</a></li> -->
+		<li><a data-toggle="modal" href="#image-gararry-modal">画像ギャラリー</a></li>
 		<li><a href="">色設定</a></li>
 		<li><a href="uploader.html">画像設定</a></li>
 		<li><a href="/?view=preview" target="_blank">プレビュー</a></li>
 		<li><a href="?action=logout">ログアウト</a></li>
     </ul>
-</div>
+</div> -->
+
+
 
 <!-- モーダル（id="general-settings-modal"） -->
 <div class="modal" id="general-settings-modal">
@@ -97,10 +103,9 @@
 <h4 class="modal-title">画像ギャラリー</h4>
 </div><!-- / .modal-header -->
 <div class="modal-body">
-<p>
-コンテンツ
-</p>
+<p>コンテンツ</p>
 </div><!-- / .modal-body -->
+
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
 <button type="button" class="btn btn-primary">更新</button>
@@ -108,14 +113,5 @@
 </div><!-- / .modal-content -->
 </div><!-- / .modal-dialog -->
 </div><!-- / .modal -->
-
-
-<!-- <script type="text/javascript"> 
-$(function(){
-
-});
-</script>
- -->
-
 
 

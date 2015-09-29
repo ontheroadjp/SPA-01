@@ -1,13 +1,14 @@
 <?php 
-
 // namespace Spa01;
-
 // use Spa01\Core\SitemapManager;
 
+// TEMP
 $editmode = 1; 
 $a = $_GET['view'];
 $a == 'preview' ? $editmode = 0 : $editmode = 1;
 ?>
+
+
 
 <?php
 	// conf.json の読み込み
@@ -21,22 +22,23 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 
 	// sitemap.json の読み込み or 新規作成
 	require_once(dirname('__FILE__').'/Spa01/Core/SitemapManager.php');
-	$mm = new SitemapManager();
+	$sitemapManager = new SitemapManager();
+
 
 	// パネル操作の処理
 	$mode = $_POST['mode'];
-	var_dump($mode);
+
 	switch($mode) {
 		case 'panelswap':
-			$mm->swapModule($_POST['first'], $_POST['second']);
+			$sitemapManager->swapModule($_POST['first'], $_POST['second']);
 			break;
 
 		case 'paneladd':
-			$mm->addModule($_POST['module'], $_POST['position']);
+			$sitemapManager->addModule($_POST['module'], $_POST['position']);
 			break;
 
 		case 'paneldelete':
-			$mm->deleteModule($_POST['position']);
+			$sitemapManager->deleteModule($_POST['position']);
 			break;
 	}
 ?>
@@ -45,37 +47,75 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 <!-- ここから HTML 出力 -->
 <?php include(dirname('__FILE__').'/Spa01/Modules/header.php'); ?>
 
+<div class="sidebar" style="float:left;width:200px;background-color:#000">
+		<ul>
+			<li><a href="#">Menu</a></li>
+			<li><a href="#">Menu</a></li>
+			<li><a href="#">Menu</a></li>
+			<li class="divider"></li>
+			<li><a href="#" data-role="sidemenu-toggle">Close</a></li>
+		</ul>
+</div>
+
+<!-- <div data-role="sidemenu-container" data-sidemenu-dir="left">
+	<div data-role="sidemenu-content">
+		<div id="sidemenu">
+		<ul>
+			<li><a href="#">Menu</a></li>
+			<li><a href="#">Menu</a></li>
+			<li><a href="#">Menu</a></li>
+			<li class="divider"></li>
+			<li><a href="#" data-role="sidemenu-toggle">Close</a></li>
+		</ul>
+		</div>
+		<a href="#" data-role="sidemenu-toggle">Open side menu</a>
+	</div>
+</div>
+ -->
+
+<div clas="editbody" style="">
+
+
+
+
 <!-- ヘッダメニューの出力 -->
 <?php if( $editmode == 1 ) { ?>
-	<div class="navbar navbar-default navbar-fixed-top">
-		<?php include(dirname('__FILE__').'/Spa01/Modules/admin-bar.php'); ?>
-	</div>
+	<!-- <div class="navbar navbar-default navbar-fixed-top"> -->
+		<?php //include(dirname('__FILE__').'/Spa01/Modules/admin-bar.php'); ?>
+	<!-- </div> -->
 <?php } ?>
 
-<div> 
-	<?php include(dirname('__FILE__').'/Spa01/Modules/top-bar.php'); ?>
-</div>
+<div id="aside"></div>
+
+<div> <?php include(dirname('__FILE__').'/Spa01/Modules/top-bar.php'); ?></div>
+
+
 
 <!-- パネルの出力 -->
 <div id="panelcontrol">
 <?php
-
-	for( $n=0; $n<$mm->modulecount(); $n++ ) {
-		$module = $mm->getModule($n);
+	for( $n=0; $n<$sitemapManager->modulecount(); $n++ ) {
+		$module = $sitemapManager->getModule($n);
 		if( $editmode == 1 ) { 
 			echo $module->getEditDoc();
 		} else {
 			echo $module->getDoc();
 		}
 	}
-
 ?>
 </div><!-- / #panelcontrol -->
 
-
+<!-- フッター -->
 <footer>
 	© 2015 ontheroad.jp  | <a href="<?= $url ?>">Created by SPA-01</a>
 </footer>
+
+
+</div><!-- .editbody -->
+
+<!-- ------------------------------------------------------------- -->
+<!-- JAVASCRIPT SECSSION -->
+<!-- ------------------------------------------------------------- -->
 
 
 <script src="js/scripts.js"></script>
@@ -93,6 +133,8 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 
 <script type="text/javascript"> 
 $(function(){
+
+
     var $window             = $(window),
         $aside              = $('#aside'),
         defaultPositionLeft = $aside.css('left'),
@@ -108,7 +150,6 @@ $(function(){
             }
         }
     }).trigger('scroll');
-
 
 
 // https://github.com/Fooidge/PleaseJS
