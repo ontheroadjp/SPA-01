@@ -1,3 +1,4 @@
+
 var gulp = require('gulp');
 var bower = require('main-bower-files');
 var sass = require('gulp-ruby-sass');
@@ -73,15 +74,15 @@ gulp.task('js', function() {
 	.pipe(reload({stream:true}));
 });
 
-gulp.task('bower', function() {
-	var jsFilter = filter([target + '**/*.js']);
-		gulp.src(bower())
-		.pipe(jsFilter)
-		.pipe(concat('scripts.js'))
-		.pipe(uglify({presserveComents: 'some'}))
-		.pipe(gulp.dest('build/js'))
-		.pipe(reload({stream:true}));
-});
+//gulp.task('bower', function() {
+//	var jsFilter = filter([target + '**/*.js']);
+//		gulp.src(bower())
+//		.pipe(jsFilter)
+//		.pipe(concat('scripts.js'))
+//		.pipe(uglify({presserveComents: 'some'}))
+//		.pipe(gulp.dest('build/js'))
+//		.pipe(reload({stream:true}));
+//});
 
 
 // Imagemin

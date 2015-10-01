@@ -125,6 +125,10 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
 
+
+<script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="/js/tinymce/jquery.tinymce.min.js"></script>
+
 <script type="text/javascript"> 
 $(function(){
 
@@ -146,25 +150,138 @@ $(function(){
     }).trigger('scroll');
 
 
-// https://github.com/Fooidge/PleaseJS
-// http://www.checkman.io/please/
-// alert( Please.make_scheme(
-// 			{
-// 			    h: 130,
-// 			    s: 0.7,
-// 			    v: 0.75
-// 			},
-// 			{
-// 			    scheme_type: 'complement',
-// 			    format: 'hex'
-// 			})
-// );
-
-
-
 	// パネルエディターの初期化
 	// @ panelEditor.js
-	initPanelEditor();
+	// initPanelEditor();
+	// $('p, h1, h2, h3, h4, h5, img, i').each( function() {
+	// 	var backup = $(this).text();
+
+	// 	// マウスオーバー処理
+	// 	$(this).data('backup', backup).hover(
+	// 		function() {
+	// 			if( !$('*.on')[0] && !$('*.editing')[0] ) {
+	// 				$(this).css('border','1px solid #ff9900');
+	// 			}
+	// 		},
+	// 		function() {
+	// 			if( !$(this).hasClass('on') && !$(this).hasClass('editing') ) {
+	// 				$(this).css('border','none');
+	// 			}
+	// 		}
+	// 	);
+	// });
+
+	// TinyMCE
+	$('h1, h2, h3, h4, h5').tinymce({
+		language: "ja",
+		inline: true,
+		custom_undo_redo_levels: 10,
+		plugins: "link save",
+		menubar: false,
+		toolbar: [
+			"save | link | bold italic underline strikethrough | fontsizeselect | undo redo",
+			],
+		save_enablewhendirty: true,
+		save_onsavecallback: function() {console.log("Save しました");},
+		save_oncancelcallback: function() {console.log("Cancel しました");},
+		statusbar: true,
+
+		setup: function(editor) {
+			editor.on('init', function(){
+
+				// マウスエンターイベント
+				editor.on('mouseenter', function(e) {
+					$(editor.getElement()).css('border','1px solid #ff9900');
+					$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+				});
+
+				// マウスアウトイベント
+				editor.on('mouseout', function(e) {
+					$(editor.getElement()).css('border','none');
+					$(editor.getElement()).css('background-color','');
+				});
+
+
+			})
+		},
+
+	})
+
+	$('p').tinymce({
+		language: "ja",
+		inline: true,
+		custom_undo_redo_levels: 10,
+		plugins: "link save",
+		menubar: false,
+		toolbar: [
+			"bold italic underline strikethrough | alignleft aligncenter alignright | alignjustify | bullist numlist",
+			"save | link | fontsizeselect | undo redo",
+			],
+		save_enablewhendirty: true,
+		save_onsavecallback: function() {console.log("Save しました");},
+		save_oncancelcallback: function() {console.log("Cancel しました");},
+		statusbar: true,
+
+		setup: function(editor) {
+			editor.on('init', function(){
+
+				// マウスエンターイベント
+				editor.on('mouseenter', function(e) {
+					$(editor.getElement()).css('border','1px solid #ff9900');
+					$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+				});
+
+				// マウスアウトイベント
+				editor.on('mouseout', function(e) {
+					$(editor.getElement()).css('border','none');
+					$(editor.getElement()).css('background-color','');
+				});
+
+
+
+			})
+		},
+
+	})
+
+	// $('img, i').tinymce({
+	// 	language: "ja",
+	// 	inline: true,
+	// 	custom_undo_redo_levels: 10,
+	// 	plugins: "save image imagetools",
+	// 	image_advtab: true,
+	// 	image_description: true,
+	// 	image_dimensions: false,
+	// 	image_title: true,
+	// 	imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
+	// 	menubar: false,
+	// 	toolbar: "save | image | undo redo",
+	// 	save_enablewhendirty: true,
+	// 	save_onsavecallback: function() {console.log("Save しました");},
+	// 	save_oncancelcallback: function() {console.log("Cancel しました");},
+	// 	statusbar: true,
+	// 	resize: "both",
+
+	// 	images_upload_url: "ImgUploader.php",
+
+	// 	setup: function(editor) {
+	// 		editor.on('init', function(){
+
+	// 			// tinymce.activeEditor.$().css('border','1px solid #ff9900');
+
+	// 			// マウスオーバーイベント
+	// 			editor.on('mouseenter', function(e) {
+	// 				$(editor.getElement()).css('border','1px solid #ff9900');
+	// 				$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+	// 			});
+	// 			editor.on('mouseout', function(e) {
+	// 				$(editor.getElement()).css('border','none');
+	// 				$(editor.getElement()).css('background-color','');
+	// 			});
+	// 		})
+	// 	},
+
+	// })
 
 	// パネルカルーセルの初期化
 	// @ panelChanger.js
@@ -249,6 +366,8 @@ $(function(){
 
 });
 </script>
+
+<?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
 
 
 </body>
