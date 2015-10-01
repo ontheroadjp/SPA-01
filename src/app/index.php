@@ -365,9 +365,19 @@ $(function(){
 	});
 
 });
+
+function responsive_filemanager_callback(field_id){
+	console.log(field_id);
+	var url=jQuery('#'+field_id).val();
+	alert('update '+field_id+" with "+url);
+	//your code
+}
+
 </script>
 
 <?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
+
+<a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a>
 
 
 </body>
