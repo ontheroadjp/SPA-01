@@ -1,0 +1,381 @@
+<?php 
+// namespace Spa01;
+// use Spa01\Core\SitemapManager;
+
+// TEMP
+$editmode = 1; 
+$a = $_GET['view'];
+$a == 'preview' ? $editmode = 0 : $editmode = 1;
+?>
+<?php
+    // conf.json の読み込み
+    if( $file = file_get_contents( 'conf.json' ) ) {
+        $json = json_decode( $file, true ); // true 付けると連想配列
+//      var_dump($json);
+    } else {
+        echo '読み込みエラー<br>
+<p>'; echo $path; }</p>
+<pre><code>// sitemap.json の読み込み or 新規作成
+require_once(dirname(&#39;__FILE__&#39;).&#39;/Spa01/Core/SitemapManager.php&#39;);
+$sitemapManager = new SitemapManager();
+
+
+// パネル操作の処理
+$mode = $_POST[&#39;mode&#39;];
+
+switch($mode) {
+    case &#39;panelswap&#39;:
+        $sitemapManager-&gt;swapModule($_POST[&#39;first&#39;], $_POST[&#39;second&#39;]);
+        break;
+
+    case &#39;paneladd&#39;:
+        $sitemapManager-&gt;addModule($_POST[&#39;module&#39;], $_POST[&#39;position&#39;]);
+        break;
+
+    case &#39;paneldelete&#39;:
+        $sitemapManager-&gt;deleteModule($_POST[&#39;position&#39;]);
+        break;
+}</code></pre>
+<p>?&gt;</p>
+<!-- ここから HTML 出力 -->
+<?php include(dirname('__FILE__').'/Spa01/Modules/header.php'); ?>
+<!-- <div class="sidebar" style="float:left;width:200px;background-color:#000">
+        <ul>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Menu</a></li>
+            <li class="divider"></li>
+            <li><a href="#" data-role="sidemenu-toggle">Close</a></li>
+        </ul>
+</div>
+ -->
+<!-- <div data-role="sidemenu-container" data-sidemenu-dir="left">
+    <div data-role="sidemenu-content">
+        <div id="sidemenu">
+        <ul>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Menu</a></li>
+            <li class="divider"></li>
+            <li><a href="#" data-role="sidemenu-toggle">Close</a></li>
+        </ul>
+        </div>
+        <a href="#" data-role="sidemenu-toggle">Open side menu</a>
+    </div>
+</div>
+ -->
+<!-- ヘッダメニューの出力 -->
+<?php if( $editmode == 1 ) { ?>
+<pre><code>&lt;!-- &lt;div class=&quot;navbar navbar-default navbar-fixed-top&quot;&gt; --&gt;
+    &lt;?php //include(dirname(&#39;__FILE__&#39;).&#39;/Spa01/Modules/admin-bar.php&#39;); ?&gt;
+&lt;!-- &lt;/div&gt; --&gt;</code></pre>
+<?php } ?>
+<div id="aside">
+
+</div>
+<div>
+<?php include(dirname('__FILE__').'/Spa01/Modules/top-bar.php'); ?>
+</div>
+<!-- パネルの出力 -->
+<div id="panelcontrol">
+<?php
+    for( $n=0; $n<$sitemapManager->
+modulecount(); $n++ ) { $module = <span class="math inline"><em>s</em><em>i</em><em>t</em><em>e</em><em>m</em><em>a</em><em>p</em><em>M</em><em>a</em><em>n</em><em>a</em><em>g</em><em>e</em><em>r</em> −  &gt; <em>g</em><em>e</em><em>t</em><em>M</em><em>o</em><em>d</em><em>u</em><em>l</em><em>e</em>(</span>n); if( $editmode == 1 ) { echo $module-&gt;getEditDoc(); } else { echo $module-&gt;getDoc(); } } ?&gt;
+</div>
+<!-- / #panelcontrol -->
+<!-- フッター -->
+<footer>
+<pre><code>© 2015 ontheroad.jp  | &lt;a href=&quot;&lt;?= $url ?&gt;&quot;&gt;Created by SPA-01&lt;/a&gt;</code></pre>
+</footer>
+<!--################### START PORTFOLIO ###################
+    ======================================================= -->
+<pre><code>&lt;div class=&quot;thumbnail&quot;&gt;
+    &lt;!-- IMAGE CONTAINER--&gt;
+    &lt;div class=&quot;img-wrapp&quot;&gt;
+        &lt;div class=&quot;img-effect&quot;&gt;&lt;/div&gt;
+        &lt;img src=&quot;http://localhost:9999/img/3.jpg&quot; alt=&quot;responsive filemanager file uploading&quot;&gt;
+        &lt;div class=&quot;img-links&quot;&gt;
+        &lt;a href=&quot;http://localhost:9999/img/3.jpg&quot; class=&quot;btn btn-action small &quot;&gt;&lt;i class=&quot;fa fa-recycle  fa-5x&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!--END IMAGE CONTAINER--&gt;
+&lt;/div&gt;</code></pre>
+<!-- ------------------------------------------------------------- -->
+<!-- JAVASCRIPT SECSSION -->
+<!-- ------------------------------------------------------------- -->
+<script src="js/scripts.js"></script>
+<!--
+    js/jquery-1.11.1.js
+    js/bootstrap.js
+    js/jquery.mb.YTPlayer.js    // 動画プレイヤー
+    js/jquery.easing.min.js     // エフェクトの動きを加減速させる
+    js/custom.js
+
+    js/panelEditor.js           // リアルタイム編集
+    js/panelController.js       // パネル操作（追加、削除、上下入替）
+    js/panelChanger.js          // パネルの差替え（アコーディオン）
+-->
+<script type="text/javascript"> 
+$('img').before("<div class='thumbnail'><div class='img-wrapp'><div class='img-effect'></div>");
+$('img').after
+
+
+$('.thumbnail').hover(function(){
+    $(this).find('.img-effect').stop().animate({'opacity':'0.7'});
+    $(this).find('.img-links').stop().animate({'top':'50%'});
+},function(){
+    $(this).find('.img-effect').stop().animate({'opacity':'0'});
+    $(this).find('.img-links').stop().animate({'top':'-50%'});
+});
+</script>
+<script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="/js/tinymce/jquery.tinymce.min.js"></script>
+<script type="text/javascript"> 
+$(function(){
+
+
+    var $window             = $(window),
+        $aside              = $('#aside'),
+        defaultPositionLeft = $aside.css('left'),
+        setOffsetPosition   = $aside.offset(),
+        fixedClassName      = 'fixed';
+ 
+    $window.on('scroll', function() {
+        if ($(this).scrollTop() > setOffsetPosition.top) {
+            $aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
+        } else {
+            if ($aside.hasClass(fixedClassName)) {
+                // $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
+            }
+        }
+    }).trigger('scroll');
+
+
+    // パネルエディターの初期化
+    // @ panelEditor.js
+    // initPanelEditor();
+    // $('p, h1, h2, h3, h4, h5, img, i').each( function() {
+    //  var backup = $(this).text();
+
+    //  // マウスオーバー処理
+    //  $(this).data('backup', backup).hover(
+    //      function() {
+    //          if( !$('*.on')[0] && !$('*.editing')[0] ) {
+    //              $(this).css('border','1px solid #ff9900');
+    //          }
+    //      },
+    //      function() {
+    //          if( !$(this).hasClass('on') && !$(this).hasClass('editing') ) {
+    //              $(this).css('border','none');
+    //          }
+    //      }
+    //  );
+    // });
+
+    // TinyMCE
+    $('h1, h2, h3, h4, h5').tinymce({
+        language: "ja",
+        inline: true,
+        custom_undo_redo_levels: 10,
+        plugins: "link save",
+        menubar: false,
+        toolbar: [
+            "save | link | bold italic underline strikethrough | fontsizeselect | undo redo",
+            ],
+        save_enablewhendirty: true,
+        save_onsavecallback: function() {console.log("Save しました");},
+        save_oncancelcallback: function() {console.log("Cancel しました");},
+        statusbar: true,
+
+        setup: function(editor) {
+            editor.on('init', function(){
+
+                // マウスエンターイベント
+                editor.on('mouseenter', function(e) {
+                    $(editor.getElement()).css('border','1px solid #ff9900');
+                    $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+                });
+
+                // マウスアウトイベント
+                editor.on('mouseout', function(e) {
+                    $(editor.getElement()).css('border','none');
+                    $(editor.getElement()).css('background-color','');
+                });
+
+
+            })
+        },
+
+    })
+
+    $('p').tinymce({
+        language: "ja",
+        inline: true,
+        custom_undo_redo_levels: 10,
+        plugins: "link save",
+        menubar: false,
+        toolbar: [
+            "bold italic underline strikethrough | alignleft aligncenter alignright | alignjustify | bullist numlist",
+            "save | link | fontsizeselect | undo redo",
+            ],
+        save_enablewhendirty: true,
+        save_onsavecallback: function() {console.log("Save しました");},
+        save_oncancelcallback: function() {console.log("Cancel しました");},
+        statusbar: true,
+
+        setup: function(editor) {
+            editor.on('init', function(){
+
+                // マウスエンターイベント
+                editor.on('mouseenter', function(e) {
+                    $(editor.getElement()).css('border','1px solid #ff9900');
+                    $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+                });
+
+                // マウスアウトイベント
+                editor.on('mouseout', function(e) {
+                    $(editor.getElement()).css('border','none');
+                    $(editor.getElement()).css('background-color','');
+                });
+
+
+
+            })
+        },
+
+    })
+
+    // $('img, i').tinymce({
+    //  language: "ja",
+    //  inline: true,
+    //  custom_undo_redo_levels: 10,
+    //  plugins: "save image imagetools",
+    //  image_advtab: true,
+    //  image_description: true,
+    //  image_dimensions: false,
+    //  image_title: true,
+    //  imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
+    //  menubar: false,
+    //  toolbar: "save | image | undo redo",
+    //  save_enablewhendirty: true,
+    //  save_onsavecallback: function() {console.log("Save しました");},
+    //  save_oncancelcallback: function() {console.log("Cancel しました");},
+    //  statusbar: true,
+    //  resize: "both",
+
+    //  images_upload_url: "ImgUploader.php",
+
+    //  setup: function(editor) {
+    //      editor.on('init', function(){
+
+    //          // tinymce.activeEditor.$().css('border','1px solid #ff9900');
+
+    //          // マウスオーバーイベント
+    //          editor.on('mouseenter', function(e) {
+    //              $(editor.getElement()).css('border','1px solid #ff9900');
+    //              $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+    //          });
+    //          editor.on('mouseout', function(e) {
+    //              $(editor.getElement()).css('border','none');
+    //              $(editor.getElement()).css('background-color','');
+    //          });
+    //      })
+    //  },
+
+    // })
+
+    // パネルカルーセルの初期化
+    // @ panelChanger.js
+    // initPanelChanger();
+
+    // パネルコントロールの初期化
+    // @ panelController.js
+    $('#panelcontrol').panelcontrol({
+        panel:'.panelcontrol-panel',
+        btns: '.panelcontrol-buttons',
+        up:'.panelcontrol-up',
+        down:'.panelcontrol-down',
+        add:'.add-panel-btn',
+        addok:'.add-panel-ok-btn',
+        addcancel:'.add-panel-cancel-btn',
+        delete:'.delete-panel-btn',
+        opacity: 0.6,
+        duration: 600, // slow, normal, fast
+        marginHeight: 1,
+
+        // スワップ時の後処理
+        onpanelswapped: function(base,first,second,options) {
+            $.ajax({
+                url: 'http://localhost:9999/index.php',
+                type: 'POST',
+                data: {
+                    mode: 'panelswap',
+                    first: first.data('panel-index'),
+                    second: second.data('panel-index')
+                },
+                dataType: 'html',
+                cache: false,
+                async: false,
+                timeout: 10000
+            })
+            .done(function(data){
+            })
+            .fail(function(data){
+            })
+            .always(function(data){
+            });
+        },
+
+        // パネル追加の後処理
+        onpaneladded: function(base,modulepath,panelIndex,options) {
+            $.ajax({
+                url: 'http://localhost:9999/index.php',
+                type: 'POST',
+                data: {
+                    mode: 'paneladd',
+                    module: modulepath,
+                    position: panelIndex
+                },
+                dataType: 'html',
+                cache: false,
+                async: false,
+                timeout: 10000
+            })
+            .done(function(data){
+            });
+        },
+
+        // パネル削除の後処理
+        onpaneldeleted: function(base, panelIndex, options) {
+            $.ajax({
+                url: 'http://localhost:9999/index.php',
+                type: 'POST',
+                data: {
+                    mode: 'paneldelete',
+                    position: panelIndex
+                },
+                dataType: 'html',
+                cache: false,
+                async: false,
+                timeout: 10000
+            })
+            .done(function(data){
+            });
+        }
+
+    });
+
+});
+
+function responsive_filemanager_callback(field_id){
+    console.log(field_id);
+    var url=jQuery('#'+field_id).val();
+    alert('update '+field_id+" with "+url);
+    //your code
+}
+
+</script>
+<?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
+<p><a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a></p>
+</body>
+</html>

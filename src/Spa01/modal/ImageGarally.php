@@ -27,7 +27,7 @@
 </div><!-- / .modal -->
 
 <script type="text/javascript">
-$('img').wrap('<a href="#image_modal" role="button" data-toggle="modal"></a>');
+// $('img').wrap('<a href="#image_modal" role="button" data-toggle="modal"></a>');
 
 tinymce.init({
     selector:   "textarea",

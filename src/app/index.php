@@ -124,6 +124,28 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	js/panelController.js 		// パネル操作（追加、削除、上下入替）
 	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
+<script type="text/javascript"> 
+
+// 画像編集ボタンの表示
+$('img').each(function(i, element){
+	var beforeHTML = "<div class='img-wrapp'><div class='img-effect'></div>"; 
+	var imgTag = element.outerHTML;
+	var afterHTML = "<div class='img-links'><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a></div></div>";
+	var wrappedImgTag = beforeHTML + imgTag + afterHTML;
+	$(this).replaceWith(wrappedImgTag);
+});
+
+// 画像編集ボタンの表示（イベント）
+$('.img-wrapp').hover(function(){
+	$(this).find('.img-effect').stop().animate({'opacity':'0.8'},10);
+	// $(this).find('.img-links').stop().animate({'top':'50%'});
+	$(this).find('.img-links').stop().animate({'opacity':'1'},10);
+},function(){
+	$(this).find('.img-effect').stop().animate({'opacity':'0'},10);
+	// $(this).find('.img-links').stop().animate({'top':'-50%'});
+	$(this).find('.img-links').stop().animate({'opacity':'0'},10);
+});
+</script>
 
 
 <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
@@ -378,6 +400,7 @@ function responsive_filemanager_callback(field_id){
 <?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
 
 <a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a>
+
 
 
 </body>
