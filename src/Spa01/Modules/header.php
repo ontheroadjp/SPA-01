@@ -3,7 +3,6 @@
 $protcol = empty($_SERVER["HTTPS"]) ? "http://" : "https://";
 $hostname = $_SERVER["HTTP_HOST"];
 $uri = $_SERVER["REQUEST_URI"];
-
 $url = $protcol.$hostname.$uri;
 ?>
 
@@ -39,24 +38,7 @@ $url = $protcol.$hostname.$uri;
 <!-- <link href="css/font-awesome.css" rel="stylesheet" /> -->
 <link href="css/style.css" rel="stylesheet" />
 <style>
-/*.project-item .thumbnail {
-    background-color: rgb(255, 255, 255);
-    padding: 2px;
-    display: block;
-    max-width: 100%;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    -moz-border-radius-bottomleft: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    height: auto;
-    overflow: hidden;
-    box-shadow: rgb(153, 153, 153) 0px 1px 1px;
-    -webkit-box-shadow: rgb(153, 153, 153) 0px 1px 1px;
-    -moz-box-shadow: rgb(153, 153, 153) 0px 1px 1px;
-}
-*/.img-wrapp {
+.img-wrapp {
     position: relative;
     display: inline-block;
     width: 100%;
@@ -98,32 +80,14 @@ $url = $protcol.$hostname.$uri;
     text-align: center;
     top: 42%;
     opacity: 0;
-
-
-/*    display: block;
-    top: -50%;
-    margin-top: -19px;
-    line-height: 0;
-    padding: 0px;
-    left: 0px;
-    transition: all 0.25s ease-in-out;
-*/}
+}
 .btn.btn-action.small {
     background: #e93f33;
     font-size: 6px;
     font-weight: 200;
     color: #fff;
     border-radius: 5px;
-
-/*    border: 0;
-    padding: 8px 18px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0px 2px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0px 2px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25), 0px 2px 0px rgba(0, 0, 0, 0.1);
-    text-shadow: none;
-*/}
+}
 .sample {
 }
 </style>

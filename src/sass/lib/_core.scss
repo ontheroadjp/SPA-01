@@ -3,34 +3,6 @@
 // 
 // 
 
-#dropzone {
-    background: #DDE4EF;
-    width: 100%;
-    height: 200px;
-    line-height: 2.6em;
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#dropzone.in {
-    width: 100%;
-    height: 200px;
-    // line-height: 200px;
-    font-size: larger;
-}
-
-#dropzone.hover {
-    background: #A5C4F5;
-}
-#dropzone.fade {
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    opacity: 1;
-}
 
 // /* -------------------------------- */
 // /* for carousel @bootstrap */
@@ -150,6 +122,32 @@ section {
 	@include panel-control;
 	background-color: #2C2C2C;
 }
+
+/* -------------------------------- */
+/* for panelproperty */
+/* -------------------------------- */
+.panelpropety-buttons {
+	height: 0;
+}
+
+.panelpropety-buttons ul {
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	list-style: none;
+}
+
+.panelpropaty-window {
+	border: 1px solid #171616;
+	background-color: #2C2C2C;
+	width: 100%;
+}
+
+.panelpropaty-collapse {
+	// overflow: overlay;
+	transition: height 0.15s ease;
+}
+
 
 /* -------------------------------- */
 /* for Editing */

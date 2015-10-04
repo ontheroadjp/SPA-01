@@ -9,7 +9,7 @@ class ModuleUtilities {
 	 * @param  [type] $doc [description]
 	 * @return [type]      [description]
 	 */
-	public static function wrapPanelControll($doc) {
+	public static function wrapPanelControll($id, $doc) {
 		$val = '';
 
 		// パネルコントロール
@@ -64,24 +64,31 @@ class ModuleUtilities {
 
 
 		// パネルプロパティコントロール
-		// $val .= '<div class="panel-propaty-control-buttons">';
+		$val .= '<div class="panelpropety-buttons">';
 		// $val .= '<div class="container">';
 		// $val .= '<div class="row">';
 
-		// 	$val .= '<ul>';
-		// 	$val .= '<li><button class="add-panel-btn btn btn-default btn-md">レイアウト変更</button></li>';
-		// 	$val .= '</ul>';
+			$val .= '<ul>';
+			$val .= '<li><button id="panel-settings-btn" class="panel-settings-btn"><i class="fa fa-cog"></i></a></button></li>';
+			$val .= '</ul>';
 			
 		// $val .= '</div><!-- / .row -->';
 		// $val .= '</div><!-- / .container -->';
-		// $val .= '</div><!-- / .panelcontrol-buttons -->';
+		$val .= '</div><!-- / .panelproperty-buttons -->';
+
+		// パネルプロパティコントロール（開くパネル）
+		$val .= '<div id="panelpropaty-panel-'.$id.'" class="collapse panelpropaty-collapse panelpropaty-window" style="height: auto;">';
+		$val .= '<ul>';
+		$val .= '<li><img style="width:100px;margin:20px auto;margin-bottom:20px;" class="img-responsive" src="Spa01/Modules/2columns/txtimg/img/ipad.png" alt=""></li>';
+		$val .= '</ul>';
+		$val .= '</div>';
 
 
 		// オリジナルドキュメント
 		$val .= $doc;
 
 		// パネルコントロール
-		$val .= '</div><!-- / .panelcontrol-panel -->';		// パネルスワップ
+		$val .= '</div><!-- / .panelpropatycontrol-panel -->';		// パネルスワップ
 		echo $val;
 
 	}

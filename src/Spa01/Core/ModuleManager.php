@@ -48,7 +48,6 @@ class ModuleManager {
 // public メソッド
 // ---------------------------------------------------------
 
-
 	public function moduleCount() {
 		return count( $this->modulemap );
 	}

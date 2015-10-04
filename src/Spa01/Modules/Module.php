@@ -102,7 +102,7 @@ abstract class Module {
 	 * @return String 編集タグ付きのドキュメント
 	 */
 	public function getEditDoc( $carousel = null ){
-		return ModuleUtilities::wrapPanelControll($this->getDoc());
+		return ModuleUtilities::wrapPanelControll($this->id, $this->getDoc());
 
 	}
 

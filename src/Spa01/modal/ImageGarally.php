@@ -50,5 +50,13 @@ $(document).on('focusin', function(e) {
 	}
 });
 
+// コールバック(未実装)
+function responsive_filemanager_callback(field_id){
+	console.log(field_id);
+	var url=jQuery('#'+field_id).val();
+	alert('update '+field_id+" with "+url);
+	//your code
+}
+
 </script>
 

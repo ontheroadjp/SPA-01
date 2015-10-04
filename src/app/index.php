@@ -125,12 +125,13 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
 <script type="text/javascript"> 
-
+// ---------------------------------------------------------
 // 画像編集ボタンの表示
-$('img').each(function(i, element){
+// ---------------------------------------------------------
+$('.img').each(function(i, element){
 	var beforeHTML = "<div class='img-wrapp'><div class='img-effect'></div>"; 
 	var imgTag = element.outerHTML;
-	var afterHTML = "<div class='img-links'><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a></div></div>";
+	var afterHTML = "<div class='img-links'><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a></div></div>";
 	var wrappedImgTag = beforeHTML + imgTag + afterHTML;
 	$(this).replaceWith(wrappedImgTag);
 });
@@ -148,28 +149,31 @@ $('.img-wrapp').hover(function(){
 </script>
 
 
+<?php
+// ---------------------------------------------------------
+// パネルコントロール、TinyMCE など
+// --------------------------------------------------------- ?>
 <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="/js/tinymce/jquery.tinymce.min.js"></script>
-
 <script type="text/javascript"> 
 $(function(){
 
+	// 
+	var $window             = $(window),
+	    $aside              = $('#aside'),
+	    defaultPositionLeft = $aside.css('left'),
+	    setOffsetPosition   = $aside.offset(),
+	    fixedClassName      = 'fixed';
 
-    var $window             = $(window),
-        $aside              = $('#aside'),
-        defaultPositionLeft = $aside.css('left'),
-        setOffsetPosition   = $aside.offset(),
-        fixedClassName      = 'fixed';
- 
-    $window.on('scroll', function() {
-        if ($(this).scrollTop() > setOffsetPosition.top) {
-            $aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
-        } else {
-            if ($aside.hasClass(fixedClassName)) {
-                // $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
-            }
-        }
-    }).trigger('scroll');
+	$window.on('scroll', function() {
+	    if ($(this).scrollTop() > setOffsetPosition.top) {
+	        $aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
+	    } else {
+	        if ($aside.hasClass(fixedClassName)) {
+	            // $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
+	        }
+	    }
+	}).trigger('scroll');
 
 
 	// パネルエディターの初期化
@@ -178,20 +182,61 @@ $(function(){
 	// $('p, h1, h2, h3, h4, h5, img, i').each( function() {
 	// 	var backup = $(this).text();
 
-	// 	// マウスオーバー処理
-	// 	$(this).data('backup', backup).hover(
-	// 		function() {
-	// 			if( !$('*.on')[0] && !$('*.editing')[0] ) {
-	// 				$(this).css('border','1px solid #ff9900');
-	// 			}
-	// 		},
-	// 		function() {
-	// 			if( !$(this).hasClass('on') && !$(this).hasClass('editing') ) {
-	// 				$(this).css('border','none');
-	// 			}
-	// 		}
-	// 	);
-	// });
+	// パネルカルーセルの初期化
+	// @ panelChanger.js
+	// initPanelChanger();
+
+
+		// $(".panel-settings-btn").each( function(i, ele) {
+		// $(".panelpropaty-window").each( function(i, ele) {
+		// 	var target = '#' + $(this).attr('id');
+		// 	// alert($(this).parent().find('.panelcontrol-buttons').css('display') );
+		// 	$(this).prev().find('.panel-settings-btn').click(function() {
+
+		// 		$(target).collapse('toggle');
+		// 	});
+		// });
+
+		$(".panel-settings-btn").each( function(i, ele) {
+			var panel = $(this).parents('.panelcontrol-panel');
+			var targetId = panel.find("[id^='panelpropaty-panel-']").attr('id');
+			// alert(target);
+			$(this).click(function() {
+				panel.find('.panelcontrol-buttons').css('display','none');
+				// panel.find('.panelcontrol-buttons').animate({ opacity: 'hide',}, { duration: 150, easing: 'swing', });
+				// panel.find('.panelcontrol-buttons').css({'display':'none','opacity':'0'})
+				$('#' + targetId).collapse('toggle');
+				$('#' + targetId).on('shown.bs.collapse', function(){
+					panel.find('.panelcontrol-buttons').animate({ opacity: 'show',}, { duration: 3500, easing: 'swing', });
+				}).on('hidden.bs.collapse', function(){
+					panel.find('.panelcontrol-buttons').animate({ opacity: 'show',}, { duration: 3500, easing: 'swing', });
+				});
+			});
+		});
+
+
+		// 	click(function() {
+		// 	$('#demo2').collapse('toggle');
+		// });
+
+
+	// 	var newPanel = $(data);
+	// 	panel.before('<div id="graylayer"></div>');
+	// 	panel.before(newPanel.css({'display':'none'}));
+	// 	newPanel.attr('id','active').addClass('adding').show("slow");
+	// 	var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
+	// 	var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
+
+	// 	initPanelController(base,options);
+	// 	swapbtn(options);
+	// 	// initPanelEditor();
+	// 	// btnenable(false,options);
+
+	// 	// Ajax
+	// 	if (!!options.onpaneladded) {
+	// 		options.onpaneladded(base, data, panelIndex, options);
+	// 	}
+
 
 	// TinyMCE
 	$('h1, h2, h3, h4, h5').tinymce({
@@ -213,8 +258,10 @@ $(function(){
 
 				// マウスエンターイベント
 				editor.on('mouseenter', function(e) {
-					$(editor.getElement()).css('border','1px solid #ff9900');
-					$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+					// $(editor.getElement()).css('border','1px solid #ff9900');
+					// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+					$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
+					$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
 				});
 
 				// マウスアウトイベント
@@ -249,8 +296,10 @@ $(function(){
 
 				// マウスエンターイベント
 				editor.on('mouseenter', function(e) {
-					$(editor.getElement()).css('border','1px solid #ff9900');
-					$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+					// $(editor.getElement()).css('border','1px solid #ff9900');
+					// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+					$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
+					$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
 				});
 
 				// マウスアウトイベント
@@ -258,56 +307,11 @@ $(function(){
 					$(editor.getElement()).css('border','none');
 					$(editor.getElement()).css('background-color','');
 				});
-
-
-
 			})
 		},
 
 	})
 
-	// $('img, i').tinymce({
-	// 	language: "ja",
-	// 	inline: true,
-	// 	custom_undo_redo_levels: 10,
-	// 	plugins: "save image imagetools",
-	// 	image_advtab: true,
-	// 	image_description: true,
-	// 	image_dimensions: false,
-	// 	image_title: true,
-	// 	imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
-	// 	menubar: false,
-	// 	toolbar: "save | image | undo redo",
-	// 	save_enablewhendirty: true,
-	// 	save_onsavecallback: function() {console.log("Save しました");},
-	// 	save_oncancelcallback: function() {console.log("Cancel しました");},
-	// 	statusbar: true,
-	// 	resize: "both",
-
-	// 	images_upload_url: "ImgUploader.php",
-
-	// 	setup: function(editor) {
-	// 		editor.on('init', function(){
-
-	// 			// tinymce.activeEditor.$().css('border','1px solid #ff9900');
-
-	// 			// マウスオーバーイベント
-	// 			editor.on('mouseenter', function(e) {
-	// 				$(editor.getElement()).css('border','1px solid #ff9900');
-	// 				$(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
-	// 			});
-	// 			editor.on('mouseout', function(e) {
-	// 				$(editor.getElement()).css('border','none');
-	// 				$(editor.getElement()).css('background-color','');
-	// 			});
-	// 		})
-	// 	},
-
-	// })
-
-	// パネルカルーセルの初期化
-	// @ panelChanger.js
-	// initPanelChanger();
 
 	// パネルコントロールの初期化
 	// @ panelController.js
@@ -383,17 +387,8 @@ $(function(){
 			.done(function(data){
 			});
  		}
-
 	});
-
 });
-
-function responsive_filemanager_callback(field_id){
-	console.log(field_id);
-	var url=jQuery('#'+field_id).val();
-	alert('update '+field_id+" with "+url);
-	//your code
-}
 
 </script>
 
