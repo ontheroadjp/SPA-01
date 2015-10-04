@@ -38,6 +38,76 @@ $url = $protcol.$hostname.$uri;
 <!-- <link href="css/font-awesome.css" rel="stylesheet" /> -->
 <link href="css/style.css" rel="stylesheet" />
 <style>
+
+.panelpropaty-panel{
+    font-family: 'pragmatica',sans-serif;
+    /*position: fixed;*/
+    /*height: 100%;*/
+    /*width: 200px;*/
+    /*background: #333 url(//assets.strikingly.com/assets/editor2/menu-bg-eebf168ff151bae15a6d6d77207f6e5a.png);*/
+    border-bottom: 1px solid black;
+    /*overflow: hidden;*/
+}
+.top-menu {
+    position: relative;
+    zoom: 1;
+    margin: 5px 5px 5px 5px;
+    style: none;
+}
+.top-menu li {
+    float: left;
+    margin: 4px 5px;
+    width: 85px;
+    height: 54px;
+    background-color: #222;
+    background: rgba(0,0,0,0.3);
+    color: #337ab7;
+    text-shadow: none;
+    cursor: pointer;
+    box-shadow: none;
+    text-decoration: none;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.top-menu li:hover {
+    background-color: #80bf00;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear,left top,left bottom,from(#a7d100),to(#80bf00));
+    background-image: -moz-linear-gradient(top,#a7d100,#80bf00);
+    background-image: -ms-linear-gradient(top,#a7d100,#80bf00);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#a7d100),color-stop(100%,#80bf00));
+    background-image: -webkit-linear-gradient(top,#a7d100,#80bf00);
+    background-image: -o-linear-gradient(top,#a7d100,#80bf00);
+    background-image: linear-gradient(top,#a7d100,#80bf00);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a7d100',endColorstr='#80bf00',GradientType=0);
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+.top-menu li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    color: #ccc;
+    padding-top: 5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+.top-menu li a .button-label {
+    /*color: #363636;*/
+    /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/
+}
+.top-menu li a i {
+    font-size: 20px;
+    /*color: #363636;*/
+}
+
+
+
 .img-wrapp {
     position: relative;
     display: inline-block;

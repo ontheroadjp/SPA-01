@@ -77,10 +77,58 @@ class ModuleUtilities {
 		$val .= '</div><!-- / .panelproperty-buttons -->';
 
 		// パネルプロパティコントロール（開くパネル）
-		$val .= '<div id="panelpropaty-panel-'.$id.'" class="collapse panelpropaty-collapse panelpropaty-window" style="height: auto;">';
-		$val .= '<ul>';
-		$val .= '<li><img style="width:100px;margin:20px auto;margin-bottom:20px;" class="img-responsive" src="Spa01/Modules/2columns/txtimg/img/ipad.png" alt=""></li>';
-		$val .= '</ul>';
+		$val .= '<div id="panelpropaty-panel-'.$id.'" class="panelpropaty-panel collapse panelpropaty-collapse panelpropaty-window" style="height: auto;">';
+
+
+$val .= '<ul class="top-menu" id="strikingly-top-menu">';
+
+$val .= '<li class="green">';
+$val .= '	<a class="save">';
+$val .= '	<i class="fa fa-cog"></i>';
+$val .= '	<div class="si-hover si-save-icon-hover"></div>';
+$val .= '	<span class="button-label">Save</span>';
+$val .= '	</a>';
+$val .= '</li>';
+
+$val .= '<li class="orange right pub-alert show-pub-alert">';
+$val .= '	<a class="page publish-button" data-original-title="You have unpublished changes. Click to go live!" rel="tooltip-right">';
+$val .= '	<i class="fa fa-cog"> </i>';
+$val .= '	<div class="si-hover si-page-icon-hover"></div>';
+$val .= '	<span class="button-label">Publish</span>';
+$val .= '	</a>';
+$val .= '</li>';
+
+$val .= '<li class="hidden gray selected">';
+$val .= '	<a class="save selected">';
+$val .= '		<i class="fa fa-cog"> </i>';
+$val .= '		<div class="si-hover si-page-icon-hover"></div>';
+$val .= '		<span class="button-label">Publishing...</span>';
+$val .= '	</a>';
+$val .= '</li>';
+
+$val .= '<li class="blue" rel="tooltip-right" data-original-title="Try different styles or change your template.">';
+$val .= '	<a class="button styles">';
+$val .= '		<i class="fa fa-cog"> </i>';
+$val .= '		<div class="si-hover si-styles-icon-hover"></div>';
+$val .= '		<span class="button-label">Styles</span>';
+$val .= '	</a>';
+$val .= '</li>';
+
+$val .= '<li class="purple right" rel="tooltip-right" data-original-title="Domains, SEO, header/footer, and lots more.">';
+$val .= '	<a class="settings">';
+$val .= '		<i class="fa fa-cog"> </i>';
+$val .= '		<div class="si-hover si-settings-icon-hover"></div>';
+$val .= '		<span class="button-label">Settings</span>';
+$val .= '	</a>';
+$val .= '</li>';
+
+$val .= '</ul>';
+
+$val .='<div class="clearfix"></div>';
+
+		// $val .= '<ul>';
+		// $val .= '<li><img style="width:100px;margin:20px auto;margin-bottom:20px;" class="img-responsive" src="Spa01/Modules/2columns/txtimg/img/ipad.png" alt=""></li>';
+		// $val .= '</ul>';
 		$val .= '</div>';
 
 

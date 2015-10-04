@@ -148,6 +148,69 @@ section {
 	transition: height 0.15s ease;
 }
 
+/* -------------------------------- */
+/* for panelproperty-window */
+/* -------------------------------- */
+div.radio-group {
+	margin: 30px;
+}
+
+div.radio-group div {
+	position: relative;
+}
+div.radio-group input {
+    position: absolute;
+    left: 0px;
+    outline:none;
+}
+
+div.radio-group div:first-child label {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    -webkit-border-top-left-radius: 7px;
+    -webkit-border-bottom-left-radius: 7px;
+    -moz-border-radius-topleft: 7px;
+    -moz-border-radius-bottomleft: 7px;
+}
+
+div.radio-group div:last-child label {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    -webkit-border-top-right-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+    -moz-border-radius-topright: 7px;
+    -moz-border-radius-bottomright: 7px;
+}
+
+div.radio-group label {
+    cursor: pointer;
+    padding: 15px 15px;
+    float: left;
+    border: solid 1px #aaa;
+    margin-left: -1px;
+    background: #eee;
+    background-image: linear-gradient(top, #F6F6F6, #ccc);
+    // background-image: -ms-linear-gradient(top, #F6F6F6, #ccc);
+    // background-image: -moz-linear-gradient(top, #F6F6F6, #ccc);
+    // background-image: -webkit-gradient(linear, left top, left bottom, from(#F6F6F6), to(#ccc));
+    // box-shadow: 2px 2px 6px #ddd;
+    // -moz-box-shadow: 2px 2px 6px #ddd;
+    // -webkit-box-shadow: 2px 2px 6px #ddd;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+div.radio-group label.checked {
+    color: #fff;
+    background: #C3C3C3;
+    background-image: linear-gradient(top, #C3C3C3, #DBDBDB);
+    background-image: -ms-linear-gradient(top, #C3C3C3, #DBDBDB);
+    background-image: -moz-linear-gradient(top, #C3C3C3, #DBDBDB);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#C3C3C3), to(#DBDBDB));
+    text-shadow: 0px 0px 0px #fff;
+}
+
+
+
 
 /* -------------------------------- */
 /* for Editing */

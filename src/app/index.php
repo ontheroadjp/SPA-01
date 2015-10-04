@@ -124,29 +124,6 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	js/panelController.js 		// パネル操作（追加、削除、上下入替）
 	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
-<script type="text/javascript"> 
-// ---------------------------------------------------------
-// 画像編集ボタンの表示
-// ---------------------------------------------------------
-$('.img').each(function(i, element){
-	var beforeHTML = "<div class='img-wrapp'><div class='img-effect'></div>"; 
-	var imgTag = element.outerHTML;
-	var afterHTML = "<div class='img-links'><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a></div></div>";
-	var wrappedImgTag = beforeHTML + imgTag + afterHTML;
-	$(this).replaceWith(wrappedImgTag);
-});
-
-// 画像編集ボタンの表示（イベント）
-$('.img-wrapp').hover(function(){
-	$(this).find('.img-effect').stop().animate({'opacity':'0.8'},10);
-	// $(this).find('.img-links').stop().animate({'top':'50%'});
-	$(this).find('.img-links').stop().animate({'opacity':'1'},10);
-},function(){
-	$(this).find('.img-effect').stop().animate({'opacity':'0'},10);
-	// $(this).find('.img-links').stop().animate({'top':'-50%'});
-	$(this).find('.img-links').stop().animate({'opacity':'0'},10);
-});
-</script>
 
 
 <?php
@@ -158,22 +135,24 @@ $('.img-wrapp').hover(function(){
 <script type="text/javascript"> 
 $(function(){
 
-	// 
-	var $window             = $(window),
-	    $aside              = $('#aside'),
-	    defaultPositionLeft = $aside.css('left'),
-	    setOffsetPosition   = $aside.offset(),
-	    fixedClassName      = 'fixed';
+	(function(){
+		var
+			$window             = $(window),
+			$aside              = $('#aside'),
+			defaultPositionLeft = $aside.css('left'),
+			setOffsetPosition   = $aside.offset(),
+			fixedClassName      = 'fixed';
 
-	$window.on('scroll', function() {
-	    if ($(this).scrollTop() > setOffsetPosition.top) {
-	        $aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
-	    } else {
-	        if ($aside.hasClass(fixedClassName)) {
-	            // $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
-	        }
-	    }
-	}).trigger('scroll');
+		$window.on('scroll', function() {
+			if ($(this).scrollTop() > setOffsetPosition.top) {
+				$aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
+			} else {
+				if ($aside.hasClass(fixedClassName)) {
+					// $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
+				}
+			}
+		}).trigger('scroll');
+	}());
 
 
 	// パネルエディターの初期化
@@ -187,213 +166,224 @@ $(function(){
 	// initPanelChanger();
 
 
-		// $(".panel-settings-btn").each( function(i, ele) {
-		// $(".panelpropaty-window").each( function(i, ele) {
-		// 	var target = '#' + $(this).attr('id');
-		// 	// alert($(this).parent().find('.panelcontrol-buttons').css('display') );
-		// 	$(this).prev().find('.panel-settings-btn').click(function() {
-
-		// 		$(target).collapse('toggle');
-		// 	});
-		// });
-
+	// Panelpropatyパネル
+	(function() {
 		$(".panel-settings-btn").each( function(i, ele) {
 			var panel = $(this).parents('.panelcontrol-panel');
 			var targetId = panel.find("[id^='panelpropaty-panel-']").attr('id');
-			// alert(target);
 			$(this).click(function() {
 				panel.find('.panelcontrol-buttons').css('display','none');
-				// panel.find('.panelcontrol-buttons').animate({ opacity: 'hide',}, { duration: 150, easing: 'swing', });
-				// panel.find('.panelcontrol-buttons').css({'display':'none','opacity':'0'})
-				$('#' + targetId).collapse('toggle');
-				$('#' + targetId).on('shown.bs.collapse', function(){
-					panel.find('.panelcontrol-buttons').animate({ opacity: 'show',}, { duration: 3500, easing: 'swing', });
+				$('#' + targetId).collapse('toggle').on('shown.bs.collapse', function(){
+					panel.find('.panelcontrol-buttons')
+						.animate({ opacity: 'show'},{ duration: 100, easing: 'swing'});
 				}).on('hidden.bs.collapse', function(){
-					panel.find('.panelcontrol-buttons').animate({ opacity: 'show',}, { duration: 3500, easing: 'swing', });
+					panel.find('.panelcontrol-buttons')
+						.animate({ opacity: 'show',}, { duration: 100, easing: 'swing', });
 				});
 			});
 		});
+	}());
+
+	// Panelpropaty パネルの中身
+	(function() {
+		var radio = $('div.radio-group');
+		$('input', radio).css({'opacity': '0'})
+		//checkedだったら最初からチェックする
+		.each(function(){
+		    if ($(this).attr('checked') == 'checked') {
+		        $(this).next().addClass('checked');
+		    }
+		});
+	}());
 
 
-		// 	click(function() {
-		// 	$('#demo2').collapse('toggle');
-		// });
+	// TinyMCE( for <h1><h2><h3><h4><h5> )
+	// セレクタは単純な img ではなくて class などに .editable を設定すべき
+	(function() {
+		$('h1, h2, h3, h4, h5').tinymce({
+			language: "ja",
+			inline: true,
+			custom_undo_redo_levels: 10,
+			plugins: "link save",
+			menubar: false,
+			toolbar: [
+				"save | link | bold italic underline strikethrough | fontsizeselect | undo redo",
+				],
+			save_enablewhendirty: true,
+			save_onsavecallback: function() {console.log("Save しました");},
+			save_oncancelcallback: function() {console.log("Cancel しました");},
+			statusbar: true,
 
+			setup: function(editor) {
+				editor.on('init', function(){
 
-	// 	var newPanel = $(data);
-	// 	panel.before('<div id="graylayer"></div>');
-	// 	panel.before(newPanel.css({'display':'none'}));
-	// 	newPanel.attr('id','active').addClass('adding').show("slow");
-	// 	var addBtn = newPanel.children('.panelcontrol-add').css({'display':'block'});
-	// 	var ctrlBtns = newPanel.children('.panelcontrol-buttons').css({'display':'none'});
+					// マウスエンターイベント
+					editor.on('mouseenter', function(e) {
+						// $(editor.getElement()).css('border','1px solid #ff9900');
+						// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+						$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
+						$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
+					});
 
-	// 	initPanelController(base,options);
-	// 	swapbtn(options);
-	// 	// initPanelEditor();
-	// 	// btnenable(false,options);
+					// マウスアウトイベント
+					editor.on('mouseout', function(e) {
+						$(editor.getElement()).css('border','none');
+						$(editor.getElement()).css('background-color','');
+					});
+				})
+			},
+		})
+	}());
 
-	// 	// Ajax
-	// 	if (!!options.onpaneladded) {
-	// 		options.onpaneladded(base, data, panelIndex, options);
-	// 	}
+	// TinyMCE( for <p> )
+	// セレクタは単純な img ではなくて class などに .editable を設定すべき
+	(function(){
+		$('p').tinymce({
+			language: "ja",
+			inline: true,
+			custom_undo_redo_levels: 10,
+			plugins: "link save",
+			menubar: false,
+			toolbar: [
+				"bold italic underline strikethrough | alignleft aligncenter alignright | alignjustify | bullist numlist",
+				"save | link | fontsizeselect | undo redo",
+				],
+			save_enablewhendirty: true,
+			save_onsavecallback: function() {console.log("Save しました");},
+			save_oncancelcallback: function() {console.log("Cancel しました");},
+			statusbar: true,
 
+			setup: function(editor) {
+				editor.on('init', function(){
 
-	// TinyMCE
-	$('h1, h2, h3, h4, h5').tinymce({
-		language: "ja",
-		inline: true,
-		custom_undo_redo_levels: 10,
-		plugins: "link save",
-		menubar: false,
-		toolbar: [
-			"save | link | bold italic underline strikethrough | fontsizeselect | undo redo",
-			],
-		save_enablewhendirty: true,
-		save_onsavecallback: function() {console.log("Save しました");},
-		save_oncancelcallback: function() {console.log("Cancel しました");},
-		statusbar: true,
+					// マウスエンターイベント
+					editor.on('mouseenter', function(e) {
+						// $(editor.getElement()).css('border','1px solid #ff9900');
+						// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
+						$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
+						$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
+					});
 
-		setup: function(editor) {
-			editor.on('init', function(){
+					// マウスアウトイベント
+					editor.on('mouseout', function(e) {
+						$(editor.getElement()).css('border','none');
+						$(editor.getElement()).css('background-color','');
+					});
+				})
+			},
 
-				// マウスエンターイベント
-				editor.on('mouseenter', function(e) {
-					// $(editor.getElement()).css('border','1px solid #ff9900');
-					// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
-					$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
-					$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
-				});
+		})
+	}());
 
-				// マウスアウトイベント
-				editor.on('mouseout', function(e) {
-					$(editor.getElement()).css('border','none');
-					$(editor.getElement()).css('background-color','');
-				});
+	// TinyMCE( for <img> )
+	// 10/4 現在動かない。二行目の .img を img に変更すると動く
+	// セレクタは単純な img ではなくて class などに .editable を設定すべき
+	(function(){
+		$('.img').each(function(i, element){
+			var beforeHTML = "<div class='img-wrapp'><div class='img-effect'></div>"; 
+			var imgTag = element.outerHTML;
+			var afterHTML = "<div class='img-links'><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a><a href='#image_modal' class='btn btn-action small' data-toggle='modal'><i class='fa fa-recycle  fa-5x'></i></a></div></div>";
+			var wrappedImgTag = beforeHTML + imgTag + afterHTML;
+			$(this).replaceWith(wrappedImgTag);
+		});
 
-
-			})
-		},
-
-	})
-
-	$('p').tinymce({
-		language: "ja",
-		inline: true,
-		custom_undo_redo_levels: 10,
-		plugins: "link save",
-		menubar: false,
-		toolbar: [
-			"bold italic underline strikethrough | alignleft aligncenter alignright | alignjustify | bullist numlist",
-			"save | link | fontsizeselect | undo redo",
-			],
-		save_enablewhendirty: true,
-		save_onsavecallback: function() {console.log("Save しました");},
-		save_oncancelcallback: function() {console.log("Cancel しました");},
-		statusbar: true,
-
-		setup: function(editor) {
-			editor.on('init', function(){
-
-				// マウスエンターイベント
-				editor.on('mouseenter', function(e) {
-					// $(editor.getElement()).css('border','1px solid #ff9900');
-					// $(editor.getElement()).css('background-color','rgba(241, 182, 95, 0.32)');
-					$(editor.getElement()).css('border','1px solid rgba(185, 185, 185, 1)');
-					$(editor.getElement()).css('background-color','rgba(225, 225, 225, 0.3)');
-				});
-
-				// マウスアウトイベント
-				editor.on('mouseout', function(e) {
-					$(editor.getElement()).css('border','none');
-					$(editor.getElement()).css('background-color','');
-				});
-			})
-		},
-
-	})
+		// 画像編集ボタンの表示（イベント）
+		$('.img-wrapp').hover(function(){
+			$(this).find('.img-effect').stop().animate({'opacity':'0.8'},10);
+			// $(this).find('.img-links').stop().animate({'top':'50%'});
+			$(this).find('.img-links').stop().animate({'opacity':'1'},10);
+		},function(){
+			$(this).find('.img-effect').stop().animate({'opacity':'0'},10);
+			// $(this).find('.img-links').stop().animate({'top':'-50%'});
+			$(this).find('.img-links').stop().animate({'opacity':'0'},10);
+		});
+	}());
 
 
 	// パネルコントロールの初期化
 	// @ panelController.js
-	$('#panelcontrol').panelcontrol({
-		panel:'.panelcontrol-panel',
-		btns: '.panelcontrol-buttons',
-		up:'.panelcontrol-up',
-		down:'.panelcontrol-down',
-		add:'.add-panel-btn',
-		addok:'.add-panel-ok-btn',
-		addcancel:'.add-panel-cancel-btn',
-		delete:'.delete-panel-btn',
-		opacity: 0.6,
-		duration: 600, // slow, normal, fast
-		marginHeight: 1,
+	(function(){
+		$('#panelcontrol').panelcontrol({
+			panel:'.panelcontrol-panel',
+			btns: '.panelcontrol-buttons',
+			up:'.panelcontrol-up',
+			down:'.panelcontrol-down',
+			add:'.add-panel-btn',
+			addok:'.add-panel-ok-btn',
+			addcancel:'.add-panel-cancel-btn',
+			delete:'.delete-panel-btn',
+			opacity: 0.6,
+			duration: 600, // slow, normal, fast
+			marginHeight: 1,
 
-		// スワップ時の後処理
-		onpanelswapped: function(base,first,second,options) {
-			$.ajax({
-				url: 'http://localhost:9999/index.php',
-				type: 'POST',
-				data: {
-					mode: 'panelswap',
-					first: first.data('panel-index'),
-					second: second.data('panel-index')
-				},
-				dataType: 'html',
-				cache: false,
-				async: false,
-				timeout: 10000
-			})
-			.done(function(data){
-			})
-			.fail(function(data){
-			})
-			.always(function(data){
-			});
-		},
+			// スワップ時の後処理
+			onpanelswapped: function(base,first,second,options) {
+				$.ajax({
+					url: 'http://localhost:9999/index.php',
+					type: 'POST',
+					data: {
+						mode: 'panelswap',
+						first: first.data('panel-index'),
+						second: second.data('panel-index')
+					},
+					dataType: 'html',
+					cache: false,
+					async: false,
+					timeout: 10000
+				})
+				.done(function(data){
+				})
+				.fail(function(data){
+				})
+				.always(function(data){
+				});
+			},
 
-		// パネル追加の後処理
-		onpaneladded: function(base,modulepath,panelIndex,options) {
-			$.ajax({
-				url: 'http://localhost:9999/index.php',
-				type: 'POST',
-				data: {
-					mode: 'paneladd',
-					module: modulepath,
-					position: panelIndex
-				},
-				dataType: 'html',
-				cache: false,
-				async: false,
-				timeout: 10000
-			})
-			.done(function(data){
-			});
-		},
+			// パネル追加の後処理
+			onpaneladded: function(base,modulepath,panelIndex,options) {
+				$.ajax({
+					url: 'http://localhost:9999/index.php',
+					type: 'POST',
+					data: {
+						mode: 'paneladd',
+						module: modulepath,
+						position: panelIndex
+					},
+					dataType: 'html',
+					cache: false,
+					async: false,
+					timeout: 10000
+				})
+				.done(function(data){
+				});
+			},
 
-		// パネル削除の後処理
-		onpaneldeleted: function(base, panelIndex, options) {
-			$.ajax({
-				url: 'http://localhost:9999/index.php',
-				type: 'POST',
-				data: {
-					mode: 'paneldelete',
-					position: panelIndex
-				},
-				dataType: 'html',
-				cache: false,
-				async: false,
-				timeout: 10000
-			})
-			.done(function(data){
-			});
- 		}
-	});
+			// パネル削除の後処理
+			onpaneldeleted: function(base, panelIndex, options) {
+				$.ajax({
+					url: 'http://localhost:9999/index.php',
+					type: 'POST',
+					data: {
+						mode: 'paneldelete',
+						position: panelIndex
+					},
+					dataType: 'html',
+					cache: false,
+					async: false,
+					timeout: 10000
+				})
+				.done(function(data){
+				});
+	 		}
+		});
+	}());
+
+
+
 });
-
 </script>
 
 <?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
-
 <a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a>
 
 
