@@ -1,0 +1,26 @@
+
+/* -------------------------------- */
+/* for panelcontrol */
+/* -------------------------------- */
+.panelcontrol-panel {
+    border-top: 2px dotted #6B6666;
+}
+
+.panelcontrol-buttons {
+	// @include panel-control;
+	padding-top: 0;
+    padding-bottom: 0;
+    height: 0px;
+    position: relative;
+    top: -13px;
+}
+
+.panelcontrol-up, .panelcontrol-down {
+	// margin-right: 10px;
+}
+
+.panelcontrol-add {
+	@include panel-control;
+	background-color: #2C2C2C;
+}
+

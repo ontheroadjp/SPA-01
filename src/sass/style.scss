@@ -8,7 +8,9 @@
 @import "lib/normalize";
 @import "lib/variable";
 @import "lib/mixin";
-@import "lib/core";
+@import "lib/nuts.wsb.core";
+@import "lib/nuts.wsb.panelcontroller";
+@import "lib/nuts.wsb.panelproperty";
 
 @import "lib/mybootstrap";
 

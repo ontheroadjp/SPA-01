@@ -114,7 +114,7 @@ gulp.task('browser-sync',['php'], function() {
 // Reload all browsers
 
 gulp.task('bs-reload', function () {
-browserSync.reload();
+	browserSync.reload();
 });
 
 // Task for `gulp` command

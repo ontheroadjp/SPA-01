@@ -64,7 +64,7 @@ class ModuleUtilities {
 
 
 		// パネルプロパティコントロール
-		$val .= '<div class="panelpropety-buttons">';
+		$val .= '<div class="panelproperty-buttons">';
 		// $val .= '<div class="container">';
 		// $val .= '<div class="row">';
 
@@ -77,7 +77,7 @@ class ModuleUtilities {
 		$val .= '</div><!-- / .panelproperty-buttons -->';
 
 		// パネルプロパティコントロール（開くパネル）
-		$val .= '<div id="panelpropaty-panel-'.$id.'" class="panelpropaty-panel collapse panelpropaty-collapse panelpropaty-window" style="height: auto;">';
+		$val .= '<div id="panelproperty-panel-'.$id.'" class="panelproperty-panel collapse panelproperty-collapse panelproperty-window" style="height: auto;">';
 
 
 $val .= '<ul class="top-menu" id="strikingly-top-menu">';

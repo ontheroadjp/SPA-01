@@ -125,7 +125,6 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	js/panelChanger.js 			// パネルの差替え（アコーディオン）
 -->
 
-
 <?php
 // ---------------------------------------------------------
 // パネルコントロール、TinyMCE など
@@ -133,6 +132,12 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="/js/tinymce/jquery.tinymce.min.js"></script>
 <script type="text/javascript"> 
+
+$(function(){
+	nutsWsb.exec();
+});
+
+
 $(function(){
 
 	(function(){
@@ -166,23 +171,23 @@ $(function(){
 	// initPanelChanger();
 
 
-	// Panelpropatyパネル
-	(function() {
-		$(".panel-settings-btn").each( function(i, ele) {
-			var panel = $(this).parents('.panelcontrol-panel');
-			var targetId = panel.find("[id^='panelpropaty-panel-']").attr('id');
-			$(this).click(function() {
-				panel.find('.panelcontrol-buttons').css('display','none');
-				$('#' + targetId).collapse('toggle').on('shown.bs.collapse', function(){
-					panel.find('.panelcontrol-buttons')
-						.animate({ opacity: 'show'},{ duration: 100, easing: 'swing'});
-				}).on('hidden.bs.collapse', function(){
-					panel.find('.panelcontrol-buttons')
-						.animate({ opacity: 'show',}, { duration: 100, easing: 'swing', });
-				});
-			});
-		});
-	}());
+	// // Panelpropatyパネル
+	// (function() {
+	// 	$(".panel-settings-btn").each( function(i, ele) {
+	// 		var panel = $(this).parents('.panelcontrol-panel');
+	// 		var targetId = panel.find("[id^='panelproperty-panel-']").attr('id');
+	// 		$(this).click(function() {
+	// 			panel.find('.panelcontrol-buttons').css('display','none');
+	// 			$('#' + targetId).collapse('toggle').on('shown.bs.collapse', function(){
+	// 				panel.find('.panelcontrol-buttons')
+	// 					.animate({ opacity: 'show'},{ duration: 100, easing: 'swing'});
+	// 			}).on('hidden.bs.collapse', function(){
+	// 				panel.find('.panelcontrol-buttons')
+	// 					.animate({ opacity: 'show',}, { duration: 100, easing: 'swing', });
+	// 			});
+	// 		});
+	// 	});
+	// }());
 
 	// Panelpropaty パネルの中身
 	(function() {
@@ -300,83 +305,83 @@ $(function(){
 	}());
 
 
-	// パネルコントロールの初期化
-	// @ panelController.js
-	(function(){
-		$('#panelcontrol').panelcontrol({
-			panel:'.panelcontrol-panel',
-			btns: '.panelcontrol-buttons',
-			up:'.panelcontrol-up',
-			down:'.panelcontrol-down',
-			add:'.add-panel-btn',
-			addok:'.add-panel-ok-btn',
-			addcancel:'.add-panel-cancel-btn',
-			delete:'.delete-panel-btn',
-			opacity: 0.6,
-			duration: 600, // slow, normal, fast
-			marginHeight: 1,
+	// // パネルコントロールの初期化
+	// // @ panelController.js
+	// (function(){
+	// 	$('#panelcontrol').panelcontrol({
+	// 		panel:'.panelcontrol-panel',
+	// 		btns: '.panelcontrol-buttons',
+	// 		up:'.panelcontrol-up',
+	// 		down:'.panelcontrol-down',
+	// 		add:'.add-panel-btn',
+	// 		addok:'.add-panel-ok-btn',
+	// 		addcancel:'.add-panel-cancel-btn',
+	// 		delete:'.delete-panel-btn',
+	// 		opacity: 0.6,
+	// 		duration: 600, // slow, normal, fast
+	// 		marginHeight: 1,
 
-			// スワップ時の後処理
-			onpanelswapped: function(base,first,second,options) {
-				$.ajax({
-					url: 'http://localhost:9999/index.php',
-					type: 'POST',
-					data: {
-						mode: 'panelswap',
-						first: first.data('panel-index'),
-						second: second.data('panel-index')
-					},
-					dataType: 'html',
-					cache: false,
-					async: false,
-					timeout: 10000
-				})
-				.done(function(data){
-				})
-				.fail(function(data){
-				})
-				.always(function(data){
-				});
-			},
+	// 		// スワップ時の後処理
+	// 		onpanelswapped: function(base,first,second,options) {
+	// 			$.ajax({
+	// 				url: 'http://localhost:9999/index.php',
+	// 				type: 'POST',
+	// 				data: {
+	// 					mode: 'panelswap',
+	// 					first: first.data('panel-index'),
+	// 					second: second.data('panel-index')
+	// 				},
+	// 				dataType: 'html',
+	// 				cache: false,
+	// 				async: false,
+	// 				timeout: 10000
+	// 			})
+	// 			.done(function(data){
+	// 			})
+	// 			.fail(function(data){
+	// 			})
+	// 			.always(function(data){
+	// 			});
+	// 		},
 
-			// パネル追加の後処理
-			onpaneladded: function(base,modulepath,panelIndex,options) {
-				$.ajax({
-					url: 'http://localhost:9999/index.php',
-					type: 'POST',
-					data: {
-						mode: 'paneladd',
-						module: modulepath,
-						position: panelIndex
-					},
-					dataType: 'html',
-					cache: false,
-					async: false,
-					timeout: 10000
-				})
-				.done(function(data){
-				});
-			},
+	// 		// パネル追加の後処理
+	// 		onpaneladded: function(base,modulepath,panelIndex,options) {
+	// 			$.ajax({
+	// 				url: 'http://localhost:9999/index.php',
+	// 				type: 'POST',
+	// 				data: {
+	// 					mode: 'paneladd',
+	// 					module: modulepath,
+	// 					position: panelIndex
+	// 				},
+	// 				dataType: 'html',
+	// 				cache: false,
+	// 				async: false,
+	// 				timeout: 10000
+	// 			})
+	// 			.done(function(data){
+	// 			});
+	// 		},
 
-			// パネル削除の後処理
-			onpaneldeleted: function(base, panelIndex, options) {
-				$.ajax({
-					url: 'http://localhost:9999/index.php',
-					type: 'POST',
-					data: {
-						mode: 'paneldelete',
-						position: panelIndex
-					},
-					dataType: 'html',
-					cache: false,
-					async: false,
-					timeout: 10000
-				})
-				.done(function(data){
-				});
-	 		}
-		});
-	}());
+	// 		// パネル削除の後処理
+	// 		onpaneldeleted: function(base, panelIndex, options) {
+	// 			$.ajax({
+	// 				url: 'http://localhost:9999/index.php',
+	// 				type: 'POST',
+	// 				data: {
+	// 					mode: 'paneldelete',
+	// 					position: panelIndex
+	// 				},
+	// 				dataType: 'html',
+	// 				cache: false,
+	// 				async: false,
+	// 				timeout: 10000
+	// 			})
+	// 			.done(function(data){
+	// 			});
+	//  		}
+	// 	});
+	// }());
 
 
 
