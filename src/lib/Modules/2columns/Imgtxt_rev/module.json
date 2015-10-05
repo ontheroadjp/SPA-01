@@ -1,19 +1,19 @@
 {
-	"id" : "2columns-txtimg",
-	"path" : "2columns/Txtimg/",
-	"classname" : "TxtImg",
+	"id" : "2columns-imgtxtrev",
+	"path" : "2columns/Imgtxt_rev/",
+	"classname" : "ImgTxtRev",
 	"content" : {
 		"text01" : "Death to the Stock Photo:<br>Special Thanks",
 		"text02" : "A special thanks to Death to the Stock Photo for providing the photographs that you see in this template. Visit their website to become a member.",
-		"img01" : "Spa01/Modules/2columns/txtimg/img/ipad.png"
+		"img01" : "lib/Modules/2columns/imgtxt/img/dog.png"
 	},
 	"css" : {
 		"section" : {
 			"padding" : "0",
 			"background-size" : "cover",
 			"min-height" : "300px",
-			"background-color" : "$$primary-color$$",
-			"color" : "$$secondary-color$$",
+			"background-color" : "$$secondary-color$$",
+			"color" : "$$primary-color$$",
 			"font-family" : "Lato, sans-self"
 		},
 		"overlay" : {

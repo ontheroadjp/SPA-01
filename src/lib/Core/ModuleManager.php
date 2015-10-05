@@ -1,6 +1,6 @@
 <?php
 
-// namespace Spa01\Core;
+// namespace lib\Core;
 
 class ModuleManager {
 

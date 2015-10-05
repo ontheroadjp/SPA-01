@@ -127,7 +127,7 @@ $val .= '</ul>';
 $val .='<div class="clearfix"></div>';
 
 		// $val .= '<ul>';
-		// $val .= '<li><img style="width:100px;margin:20px auto;margin-bottom:20px;" class="img-responsive" src="Spa01/Modules/2columns/txtimg/img/ipad.png" alt=""></li>';
+		// $val .= '<li><img style="width:100px;margin:20px auto;margin-bottom:20px;" class="img-responsive" src="lib/Modules/2columns/txtimg/img/ipad.png" alt=""></li>';
 		// $val .= '</ul>';
 		$val .= '</div>';
 

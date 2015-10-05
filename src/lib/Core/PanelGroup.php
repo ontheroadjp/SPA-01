@@ -1,6 +1,6 @@
 <?php
 
-// namespace SPA01\Core;
+// namespace lib\Core;
 
 // define('HOME', 'home');
 // define('ONE_COLUMN', '1column');

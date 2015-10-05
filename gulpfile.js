@@ -1,54 +1,44 @@
 
 var gulp = require('gulp');
-var bower = require('main-bower-files');
+// var bower = require('main-bower-files');
+// var filter = require('gulp-filter');
+// var shell = require('gulp-shell');
 var sass = require('gulp-ruby-sass');
 var pleeease = require('gulp-pleeease');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var filter = require('gulp-filter');
 var imagemin = require('gulp-imagemin');
 var php = require('gulp-connect-php');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
-
-var shell = require('gulp-shell');
 
 
 // ソースコードの Directory を指定(最後に / 必要)
 var target = 'src/';
 
 // build
-gulp.task('build',['app','lib','sass','js','img']);
+gulp.task('build',['root','lib','sass','js','jsex','img']);
 
-gulp.task('shell', shell.task([
-			  'cp -r ./src/app ./build',
-					]))
+// gulp.task('shell', shell.task([
+// 		'cp -r ./src/root ./build',
+// ]))
 
-// app
-gulp.task('app', function () {
-	gulp.src(
-							target + 'app/**/*.*'
-						)
+// root
+gulp.task('root', function () {
+	gulp.src( target + 'root/**/*.*' )
 		.pipe(gulp.dest('build/'))
 		.pipe(reload({stream:true}));
 });
 
 // lib
 gulp.task('lib', function () {
-	gulp.src(
-							target + 'Spa01/**/*.*'
-						)
-		.pipe(gulp.dest('build/Spa01'))
+	gulp.src( target + 'lib/**/*.*')
+		.pipe(gulp.dest('build/lib'))
 		.pipe(reload({stream:true}));
 });
 
 // Sass
-
-var sassoptions = {
-	style: 'expanded'
-	, sourcemap: true
-};
 
 gulp.task('sass', function () {
 	sass(target + 'sass/',{
@@ -70,6 +60,12 @@ gulp.task('js', function() {
 	gulp.src([target + 'js/**/*.js'])
 	.pipe(concat('scripts.js'))
 	.pipe(uglify({preserveComments: 'some'})) // Keep some comments
+	.pipe(gulp.dest('build/js'))
+	.pipe(reload({stream:true}));
+});
+
+gulp.task('jsex', function() {
+	gulp.src([target + 'root/js/**/*.js'])
 	.pipe(gulp.dest('build/js'))
 	.pipe(reload({stream:true}));
 });
@@ -120,8 +116,8 @@ gulp.task('bs-reload', function () {
 // Task for `gulp` command
 
 gulp.task('default',['browser-sync'], function() {
-	gulp.watch(target + 'app/*.*',['app']);
-	gulp.watch(target + 'Spa01/**/*.*',['lib']);
+	gulp.watch(target + 'root/*.*',['root']);
+	gulp.watch(target + 'lib/**/*.*',['lib']);
 	gulp.watch(target + 'sass/**/*.scss',['sass']);
 	gulp.watch(target + 'js/**/*.js',['js']);
 	gulp.watch(target + 'img/**/*.{png,jpg,gif,svg}',['imagemin']);

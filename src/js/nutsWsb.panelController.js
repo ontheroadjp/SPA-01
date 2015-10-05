@@ -311,7 +311,7 @@ nutsWsb.panelController =  (function($) {
 	 */
 	var panelAddToDOM = function(base,panel,panelIndex,options) {
 		$.ajax({
-			url: 'http://localhost:9999/Spa01/ajax.php',
+			url: 'http://localhost:9999/lib/ajax.php',
 			type: 'POST',
 			dataType: 'html',
 			data: {

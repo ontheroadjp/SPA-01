@@ -1,6 +1,6 @@
 <?php
 
-// namespace Spa01\Core;
+// namespace lib\Core;
 
 define("SITEMAP_FILE_NAME", "sitemap.json");
 

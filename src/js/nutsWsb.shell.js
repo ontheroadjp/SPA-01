@@ -1,13 +1,13 @@
 
 nutsWsb.shell = (function($){
 
-	// var panels = {
-	// 	"basepanel" : "panelcontrol",
-	// 	"panelcontrol-panel" : "panelcontrol-panel",
-	// 	"panelcontrol-btns" : "panelcontrol-buttons",
-	// 	"panelcontrol-add" : "panelcontrol-add",
-	// 	"panelproperty-btns" : "panelproperty-buttons"
-	// }
+	var nutsWsbPanels = {
+		'rootpanel':'panelcontrol',
+		'panelbase':'panelcontrol-panel',
+		'panelcontrol-btns':'panelcontrol-buttons',
+		'panelcontrol-add':'panelcontrol-add',
+		'panelproperty-btns':'panelproperty-buttons'
+	};
 
 	var initModules = function() {
 
@@ -96,9 +96,8 @@ nutsWsb.shell = (function($){
 					.always(function(data){
 					});
 				}
-
-
 			});
+
 		}());
 
 
@@ -106,20 +105,20 @@ nutsWsb.shell = (function($){
 		// @ nutswsb.panelController.js
 		(function(){
 			$('#panelcontrol').panelcontrol({
-				panel:'.panelcontrol-panel',
-				btns: '.panelcontrol-buttons',
-				up:'.panelcontrol-up',
-				down:'.panelcontrol-down',
-				add:'.add-panel-btn',
-				addok:'.add-panel-ok-btn',
-				addcancel:'.add-panel-cancel-btn',
-				delete:'.delete-panel-btn',
-				opacity: 0.6,
-				duration: 600, // slow, normal, fast
-				marginHeight: 1,
+				'panel':'.panelcontrol-panel',
+				'btns': '.panelcontrol-buttons',
+				'up':'.panelcontrol-up',
+				'down':'.panelcontrol-down',
+				'add':'.add-panel-btn',
+				'addok':'.add-panel-ok-btn',
+				'addcancel':'.add-panel-cancel-btn',
+				'delete':'.delete-panel-btn',
+				'opacity': 0.6,
+				'duration': 600, // slow, normal, fast
+				'marginHeight': 1,
 
 				// スワップ時の後処理
-				onpanelswapped: function(base,first,second,options) {
+				'onpanelswapped': function(base,first,second,options) {
 					$.ajax({
 						url: 'http://localhost:9999/index.php',
 						type: 'POST',
@@ -142,7 +141,7 @@ nutsWsb.shell = (function($){
 				},
 
 				// パネル追加の後処理
-				onpaneladded: function(base,modulepath,panelIndex,options) {
+				'onpaneladded': function(base,modulepath,panelIndex,options) {
 					$.ajax({
 						url: 'http://localhost:9999/index.php',
 						type: 'POST',
@@ -161,7 +160,7 @@ nutsWsb.shell = (function($){
 				},
 
 				// パネル削除の後処理
-				onpaneldeleted: function(base, panelIndex, options) {
+				'onpaneldeleted': function(base, panelIndex, options) {
 					$.ajax({
 						url: 'http://localhost:9999/index.php',
 						type: 'POST',

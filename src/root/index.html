@@ -1,6 +1,6 @@
 <?php 
-// namespace Spa01;
-// use Spa01\Core\SitemapManager;
+// namespace lib;
+// use lib\Core\SitemapManager;
 
 // TEMP
 $editmode = 1; 
@@ -16,7 +16,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
         echo '読み込みエラー<br>
 <p>'; echo $path; }</p>
 <pre><code>// sitemap.json の読み込み or 新規作成
-require_once(dirname(&#39;__FILE__&#39;).&#39;/Spa01/Core/SitemapManager.php&#39;);
+require_once(dirname(&#39;__FILE__&#39;).&#39;/lib/Core/SitemapManager.php&#39;);
 $sitemapManager = new SitemapManager();
 
 
@@ -38,7 +38,7 @@ switch($mode) {
 }</code></pre>
 <p>?&gt;</p>
 <!-- ここから HTML 出力 -->
-<?php include(dirname('__FILE__').'/Spa01/Modules/header.php'); ?>
+<?php include(dirname('__FILE__').'/lib/Modules/header.php'); ?>
 <!-- <div class="sidebar" style="float:left;width:200px;background-color:#000">
         <ul>
             <li><a href="#">Menu</a></li>
@@ -67,14 +67,14 @@ switch($mode) {
 <!-- ヘッダメニューの出力 -->
 <?php if( $editmode == 1 ) { ?>
 <pre><code>&lt;!-- &lt;div class=&quot;navbar navbar-default navbar-fixed-top&quot;&gt; --&gt;
-    &lt;?php //include(dirname(&#39;__FILE__&#39;).&#39;/Spa01/Modules/admin-bar.php&#39;); ?&gt;
+    &lt;?php //include(dirname(&#39;__FILE__&#39;).&#39;/lib/Modules/admin-bar.php&#39;); ?&gt;
 &lt;!-- &lt;/div&gt; --&gt;</code></pre>
 <?php } ?>
 <div id="aside">
 
 </div>
 <div>
-<?php include(dirname('__FILE__').'/Spa01/Modules/top-bar.php'); ?>
+<?php include(dirname('__FILE__').'/lib/Modules/top-bar.php'); ?>
 </div>
 <!-- パネルの出力 -->
 <div id="panelcontrol">
@@ -375,7 +375,7 @@ function responsive_filemanager_callback(field_id){
 }
 
 </script>
-<?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
+<?php include(dirname('__FILE__').'/lib/modal/ImageGarally.php'); ?>
 <p><a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a></p>
 </body>
 </html>

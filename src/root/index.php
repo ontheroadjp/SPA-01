@@ -1,6 +1,6 @@
 <?php 
-// namespace Spa01;
-// use Spa01\Core\SitemapManager;
+// namespace lib;
+// use lib\Core\SitemapManager;
 
 // TEMP
 $editmode = 1; 
@@ -21,7 +21,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 	}
 
 	// sitemap.json の読み込み or 新規作成
-	require_once(dirname('__FILE__').'/Spa01/Core/SitemapManager.php');
+	require_once(dirname('__FILE__').'/lib/Core/SitemapManager.php');
 	$sitemapManager = new SitemapManager();
 
 
@@ -45,7 +45,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 
 
 <!-- ここから HTML 出力 -->
-<?php include(dirname('__FILE__').'/Spa01/Modules/header.php'); ?>
+<?php include(dirname('__FILE__').'/lib/Modules/header.php'); ?>
 
 <!-- <div class="sidebar" style="float:left;width:200px;background-color:#000">
 		<ul>
@@ -77,13 +77,13 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 <!-- ヘッダメニューの出力 -->
 <?php if( $editmode == 1 ) { ?>
 	<!-- <div class="navbar navbar-default navbar-fixed-top"> -->
-		<?php //include(dirname('__FILE__').'/Spa01/Modules/admin-bar.php'); ?>
+		<?php //include(dirname('__FILE__').'/lib/Modules/admin-bar.php'); ?>
 	<!-- </div> -->
 <?php } ?>
 
 <div id="aside"></div>
 
-<div> <?php include(dirname('__FILE__').'/Spa01/Modules/top-bar.php'); ?></div>
+<div> <?php include(dirname('__FILE__').'/lib/Modules/top-bar.php'); ?></div>
 
 
 
@@ -140,24 +140,24 @@ $(function(){
 
 $(function(){
 
-	(function(){
-		var
-			$window             = $(window),
-			$aside              = $('#aside'),
-			defaultPositionLeft = $aside.css('left'),
-			setOffsetPosition   = $aside.offset(),
-			fixedClassName      = 'fixed';
+	// (function(){
+	// 	var
+	// 		$window             = $(window),
+	// 		$aside              = $('#aside'),
+	// 		defaultPositionLeft = $aside.css('left'),
+	// 		setOffsetPosition   = $aside.offset(),
+	// 		fixedClassName      = 'fixed';
 
-		$window.on('scroll', function() {
-			if ($(this).scrollTop() > setOffsetPosition.top) {
-				$aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
-			} else {
-				if ($aside.hasClass(fixedClassName)) {
-					// $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
-				}
-			}
-		}).trigger('scroll');
-	}());
+	// 	$window.on('scroll', function() {
+	// 		if ($(this).scrollTop() > setOffsetPosition.top) {
+	// 			$aside.addClass(fixedClassName).css('left', setOffsetPosition.left);
+	// 		} else {
+	// 			if ($aside.hasClass(fixedClassName)) {
+	// 				// $aside.removeClass(fixedClassName).css('left', defaultPositionLeft);
+	// 			}
+	// 		}
+	// 	}).trigger('scroll');
+	// }());
 
 
 	// パネルエディターの初期化
@@ -388,7 +388,7 @@ $(function(){
 });
 </script>
 
-<?php include(dirname('__FILE__').'/Spa01/modal/ImageGarally.php'); ?>
+<?php include(dirname('__FILE__').'/lib/modal/ImageGarally.php'); ?>
 <a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a>
 
 
