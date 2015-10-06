@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 // var bower = require('main-bower-files');
 // var filter = require('gulp-filter');
-// var shell = require('gulp-shell');
+var shell = require('gulp-shell');
 var sass = require('gulp-ruby-sass');
 var pleeease = require('gulp-pleeease');
 var sourcemaps = require('gulp-sourcemaps');
@@ -66,8 +66,10 @@ gulp.task('js', function() {
 	.pipe(reload({stream:true}));
 });
 
+// JSex
+
 gulp.task('jsex', function() {
-	gulp.src([srcDir + 'root/js/**/*.js'])
+	gulp.src([srcDir + 'root/js/**/*.*'])
 	.pipe(gulp.dest(destDir + 'js'))
 	.pipe(reload({stream:true}));
 });

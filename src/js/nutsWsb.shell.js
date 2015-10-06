@@ -1,13 +1,6 @@
 
 nutsWsb.shell = (function($){
 
-	var nutsWsbPanels = {
-		'rootpanel':'panelcontrol',
-		'panelbase':'panelcontrol-panel',
-		'panelcontrol-btns':'panelcontrol-buttons',
-		'panelcontrol-add':'panelcontrol-add',
-		'panelproperty-btns':'panelproperty-buttons'
-	};
 
 	var initModules = function() {
 

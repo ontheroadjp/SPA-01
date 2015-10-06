@@ -2,7 +2,15 @@
 
 var nutsWsb = (function($){
 
-	var render = function(){
+	var nutsWsbPanels = {
+		'rootpanel':'panelcontrol',
+		'panelbase':'panelcontrol-panel',
+		'panelcontrol-btns':'panelcontrol-buttons',
+		'panelcontrol-add':'panelcontrol-add',
+		'panelproperty-btns':'panelproperty-buttons'
+	};
+
+	var pageRender = function(){
 	};
 
 	var loadShell = function(){
@@ -10,7 +18,7 @@ var nutsWsb = (function($){
 	};
 
 	var exec = function(){
-		render();
+		pageRender();
 		loadShell();
 	};
 

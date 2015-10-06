@@ -28,6 +28,7 @@
 /* for panelproperty-window */
 /* -------------------------------- */
 .panelproperty-panel{
+    padding-bottom: 10px;
     font-family: 'pragmatica',sans-serif;
     /*position: fixed;*/
     /*height: 100%;*/
@@ -38,9 +39,12 @@
 }
 .top-menu {
     position: relative;
-    zoom: 1;
-    margin: 5px 5px 5px 5px;
-    style: none;
+    // zoom: 1;
+    // margin: 5px 5px 5px 5px;
+    // style: none;
+}
+ul.top-menu {
+    margin: 25px 0 0 0;
 }
 .top-menu li {
     float: left;
@@ -82,9 +86,13 @@
     color: #ccc;
     padding-top: 5px;
     font-size: 10px;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
+.tpp-munu li a:hover {
+    text-shadow: none;
+}
+
 .top-menu li a .button-label {
     /*color: #363636;*/
     /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/

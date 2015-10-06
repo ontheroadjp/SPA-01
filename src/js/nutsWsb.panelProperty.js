@@ -10,6 +10,12 @@ nutsWsb.panelProperty =  (function($) {
 		var targetId = panel.find("[id^='panelproperty-panel-']").attr('id');
 		base.click(function() {
 			panel.find('.panelcontrol-buttons').css('display','none');
+
+			// 画面中央上へスクロール
+			$("html,body").animate({scrollTop:$(panel).offset().top - 150});
+			// $("html,body").animate({scrollTop:数字});
+
+			// パネル設定ウインドウを開く
 			$('#' + targetId).collapse('toggle').on('shown.bs.collapse', function(){
 				panel.find('.panelcontrol-buttons')
 					.animate({ opacity: 'show'},{ duration: 100, easing: 'swing'});
@@ -17,7 +23,18 @@ nutsWsb.panelProperty =  (function($) {
 				panel.find('.panelcontrol-buttons')
 					.animate({ opacity: 'show',}, { duration: 100, easing: 'swing', });
 			});
+
+			// 設定ボタンのバインド
+			panel.find('.panelproperty-panel-style-btn').click( function() {
+				$.getJSON("http://localhost:9999/sitemap.json", function(json) {
+					alert(json[0]['css']['0']['section']['background-color']);
+				});
+			});
+
 		});
+
+
+
 
 	};
 

@@ -107,6 +107,7 @@ $a == 'preview' ? $editmode = 0 : $editmode = 1;
 </footer>
 
 
+
 <!-- ------------------------------------------------------------- -->
 <!-- JAVASCRIPT SECSSION -->
 <!-- ------------------------------------------------------------- -->
@@ -138,7 +139,37 @@ $(function(){
 });
 
 
+
+
 $(function(){
+// alert($.parseJSON( $('#dataJSON').html() ).html() );
+
+// // var json = $('#dataJSON').html();
+// var items = $.parseJSON( $('#dataJSON').html() );
+// $.each( items, function(){
+// 	alert(this);
+// });
+
+
+	// $('#dataJSON').replaceWith(
+	//     $('<div id="dataPool" />').css('display', 'none').append(function(){
+	//         var json = $('#dataJSON').html();
+	//         var items = $.parseJSON( json );
+	//         var $container = $('<div class="dataContainer" />');
+	//         $.each( items, function(){
+	//             var $item = $('<div />').addClass(this.data1).data({
+	//                 data2: this.data2,
+	//                 data3: this.data3
+	//             });
+	 
+	//             $container.append($item);
+	//         });
+	//         		alert('dataJSON');
+
+	//         return $container;
+	//     })
+	// );
+
 
 	// (function(){
 	// 	var
@@ -390,7 +421,6 @@ $(function(){
 
 <?php include(dirname('__FILE__').'/lib/modal/ImageGarally.php'); ?>
 <a href="/filemanager/filemanager/dialog.php?type=0&fldr=" target="_blank">FileManager</a>
-
 
 
 </body>
