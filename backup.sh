@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-content_dir="$HOME/Vagrant/LAMP/www/SPA-01"
+content_dir=$(cd $(dirname $BASH_SOURCE); pwd)
 
 set -x
 cd "$content_dir"
