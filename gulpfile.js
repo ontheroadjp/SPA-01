@@ -69,8 +69,8 @@ gulp.task('js', function() {
 // JSex
 
 gulp.task('jsex', function() {
-	gulp.src([srcDir + 'root/js/**/*.*'])
-	.pipe(gulp.dest(destDir + 'js'))
+	gulp.src([srcDir + 'root/js/tinymce/**/*.*'])
+	.pipe(gulp.dest(destDir + 'js/tinymce'))
 	.pipe(reload({stream:true}));
 });
 
